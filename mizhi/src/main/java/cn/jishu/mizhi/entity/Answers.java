@@ -1,5 +1,6 @@
 package cn.jishu.mizhi.entity;
 
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,5 @@ public class Answers {//话题回答表
     private Questions questions;//外键 话题编号
     private String isuse;//是否被采用 0没有 1采用
     private List<Usercomments> usercommentsList;
-
+    private PageInfo<Usercomments> usercommentsPageInfo;
 }

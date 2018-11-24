@@ -28,6 +28,7 @@ public class MizhiApplicationTests {
     public void contextLoads() {
         System.out.println(1234);
     }
+/*
 
     @Test
     public void testHongQuestionList(){
@@ -53,6 +54,7 @@ public class MizhiApplicationTests {
             list.add(1);
         System.out.println(usersTalksServices.queryUserTalksByuserids(list,-1));
     }
+*/
 
 
 

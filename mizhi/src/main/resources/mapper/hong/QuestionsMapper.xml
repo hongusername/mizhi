@@ -7,10 +7,15 @@
     <resultMap id="questionsmap" type="cn.jishu.mizhi.entity.Questions" autoMapping="true">
         <id column="qid" property="qid"></id>
         <association property="users" resultMap="usersmap"></association>
+        <collection property="answersList" resultMap="answersmap"></collection>
     </resultMap>
     
     <resultMap id="usersmap" type="cn.jishu.mizhi.entity.Users" autoMapping="true">
 <id column="userid" property="userid"></id>
+    </resultMap>
+
+    <resultMap id="answersmap" type="cn.jishu.mizhi.entity.Answers" autoMapping="true">
+        <id column="awid" property="awid"></id>
     </resultMap>
     
     <select id="getQuestionsByQuestionType" resultMap="questionsmap">

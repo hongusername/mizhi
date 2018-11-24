@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class ProjectConfig implements WebMvcConfigurer {
 
 
-    @Override
+   @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("Home");
+        registry.addViewController("/").setViewName("a");
     }
 }
