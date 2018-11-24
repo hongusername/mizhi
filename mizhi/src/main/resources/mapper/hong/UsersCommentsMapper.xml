@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jishu.mizhi.hong.usercomments.dao.UsersCommentsMapper">
+    
+    <resultMap id="usercommentsmap" type="cn.jishu.mizhi.entity.Usercomments" autoMapping="true">
+    <id column="tcid" property="tcid"></id>
+        <association property="users" resultMap="ussersmap"></association>
+    </resultMap>
+    
+    <resultMap id="ussersmap" type="cn.jishu.mizhi.entity.Users" autoMapping="true">
+        <id column="userid" property="userid"></id>
+    </resultMap>
+
+    <select id="queryCommentsByFkid" resultMap="usercommentsmap">
+SELECT * FROM usercomments AS uc,users AS u WHERE u.userid = uc.userid AND tctype = #{tctype} AND fkid = #{fkid} AND ustatus = "1"
+    </select>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jishu.mizhi.hui.address.dao.AddressDao">
+  <select id="queryAll" resultType="cn.jishu.mizhi.entity.District">
+    SELECT * FROM district WHERE parent_id=0
+    </select>
+    <select id="queryAllById" resultType="cn.jishu.mizhi.entity.District">
+        SELECT * FROM district WHERE parent_id IN(SELECT id FROM district WHERE id=#{id})
+    </select>
+</mapper>
