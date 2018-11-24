@@ -2,6 +2,7 @@ package cn.jishu.mizhi.kai.manager.controller;
 
 import cn.jishu.mizhi.kai.manager.server.ManagerService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 
@@ -25,6 +26,9 @@ public class ManagerController {
    /* List<Users> queryAllUser();
     Users qeuryUsersById(@Param("userId") Integer userid);
     Integer updateUserStatus(@Param("updateUser") Users users);*/
-
+   @RequestMapping("ManagerController")
+    public String toDengLu(){
+        return "017/tables";
+    }
 
 }
