@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jishu.mizhi.hui.books.dao.BooksDao">
+
+    <resultMap id="booksMap" type="cn.jishu.mizhi.entity.Books" autoMapping="true">
+        <id column="bid" property="bid"></id>
+        <association property="booktype" resultMap="bookTypeMap"></association>
+    </resultMap>
+
+    <resultMap id="bookTypeMap" type="cn.jishu.mizhi.entity.Booktype" autoMapping="true">
+        <id column="btid" property="btid"></id>
+    </resultMap>
+
+    <select id="queryBooksAll" resultMap="booksMap">
+    select * from books b1,booktype b2 where b1.btid=b2.btid
+    </select>
+    <insert id="addBooks">
+    insert into `books` values(null,#{b.booktype.btid},#{b.bname},#{b.author},#{b.title},#{b.description},sysdate(),#{b.bookstatus},#{b.aggreecount},#{b.oldprice},#{b.newprice},#{b.tryread},#{b.bookspath},#{b.avgstarcount})
+    </insert>
+</mapper>
