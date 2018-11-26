@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>售价单 - 统一开发平台 - UI库</title>
+		<title>话题管理 - 觅知网 - 后台管理</title>
 		<meta name="description" content="Restyling jQuery UI Widgets and Elements" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -41,7 +41,7 @@
 					<!-- #section:basics/navbar.layout.brand -->
 					<a href="index.html" class="navbar-brand">
 						<small>
-							<img src="assets/avatars/logo.png" alt="" />
+							<img src="assets/avatars/logo.png" alt=""  height="25px"/>
 						</small>
 					</a>
 				</div>
@@ -215,13 +215,13 @@
 					<li class="active">
 						<a href="index.html">
 							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> 总控制台 </span>
+							<span class="menu-text"> 觅知网后台管理系统 </span>
 						</a>
 
 						<b class="arrow"></b>
 					</li>
 
-					<li class="">
+					<!-- <li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text"> UI &amp; 元素 </span>
@@ -437,12 +437,10 @@
 							<span class="menu-text">
 								日历
 
-								<!-- #section:basics/sidebar.layout.badge -->
 								<span class="badge badge-transparent tooltip-error" title="有2件重要事件">
 									<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
 								</span>
 
-								<!-- /section:basics/sidebar.layout.badge -->
 							</span>
 						</a>
 
@@ -456,12 +454,12 @@
 						</a>
 
 						<b class="arrow"></b>
-					</li>
+					</li> -->
 
 					<li class="active open">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-tag"></i>
-							<span class="menu-text"> 更多页面 </span>
+							<span class="menu-text"> 信息管理 </span>
 
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -472,7 +470,7 @@
 							<li class="">
 								<a href="profile.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									用户信息
+									用户管理
 								</a>
 
 								<b class="arrow"></b>
@@ -482,7 +480,7 @@
 							<li class="active">
 								<a href="pricing.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									售价单
+									话题管理
 								</a>
 
 								<b class="arrow"></b>
@@ -491,7 +489,7 @@
 							<li class="">
 								<a href="invoice.html">
 									<i class="menu-icon fa fa-caret-right"></i>
-									购物车
+									会员管理
 								</a>
 
 								<b class="arrow"></b>
@@ -619,235 +617,66 @@
 
 				<!-- /section:basics/content.breadcrumbs -->
 				<div class="page-content">
-
-					<!-- /section:settings.box -->
+<!-- 话题页面 -->
 					<div class="page-content-area">
-						<div class="row">
-									<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box">
-											<div class="widget-header header-color-dark" style="background: #404040;border-color: #fff;">
-												<h5 class="bigger" style="color:#fff">经济舱</h5>
-											</div>
+					
+											<div class="row">
+												<div class="col-xs-12">
+													<!-- PAGE CONTENT BEGINS -->
+													<div class="row">
+														<div class="col-xs-12">
+															<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+																<thead>
+																	<tr>
+																		<!-- <th class="center">
+																			<label class="position-relative">
+																				<input type="checkbox" class="ace" />
+																				<span class="lbl"></span>
+																			</label>
+																		</th> -->
+																		<th>话题编号</th>
+																		<th>用户编号</th>
+																		<th class="hidden-480">话题内容</th>
+																		<th>点击量</th>
+																		<th class="hidden-480">
+																			<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+																			话题状态</th>
 
-											<div class="widget-body">
-												<div class="widget-main">
-													<ul class="list-unstyled spaced2">
-														<li>
-															<i class="icon-ok green"></i>
-															20公斤 免费行李额
-														</li>
+																		<th class="hidden-480">操作</th>
+																	</tr>
+																</thead>
+					
+																<tbody>
+																	<tr th:each="quest:${questionAll}">
 
-														<li>
-															<i class="icon-ok green"></i>
-															普通座位
-														</li>
+																		<td th:text="${quest.getQid()}">
+																			<a href="#"></a>
+																		</td>
+																		<td th:text="${quest.getUsers()}">1</td>
+																		<td th:text="${quest.getQcontent()}" class="hidden-480">2件</td>
+																		<td th:text="${quest.getClickcount()}">A+B+C<145cm</td>
+					
+																		
+																		<td class="hidden-480" th:text="${quest.getQuestionstatus()}">
+																			<span class="label label-sm label-warning">封闭</span>
+																		</td>
+																		<td class="hidden-480" >
+																			<span class="label label-sm label-warning">查看类型</span>
+																		</td>
+																		<td>
+																			<div class="hidden-sm hidden-xs btn-group">
+																				<button class="btn btn-xs btn-danger">
+																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																				</button>
+																			</div>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div><!-- /.span -->
+													</div><!-- /.row -->
 
-														<li>
-															<i class="icon-ok green"></i>
-															免费的机上餐饮
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															机舱内无线网络服务
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															尊享免费啤酒、葡萄酒和烈酒
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															办理登机手续，登机及行李领取。
-														</li>
-													</ul>
-
-													<hr />
-													<div class="price">
-														￥428
-														<small>/单程</small>
-													</div>
-												</div>
-
-												<div>
-													<a href="#" class="btn btn-block btn-inverse">
-														<i class="icon-shopping-cart bigger-110"></i>
-														<span>马上预定</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box">
-											<div class="widget-header header-color-orange" style="background: #ffc657;border-color: #fff;">
-												<h5 class="bigger lighter" style="color:#333">高端经济舱</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													<ul class="list-unstyled spaced2">
-														<li>
-															<i class="icon-ok green"></i>
-															20公斤 免费行李额
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															普通座位
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															免费的机上餐饮
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															机舱内无线网络服务
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															尊享免费啤酒、葡萄酒和烈酒
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															办理登机手续，登机及行李领取。
-														</li>
-													</ul>
-
-
-													<hr />
-													<div class="price">
-														￥628
-														<small>/单程</small>
-													</div>
-												</div>
-
-												<div>
-													<a href="#" class="btn btn-block btn-warning">
-														<i class="icon-shopping-cart bigger-110"></i>
-														<span>马上预定</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box">
-											<div class="widget-header header-color-blue" style="background: #307ecc;border-color: #fff;">
-												<h5 class="bigger lighter" style="color:#fff">商务舱</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													<ul class="list-unstyled spaced2">
-														<li>
-															<i class="icon-ok green"></i>
-															20公斤 免费行李额
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															普通座位
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															免费的机上餐饮
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															机舱内无线网络服务
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															尊享免费啤酒、葡萄酒和烈酒
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															办理登机手续，登机及行李领取。
-														</li>
-													</ul>
-
-
-													<hr />
-													<div class="price">
-														￥1028
-														<small>/单程</small>
-													</div>
-												</div>
-
-												<div>
-													<a href="#" class="btn btn-block btn-primary">
-														<i class="icon-shopping-cart bigger-110"></i>
-														<span>马上预定</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-xs-6 col-sm-3 pricing-box">
-										<div class="widget-box">
-											<div class="widget-header header-color-green" style="background: #82af6f;border-color: #fff;">
-												<h5 class="bigger lighter" style="color:#fff">头等舱</h5>
-											</div>
-
-											<div class="widget-body">
-												<div class="widget-main">
-													<ul class="list-unstyled spaced2">
-														<li>
-															<i class="icon-ok green"></i>
-															20公斤 免费行李额
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															普通座位
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															免费的机上餐饮
-														</li>
-
-														<li>
-															<i class="icon-ok green"></i>
-															机舱内无线网络服务
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															尊享免费啤酒、葡萄酒和烈酒
-														</li>
-														<li>
-															<i class="icon-ok green"></i>
-															办理登机手续，登机及行李领取。
-														</li>
-													</ul>
-
-
-													<hr />
-													<div class="price">
-														￥1228
-														<small>/单程</small>
-													</div>
-												</div>
-
-												<div>
-													<a href="#" class="btn btn-block btn-success">
-														<i class="icon-shopping-cart bigger-110"></i>
-														<span>马上预定</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-					</div><!-- /.page-content-area -->
-				</div><!-- /.page-content -->
+					
 			</div><!-- /.main-content -->
 
 			<div class="footer">

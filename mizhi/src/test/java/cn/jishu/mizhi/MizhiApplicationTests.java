@@ -74,6 +74,11 @@ public class MizhiApplicationTests {
         System.out.println(managerService.queryAllUser());
     }
 
+    @Test
+    public void testQueryByUserId(){
+        System.out.println(managerService.qeuryUsersById(1));
+    }
+
     //根据id查询问题类型
     @Test
     public void testQueryById() {
