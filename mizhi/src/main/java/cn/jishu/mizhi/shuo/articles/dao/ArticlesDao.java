@@ -1,6 +1,7 @@
 package cn.jishu.mizhi.shuo.articles.dao;
 
 import cn.jishu.mizhi.entity.Articles;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,9 +14,11 @@ import java.util.List;
 
 public interface ArticlesDao {
 
-    Integer addarticle(Articles articles);//增加草稿
-    Integer updatearticle(Articles articles);//ajax修改
-    List<Articles> queryALlbyuserid(Integer userid);//查询用户的所有草稿
+    Integer addarticle(@Param("articles") Articles articles);//增加草稿
+    Integer updatearticle(@Param("articles") Articles articles);//ajax修改
+    Integer updatestatus(@Param("articles") Articles articles);//发布，删除
+    List<Articles> queryALlbyuserid(@Param("articles") Articles articles);//通过用户，状态查询文章
+
     Integer addfileinfo();//储存用户发布的文件信息
 
 

@@ -34,12 +34,18 @@ public class ArticlesServiceImpl implements ArticlesService {
     }
 
     @Override
-    public PageInfo<Articles> queryALlbyuserid(Integer pageNum, Integer pageSize,Integer userid) {
+    public Integer updatestatus(Articles articles) {
+        return ad.updatearticle(articles);
+    }
+
+    @Override
+    public PageInfo<Articles> queryALlbyuserid(Integer pageNum, Integer pageSize, Articles articles) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Articles> list=ad.queryALlbyuserid(userid);
+        List<Articles> list=ad.queryALlbyuserid(articles);
         PageInfo<Articles> pi=new PageInfo<Articles>(list);
         return pi;
     }
+
 
     @Override
     public Integer addfileinfo() {

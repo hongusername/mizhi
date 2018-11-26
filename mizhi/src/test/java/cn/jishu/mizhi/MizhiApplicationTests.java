@@ -7,6 +7,7 @@ import cn.jishu.mizhi.hong.usercomments.services.UserCommentsServices;
 import cn.jishu.mizhi.hong.userstalks.services.UsersTalksServices;
 import cn.jishu.mizhi.hui.books.service.BooksService;
 import cn.jishu.mizhi.kai.manager.server.ManagerService;
+import cn.jishu.mizhi.shuo.articles.service.ArticlesService;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -31,6 +34,7 @@ public class MizhiApplicationTests {
 
     @Resource
     private ManagerService managerService;
+
 
     @Test
     public void contextLoads() {
@@ -150,6 +154,36 @@ public class MizhiApplicationTests {
             Books books = new Books(null, b, "三国演义《" + i + "》", "党二帅", "东汉末年，天下三分", "魏蜀吴三国开启了撕逼模式", null, "1", 22, 88.2, 44.2, "三英战吕布，吕布死，欲知后事如何，请见下回分解，", "///", 22, null, null);
             int a = this.booksService.addBooks(books);
         }
+    }
+
+
+    /**
+     * LearnLi
+     *    private Integer articleid;//主键
+     *     private Users users;//外键 用户编号
+     *     private Articletype articletype;//外键 文章类型编号,
+     *     private String atitle;//文章标题
+     *     private String aimg;//文章图片
+     *     private String acontent;//文章内容
+     *     private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
+     *     private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
+     *     private Timestamp articletime;//文章发表时间
+     *     private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
+     *     private List<Userstalks> userstalksList;
+     */
+
+    @Resource
+    private ArticlesService as;
+    //增加文章
+    @Test
+    public void testaddA(){
+        Users users=new Users();
+        Articletype articletype=new Articletype();
+        users.setUserid(1);
+        articletype.setArticletypeid(1);
+        Articles a=new Articles(null,users,articletype,"我是标题","","我是内容",4,0,0,0,"1",new Timestamp(new Date().getTime()),0,0,null);
+        Integer res=as.addarticle(a);
+        System.out.println(res);
     }
 
 }

@@ -2,20 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.jishu.mizhi.shuo.articles.dao.ArticlesDao">
 
-    <resultMap id="" type="">
 
-
+    <resultMap id="aMap" type="cn.jishu.mizhi.entity.Articles" autoMapping="true">
+        <id column="articleid" property="articleid"/>
+        <association property="users" resultMap="uMap"/>
+        <association property="articletype" resultMap="atMap"/>
+    </resultMap>
+    <resultMap id="uMap" type="cn.jishu.mizhi.entity.Users" autoMapping="true">
+        <id column="userid" property="userid"/>
+    </resultMap>
+    <resultMap id="atMap" type="cn.jishu.mizhi.entity.Articletype" autoMapping="true">
+        <id column="articletypeid" property="articletypeid"/>
     </resultMap>
 <!--
-    Integer addarticle(Articles articles);//增加草稿
-    Integer updatearticle(Articles articles);//ajax修改
-    List<Articles> queryALlbyuserid(Integer userid);//查询用户的所有草稿
-    Integer addfileinfo();//储存用户发布的文件信息
+    Integer addarticle(@Param("articles") Articles articles);//增加草稿
+    Integer updatearticle(@Param("articles") Articles articles);//ajax修改
+    Integer updatestatus(@Param("articles") Articles articles);//发布，删除
+    List<Articles> queryALlbyuserid(@Param("articles") Articles articles);//查询用户的所有草稿/文章
 
+    Integer addfileinfo();//储存用户发布的文件信息
+=====================================================
+    private Integer articleid;//主键
+    private Users users;//外键 用户编号
+    private Articletype articletype;//外键 文章类型编号,
+    private String atitle;//文章标题
+    private String aimg;//文章图片
+    private String acontent;//文章内容
+    private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
+    private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
+    private Timestamp articletime;//文章发表时间
+    private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
+    private List<Userstalks> userstalksList;
+===========================================
 articleid           int(11) NOT NULL主键
 articletypeid      int(11) NULL外键 文章类型编号
 userid          int(11) NULL外键 用户编号
 atitle          varchar(20) NULL文章标题
+aimg            varcahr(255)NULL文章图片
 acontent          text NULL文章内容
 anumber         int(11) NULL文章字数
 clickcount       int(11) NULL浏览量
@@ -26,9 +49,45 @@ articletime     datetime NULL文章发表时间
 rewardscore     int(11) NULL打赏总积分
 rewardcount     int(11) NULL打赏总次数
 -->
-    <insert id="addarticle">
-        insert into
-
-
+    <insert id="addarticle" parameterType="cn.jishu.mizhi.entity.Articles" >
+        INSERT INTO
+        articles
+        VALUES(
+        NULL
+        ,#{articles.articletype.articletypeid}
+        ,#{articles.users.userid}
+        ,#{articles.atitle}
+        ,#{articles.aimg}
+        ,#{articles.acontent}
+        ,#{articles.anumber}
+        ,#{articles.clickcount}
+        ,#{articles.agreecount}
+        ,#{articles.disagreecount}
+        ,#{articles.articlestatus}
+        ,#{articles.articletime}
+        ,#{articles.rewardscore}
+        ,#{articles.rewardcount}
+        )
     </insert>
+
+    <update id="updatearticle" parameterType="cn.jishu.mizhi.entity.Articles" >
+    UPDATE articles
+    SET
+    articletypeid=#{articles.articletype.articletypeid}
+    ,atitle=#{articles.atitle}
+    ,aimg=#{articles.aimg}
+    ,acontent=#{articles.acontent}
+    ,anumber=#{articles.anumber}
+    WHERE articleid=#{articles.articleid}
+    </update>
+
+
+    <update id="updatestatus" parameterType="cn.jishu.mizhi.entity.Articles" >
+    UPDATE articles
+    SET
+    articlestatus=#{articles.articlestatus}
+    ,articletime=#{articles.articletime}
+    WHERE articleid=#{articles.articleid}
+    </update>
+
 </mapper>
