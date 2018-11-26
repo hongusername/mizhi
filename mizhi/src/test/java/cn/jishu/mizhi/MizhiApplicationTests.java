@@ -137,7 +137,12 @@ public class MizhiApplicationTests {
      */
     @Test
     public void queryBook() {
-        PageInfo<Books> booksPageInfo = this.booksService.queryBooksAll(new Books(), 2);
+        Books bb = new Books();
+        // bb.setAuthor("马旭辉");
+        Booktype b2 = new Booktype();
+        b2.setBtid(2);
+        bb.setBooktype(b2);
+        PageInfo<Books> booksPageInfo = this.booksService.queryBooksAll(bb, 1);
         for (Books b : booksPageInfo.getList()) {
             System.out.println(b);
         }
