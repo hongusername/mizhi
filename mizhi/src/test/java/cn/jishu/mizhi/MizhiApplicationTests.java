@@ -191,4 +191,45 @@ public class MizhiApplicationTests {
         System.out.println(res);
     }
 
+    @Test
+    public void testB(){
+        Articles a=new Articles();
+        a.setArticleid(1);
+        a.setArticlestatus("2");
+        a.setArticletime(new Timestamp(new Date().getTime()));
+        Integer ss=as.updatestatus(a);
+        System.out.println(ss);
+    }
+
+    @Test
+    public void testC(){
+        Articles a=new Articles();
+        Articletype articletype=new Articletype();
+        articletype.setArticletypeid(1);
+        a.setArticleid(1);
+        a.setAtitle("特朗普");
+        a.setAcontent("内容那日饿哦那个");
+        a.setAimg("http//:localhost:8080");
+        a.setAnumber(11);
+        a.setArticletype(articletype);
+
+        Integer ss=as.updatearticle(a);
+        System.out.println(ss);
+    }
+    @Test
+    public void testD(){
+
+        Articles a=new Articles();
+        Users u=new Users();
+        u.setUserid(1);
+        a.setArticlestatus("1");
+        a.setUsers(u);
+        PageInfo<Articles> ss=as.queryALlbyuserid(1,4,a);
+
+        for (Articles ar:ss.getList()) {
+        System.out.println(ar);
+        }
+    }
+
+
 }
