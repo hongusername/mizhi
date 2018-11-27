@@ -6,7 +6,7 @@
 		<title>会员管理 - 觅知网 - 后台管理</title>
 		<meta name="description" content="Restyling jQuery UI Widgets and Elements" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/nn.css" />
 		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-fonts.css" />
 		<link rel="stylesheet" href="assets/css/ace.min.css" id="main-ace-style" />
@@ -624,6 +624,7 @@
 															<!-- PAGE CONTENT BEGINS -->
 															<div class="row">
 																<div class="col-xs-12">
+																	<form>
 																	<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 																		<thead>
 																			<tr>
@@ -636,6 +637,7 @@
 																				<th>会员编号</th>
 																				<th>会员等级</th>
 																				<th class="hidden-480">可下载资源数</th>
+
 																				<th>赠送积分数</th>
 																				<th class="hidden-480">
 																					<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
@@ -646,7 +648,7 @@
 																		</thead>
 							
 																		<tbody>
-																			<tr th:each="member:${memberAll}">
+																			<tr  th:each="member:${memberAll}">
 																				<td  th:text="${member.getMid()}">
 																					<a href="#">1</a>
 																				</td>
@@ -660,24 +662,47 @@
 																				<td>
 																					<div class="hidden-sm hidden-xs btn-group">
 																						
-																						<button class="btn btn-xs btn-info" href="#modal-table3" data-toggle="modal">
-																							<i class="ace-icon fa fa-pencil bigger-120"></i>
-																						</button>
+																						<!--<button class="btn btn-xs btn-info" href="#modal-table3" data-toggle="modal">-->
+																							<a  href="#modal-table3" data-toggle="modal"><i id="xiugai" class="ace-icon fa fa-pencil bigger-120"></i></a>
+																						<!--</button>-->
 					<!-- 这里是会员的删除按钮 -->
-																						<button class="btn btn-xs btn-danger">
-																							<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																						</button>
+																						<!--<button  class="btn btn-xs btn-danger">-->
+																							<a th:href="@{deleteByMemberById(id=${member.getMid()})}"><i class="ace-icon fa fa-trash-o bigger-120"></i></a>
+																						<!--</button>-->
 																						<!-- href="#modal-table2" data-toggle="modal" -->
 																					</div>
 																				</td>
 																			</tr>
 																		</tbody>
 																	</table>
+																	</form>
 																</div><!-- /.span -->
 															</div><!-- /.row -->
 					
 			</div><!-- /.main-content -->
-			
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+	$(function(){
+	    $("#xiugai").click(function(){
+	        alert(1223)
+	        var id=$("#xiugai").parent().parent().prev().prev().prev().prev().prev().prev().text();
+	        alert(id);
+	        $.post("qeuryMemberById",{"id":id},function(returnDate){
+							/*<th>会员编号</th>
+								<th>会员等级</th>
+								<th>可下载资源数</th>
+								<th>赠送积分数</th>
+								<th >单价</th>
+								<th>购物打折度</th>*/
+	            var html="<td><input type='text' value='"+returnDate.mid+"'></td><td><input type='text' value='"+returnDate.mlevel+"'></td>" +
+					"<td><input type='text' value='"+returnDate.downloadcount+"'></td><td><input type='text' value='"+returnDate.scores+"'></td>" +
+					"<td><input type='text' value='"+returnDate.mprice+"'></td><td><input type='text' value='"+returnDate.discount+"'></td>"
+                $("#xieru").html(html);
+			})
+
+		})
+	})
+</script>
 			
 			<!-- 会员信息的修改 -->
 																<div id="modal-table3" class="modal fade" tabindex="-1">
@@ -696,78 +721,17 @@
 																												<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
 																													<thead>
 																														<tr>
-																															<th>用户编号</th>
-																															<th>昵称</th>
-																															<th>
-																																账号状态
-																															</th>
+																															<th>会员编号</th>
+																															<th>会员等级</th>
+																															<th>可下载资源数</th>
+																															<th>赠送积分数</th>
+																															<th >单价</th>
+																															<th>购物打折度</th>
 																														</tr>
 																													</thead>
-																
-																													<tbody>
-																														
-																														
-																														<td></td>
-																														<td></td>																						
-																														<td>
-																															<select>
-																																<option>账号活跃</option>
-																																<option>账号冻结</option>
-																															</select>
-																														</td>																						
-																														<!-- <tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr>
-																
-																														<tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr>
-																														<tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr>
-																														<tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr>
-																														<tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr>
-																														<tr>
-																															<td>
-																																<a href="#">国内航班</a>
-																															</td>
-																															<td>头等舱</td>
-																															<td>2件</td>
-																															<td>5千克</td>
-																														</tr> -->
-																														
-																														
-																														
-																														<!-- 写行 -->
+																													<tbody id="xieru">
+
+
 																													</tbody>
 																												</table>
 																											</div>

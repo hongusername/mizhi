@@ -46,5 +46,6 @@ public interface ManagerService {
     List<Member> queryAll();
     Integer deleteByQuestionId(@Param("mid") Integer mid);
     Integer insertMember(@Param("member") Member member);
+    Member queryByMemberById(@Param("qMid") Integer qMid);
     Integer updateMember(@Param("upMember") Member member);
 }

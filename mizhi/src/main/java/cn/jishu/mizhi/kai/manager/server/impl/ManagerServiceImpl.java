@@ -68,6 +68,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    public Member queryByMemberById(Integer qMid) {
+        return managerDao.queryByMemberById(qMid);
+    }
+
+    @Override
     public Integer updateMember(Member member) {
         return managerDao.updateMember(member);
     }

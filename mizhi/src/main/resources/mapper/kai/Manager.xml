@@ -24,7 +24,14 @@
     <update id="updateUserStatus" parameterType="cn.jishu.mizhi.entity.Users">
         update users set ustatus=#{updateUser.ustatus} where userid=#{updateUser.userid}
     </update>
-    <select id="qeuryAllQuestions" resultType="cn.jishu.mizhi.entity.Questions">
+    <resultMap id="QuestionMapUser" type="cn.jishu.mizhi.entity.Questions" autoMapping="true">
+        <id column="qid" property="qid"></id>
+        <association property="users" resultMap="UserMapQ"></association>
+    </resultMap>
+    <resultMap id="UserMapQ" type="cn.jishu.mizhi.entity.Users" autoMapping="true">
+        <id column="userid" property="userid"></id>
+    </resultMap>
+    <select id="qeuryAllQuestions" resultMap="QuestionMapUser">
         select * from questions
     </select>
 
@@ -71,6 +78,9 @@
   <update id="updateMember" parameterType="cn.jishu.mizhi.entity.Member">
         UPDATE member SET mlevel=#{upMember.mlevel},downloadcount=#{upMember.downloadcount},scores=#{upMember.scores},mprice=#{upMember.mprice},discount=#{upMember.discount} WHERE MID=#{upMember.mid}
     </update>
+    <select id="queryByMemberById" resultType="cn.jishu.mizhi.entity.Member">
+        select * from member where mid=#{qMid}
+    </select>
 
 
 

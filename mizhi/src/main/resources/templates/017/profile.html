@@ -627,6 +627,7 @@
 
 					<div class="row" style="margin-top: -100000000000px;">
 						<div class="col-xs-12">
+
 							<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
@@ -647,7 +648,6 @@
 
 									<tr th:each="user:${userAll}">
 										<td th:text="${user.getUserid()}">
-
 										</td>
 										<td th:text="${user.getNickname()}">头等舱</td>
 										<td th:text="${#dates.format(user.getRegtime(),'yyyy-MM-dd')}">2件</td>
@@ -657,13 +657,12 @@
 										</td>
 										<td>
 											<div class="hidden-sm hidden-xs btn-group">
-												<button class="btn btn-xs btn-success" title="" href="#modal-table1" data-toggle="modal" id="chakan" >
+												<button type="button" class="btn btn-xs btn-success" title="" href="#modal-table1" data-toggle="modal" id="chakan" >
 													<i class="ace-icon fa fa-search-plus bigger-120"></i>
 												</button>
 												<button class="btn btn-xs btn-info" href="#modal-table2" data-toggle="modal">
 													<i class="ace-icon fa fa-pencil bigger-120"></i>
 												</button>
-
 											</div>
 										</td>
 									</tr>
@@ -680,9 +679,10 @@
 		    var id=$(this).parent().parent().prev().prev().prev().prev().prev().text();
 		    alert(id+"qewr");
 		    $.post("queryByUserId",{"id":id},function(returnDate){
+
 		        alert(returnDate)
-		        var html="<td>"+returnDate.userid+"</td><td>"+returnDate.nickname+"</td><td>"+returnDate.phone+"</td><td>"+returnDate.email+"</td><td>"+returnDate.gender+"</td><td>"+returnDate.birthday+"</td>" +
-					"<td>"+returnDate.introduce+"</td>"
+		        var html="<td>"+returnDate[0].userid+"</td><td>"+returnDate[0].nickname+"</td><td>"+returnDate[0].phone+"</td><td>"+returnDate[0].email+"</td><td>"+returnDate[0].gender+"</td><td>"+returnDate[1]+"</td>" +
+					"<td>"+returnDate[0].introduce+"</td>"
                 $("#pingjie").html(html);
 			})
 		})

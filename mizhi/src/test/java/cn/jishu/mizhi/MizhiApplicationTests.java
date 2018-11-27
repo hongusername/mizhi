@@ -16,6 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,7 +78,7 @@ public class MizhiApplicationTests {
 
     @Test
     public void testQueryByUserId(){
-        System.out.println(managerService.qeuryUsersById(1));
+        System.out.println(managerService.queyrTypeById(1));
     }
 
     //根据id查询问题类型
@@ -125,6 +127,37 @@ public class MizhiApplicationTests {
     @Test
     public void testInsertForMember() {
         System.out.println(managerService.insertMember(new Member(null, "sanji", 1, 1, 12, 12)));
+    }
+    @Test
+    public void queryByid(){
+        Integer id=1;
+        Users user=managerService.qeuryUsersById(id);
+       /* String date=user.getBirthday().toString()+"00";
+        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzz yyyy");
+        Date d = null;
+        try {
+            d=(Date) format.parse(date);
+            System.out.println("++++++++++"+d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(d);
+       */
+       Date date=new Date();
+       date=user.getBirthday();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date2=format.format(date);
+        System.out.println(date2);
+        List<Object> list=new ArrayList<>();
+        list.add(0,user);
+        list.add(1,date2);
+        System.out.println(list);
+    }
+
+    //查询话题根据id
+    @Test
+    public void testQueryByQmid(){
+        System.out.println(managerService.queryByMemberById(4));
     }
 
     //更新话题
