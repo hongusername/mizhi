@@ -23,10 +23,13 @@ import java.io.IOException;
 @Controller
 public class ArticlesController {
 
+/*
     @Resource
     private ArticlesService as;
 
-    /*新增草稿*/
+    */
+/*新增草稿*//*
+
     @RequestMapping("/addArticle")
     @ResponseBody
     public Integer ajaxdoAdd(String param) {
@@ -84,5 +87,6 @@ public class ArticlesController {
         Integer row=as.updatearticle(a);
         return row;
     }
+*/
 
 }

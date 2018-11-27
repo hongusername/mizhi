@@ -75,7 +75,7 @@ public class MizhiApplicationTests {
     }
 
     @Test
-    public void testQueryByUserId(){
+    public void testQueryByUserId() {
         System.out.println(managerService.qeuryUsersById(1));
     }
 
@@ -166,50 +166,125 @@ public class MizhiApplicationTests {
         }
     }
 
+    /**
+     * 根据id查询书
+     */
+    @Test
+    public void testQueryBooksById() {
+        System.out.println(this.booksService.queryBooksById(1001));
+    }
+
+    /**
+     * 根据name查询书
+     */
+    @Test
+    public void testQueryBooksByName() {
+        System.out.println(this.booksService.queryBooksByName("西游记"));
+    }
+
+    /**
+     * 查询当前用户书架的书
+     */
+    @Test
+    public void testQueryJiaAll() {
+        List<Books> list = this.booksService.queryJiaAll(1);
+        for (Books b : list) {
+            System.out.println(b);
+        }
+    }
+
+    /**
+     * 给当前用户书架增加一本书
+     */
+    @Test
+    public void testAddJia() {
+        Bookrack b = new Bookrack();
+        Books b1 = new Books();
+        b1.setBid(2004);
+        Users u = new Users();
+        u.setUserid(1);
+        b.setBooks(b1);
+        b.setUsers(u);
+        System.out.println(this.booksService.addJia(b));
+    }
+
+    /**
+     * 删除当前用户书架的一本书
+     */
+    @Test
+    public void testDeleteJia() {
+        System.out.println(this.booksService.deleteJia(1, 2003));
+    }
+
+    /**
+     * 购买书，增加订单信息
+     */
+    @Test
+    public void testAddOrders() {
+        Books b = new Books();
+        b.setBid(2002);
+        Users u = new Users();
+        u.setUserid(1);
+        Orderform o = new Orderform(null, u, b, null, null, "1", this.booksService.queryBooksById(2002).getNewprice());
+        System.out.println(this.booksService.addOrders(o));
+    }
+
+    /**
+     * 判断当前用户是否购买了本书
+     */
+    @Test
+    public void testQueryOrderByBooks() {
+        if (this.booksService.queryOrderByBooks(1, 20044) != null) {
+            System.out.println("已购买本书");
+        } else {
+            System.out.println("未购买本书");
+        }
+    }
 
     /**
      * LearnLi
-     *    private Integer articleid;//主键
-     *     private Users users;//外键 用户编号
-     *     private Articletype articletype;//外键 文章类型编号,
-     *     private String atitle;//文章标题
-     *     private String aimg;//文章图片
-     *     private String acontent;//文章内容
-     *     private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
-     *     private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
-     *     private Timestamp articletime;//文章发表时间
-     *     private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
-     *     private List<Userstalks> userstalksList;
+     * private Integer articleid;//主键
+     * private Users users;//外键 用户编号
+     * private Articletype articletype;//外键 文章类型编号,
+     * private String atitle;//文章标题
+     * private String aimg;//文章图片
+     * private String acontent;//文章内容
+     * private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
+     * private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
+     * private Timestamp articletime;//文章发表时间
+     * private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
+     * private List<Userstalks> userstalksList;
      */
 
     @Resource
     private ArticlesService as;
+
     //增加文章
     @Test
-    public void testaddA(){
-        Users users=new Users();
-        Articletype articletype=new Articletype();
+    public void testaddA() {
+        Users users = new Users();
+        Articletype articletype = new Articletype();
         users.setUserid(1);
         articletype.setArticletypeid(1);
-        Articles a=new Articles(null,users,articletype,"我是标题","","我是内容",4,0,0,0,"1",new Timestamp(new Date().getTime()),0,0,null);
-        Integer res=as.addarticle(a);
+        Articles a = new Articles(null, users, articletype, "我是标题", "", "我是内容", 4, 0, 0, 0, "1", new Timestamp(new Date().getTime()), 0, 0, null);
+        Integer res = as.addarticle(a);
         System.out.println(res);
     }
 
     @Test
-    public void testB(){
-        Articles a=new Articles();
+    public void testB() {
+        Articles a = new Articles();
         a.setArticleid(1);
         a.setArticlestatus("2");
         a.setArticletime(new Timestamp(new Date().getTime()));
-        Integer ss=as.updatestatus(a);
+        Integer ss = as.updatestatus(a);
         System.out.println(ss);
     }
 
     @Test
-    public void testC(){
-        Articles a=new Articles();
-        Articletype articletype=new Articletype();
+    public void testC() {
+        Articles a = new Articles();
+        Articletype articletype = new Articletype();
         articletype.setArticletypeid(1);
         a.setArticleid(1);
         a.setAtitle("特朗普");
@@ -218,21 +293,22 @@ public class MizhiApplicationTests {
         a.setAnumber(11);
         a.setArticletype(articletype);
 
-        Integer ss=as.updatearticle(a);
+        Integer ss = as.updatearticle(a);
         System.out.println(ss);
     }
-    @Test
-    public void testD(){
 
-        Articles a=new Articles();
-        Users u=new Users();
+    @Test
+    public void testD() {
+
+        Articles a = new Articles();
+        Users u = new Users();
         u.setUserid(1);
         a.setArticlestatus("1");
         a.setUsers(u);
-        PageInfo<Articles> ss=as.queryALlbyuserid(1,4,a);
+        PageInfo<Articles> ss = as.queryALlbyuserid(1, 4, a);
 
-        for (Articles ar:ss.getList()) {
-        System.out.println(ar);
+        for (Articles ar : ss.getList()) {
+            System.out.println(ar);
         }
     }
 
