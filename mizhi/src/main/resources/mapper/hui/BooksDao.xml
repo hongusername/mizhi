@@ -3,12 +3,12 @@
 <mapper namespace="cn.jishu.mizhi.hui.books.dao.BooksDao">
 
     <resultMap id="booksMap" type="cn.jishu.mizhi.entity.Books" autoMapping="true">
-        <id column="bid" property="bid"></id>
-        <association property="booktype" resultMap="bookTypeMap"></association>
+        <id column="bid" property="bid"/>
+        <association property="booktype" resultMap="bookTypeMap"/>
     </resultMap>
 
     <resultMap id="bookTypeMap" type="cn.jishu.mizhi.entity.Booktype" autoMapping="true">
-        <id column="btid" property="btid"></id>
+        <id column="btid" property="btid"/>
     </resultMap>
 
     <select id="queryBooksAll" resultMap="booksMap">
@@ -28,4 +28,40 @@
     <insert id="addBooks">
     insert into `books` values(null,#{b.booktype.btid},#{b.bname},#{b.author},#{b.title},#{b.description},sysdate(),#{b.bookstatus},#{b.aggreecount},#{b.oldprice},#{b.newprice},#{b.tryread},#{b.bookspath},#{b.avgstarcount})
     </insert>
+
+    <select id="queryBooksById" resultMap="booksMap">
+        select * from books b1,booktype b2 where b1.btid=b2.btid and b1.bid=#{id}
+    </select>
+    <select id="queryBooksByName" resultMap="booksMap">
+        select * from books b1,booktype b2 where b1.btid=b2.btid and b1.bname=#{name}
+    </select>
+    <select id="queryJiaAll" resultMap="booksMap">
+      SELECT * FROM books WHERE bid IN(SELECT bid FROM bookrack WHERE userid=#{id})
+    </select>
+    <insert id="addJia" parameterType="cn.jishu.mizhi.entity.Bookrack">
+        insert into bookrack values(null,#{j.books.bid},#{j.users.userid})
+    </insert>
+    <delete id="deleteJia">
+        delete from bookrack where bid=#{bid} and userid=#{uid}
+    </delete>
+    <insert id="addOrders">
+        insert into orderform values(null,#{o.users.userid},#{o.books.bid},sysdate(),sysdate(),#{o.ofstatus},#{o.ofprice})
+    </insert>
+    <select id="queryOrderByBooks" resultType="cn.jishu.mizhi.entity.Orderform">
+        select * from  orderform where userid=#{uid} and bookid=#{bid}
+    </select>
+
+    <resultMap id="orderformMap" type="cn.jishu.mizhi.entity.Orderform" autoMapping="true">
+        <id column="dfid" property="dfid"></id>
+        <association property="books" resultMap="booksMap"></association>
+    </resultMap>
+    <select id="queryOrderAllByUserId" resultMap="orderformMap">
+        SELECT * FROM orderform o,books b
+        <where>
+            o.bookid=b.bid
+            <if test="id!=null and id!='' and id!=0">
+                and o.userid=#{id}
+            </if>
+        </where>
+    </select>
 </mapper>

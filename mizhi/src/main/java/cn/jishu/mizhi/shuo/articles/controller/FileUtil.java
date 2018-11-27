@@ -39,8 +39,6 @@ public class FileUtil {
             System.out.println("返回的地址： " + ret.get("link"));
             System.out.println("接受的请求：" + request);
             return ret;
-            //http://localhost:8080/article/img/01964403.jpg
-            // http://localhost:8080/article/img/78552889.jpg
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,19 +54,12 @@ public class FileUtil {
      */
     public Map<String, String> uploadFile(MultipartFile file, HttpServletRequest request) throws IOException {
         Map<String, String> result = new HashMap<String, String>();//新建结果接受，用于返回结果。
-
-
         String fileName = file.getOriginalFilename();//获取原型文件名称
-
-        // File tempFile = new File(path, new Date().getTime() + String.valueOf(fileName));
         String fileType = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()).toLowerCase();//文件后缀
         String saveName = String.valueOf((new Date()).getTime()).substring(8) + (int) ((Math.random() * 999 + 1)) + '.' + fileType;
         String path=createdic(request,fileType);
-        System.out.println("路径是："+path);
         File tempFile = new File(path, String.valueOf(saveName));
         System.out.println("文件：" + tempFile);
-
-
         file.transferTo(tempFile);
         System.out.println("修改之后的原型名称：" + file.getOriginalFilename());
         result.put("fileName", fileName);
