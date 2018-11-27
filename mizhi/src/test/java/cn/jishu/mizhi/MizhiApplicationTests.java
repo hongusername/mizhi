@@ -222,7 +222,7 @@ public class MizhiApplicationTests {
     @Test
     public void testAddOrders() {
         Books b = new Books();
-        b.setBid(2002);
+        b.setBid(2004);
         Users u = new Users();
         u.setUserid(1);
         Orderform o = new Orderform(null, u, b, null, null, "1", this.booksService.queryBooksById(2002).getNewprice());
@@ -238,6 +238,17 @@ public class MizhiApplicationTests {
             System.out.println("已购买本书");
         } else {
             System.out.println("未购买本书");
+        }
+    }
+
+    /**
+     * 查询所有订单信息，组合查询当前用户订单
+     */
+    @Test
+    public void testQueryOrderAllByUserId() {
+        List<Orderform> list = this.booksService.queryOrderAllByUserId(1);
+        for (Orderform o : list) {
+            System.out.println(o.getBooks());
         }
     }
 

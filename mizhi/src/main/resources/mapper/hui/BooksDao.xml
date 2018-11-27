@@ -50,7 +50,18 @@
     <select id="queryOrderByBooks" resultType="cn.jishu.mizhi.entity.Orderform">
         select * from  orderform where userid=#{uid} and bookid=#{bid}
     </select>
-    <select id="queryOrderAllByUserId" resultMap="">
 
+    <resultMap id="orderformMap" type="cn.jishu.mizhi.entity.Orderform" autoMapping="true">
+        <id column="dfid" property="dfid"></id>
+        <association property="books" resultMap="booksMap"></association>
+    </resultMap>
+    <select id="queryOrderAllByUserId" resultMap="orderformMap">
+        SELECT * FROM orderform o,books b
+        <where>
+            o.bookid=b.bid
+            <if test="id!=null and id!='' and id!=0">
+                and o.userid=#{id}
+            </if>
+        </where>
     </select>
 </mapper>

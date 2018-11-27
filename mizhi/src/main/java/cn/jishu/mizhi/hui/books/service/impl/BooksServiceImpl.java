@@ -101,6 +101,17 @@ public class BooksServiceImpl implements BooksService {
     }
 
     /**
+     * 查询所有订单信息，组合查询当前用户订单
+     *
+     * @param uid
+     * @return
+     */
+    @Override
+    public List<Orderform> queryOrderAllByUserId(Integer uid) {
+        return this.booksDao.queryOrderAllByUserId(uid);
+    }
+
+    /**
      * 根据id查询一本书
      *
      * @param id

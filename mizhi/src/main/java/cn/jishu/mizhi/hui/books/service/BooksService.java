@@ -81,4 +81,11 @@ public interface BooksService {
      * @return
      */
     Orderform queryOrderByBooks(@Param("uid") Integer uid, @Param("bid") Integer bid);
+
+    /**
+     * 查询所有订单信息，组合查询当前用户订单
+     *
+     * @return
+     */
+    List<Orderform> queryOrderAllByUserId(Integer uid);
 }
