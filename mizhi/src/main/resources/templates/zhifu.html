@@ -197,12 +197,9 @@
     <div id="tabhead" class="tab-head">
         <h2 id="tab1" class="selected" name="tab">付 款</h2>
         <h2 id="tab2" name="tab">交 易 查 询</h2>
-        <h2 id="tab3" name="tab">退 款</h2>
-        <h2 id="tab4" name="tab">退 款 查 询</h2>
-        <h2 id="tab5" name="tab">交 易 关 闭</h2>
     </div>
     <form name=alipayment action="/pay" method="post"
-          target="_blank">
+          target="_parent">
         <div id="body1" class="show" name="divcontent">
             <dl class="content">
                 <dt>商户订单号 ：</dt>
@@ -243,27 +240,6 @@
 </div>
 </body>
 <script language="javascript">
-    var tabs = document.getElementsByName('tab');
-    var contents = document.getElementsByName('divcontent');
-
-    (function changeTab(tab) {
-        for (var i = 0, len = tabs.length; i < len; i++) {
-            tabs[i].onmouseover = showTab;
-        }
-    })();
-
-    function showTab() {
-        for (var i = 0, len = tabs.length; i < len; i++) {
-            if (tabs[i] === this) {
-                tabs[i].className = 'selected';
-                contents[i].className = 'show';
-            } else {
-                tabs[i].className = '';
-                contents[i].className = 'tab-content';
-            }
-        }
-    }
-
     function GetDateNow() {
         var vNow = new Date();
         var sNow = "";

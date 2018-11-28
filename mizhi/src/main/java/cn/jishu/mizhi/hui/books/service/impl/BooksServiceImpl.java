@@ -32,6 +32,11 @@ public class BooksServiceImpl implements BooksService {
         return pageInfo;
     }
 
+    @Override
+    public List<Books> queryBooksAll2(Books books) {
+        return this.booksDao.queryBooksAll(books);
+    }
+
     /**
      * 增加书籍
      *

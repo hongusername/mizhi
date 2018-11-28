@@ -117,471 +117,69 @@
                     <div class="Card">
                         <div class="Card-header PubIndex-recommendationsHeader">
                             <div class="Card-headerText">精选推荐
-                                <a class="PubIndex-recommendationsLink"
-                                   href="https://www.zhihu.com/publications/recommendations">查看全部书目
-                                    <svg viewBox="0 0 10 6" class="Icon Icon--arrow" width="10" height="16"
-                                         aria-hidden="true" style="height: 16px; width: 10px;">
-                                        <title></title>
-                                        <g>
-                                            <path d="M8.716.217L5.002 4 1.285.218C.99-.072.514-.072.22.218c-.294.29-.294.76 0 1.052l4.25 4.512c.292.29.77.29 1.063 0L9.78 1.27c.293-.29.293-.76 0-1.052-.295-.29-.77-.29-1.063 0z"></path>
-                                        </g>
-                                    </svg>
-                                </a>
                             </div>
                         </div>
-                        <ul class="BookList PubIndex-recommends" th:each="books,booksStat : ${booksPageInfo}">
-                            <li class="BookItem">
-                                <a href="https://www.zhihu.com/pub/book/119574155">
+                        <ul class="BookList PubIndex-recommends">
+                            <li class="BookItem" th:each="books,booksStat : ${booksPageInfo}">
+                                <a th:href="@{queryBooksById(bid=${books.bid})}">
                                     <div class="BookCoverWrapper BookItem-cover">
                                         <div class="ImageWrapper">
                                             <div class="sizeHolder" style="padding-top:133.33333333333331%"></div>
                                             <img class="Image"
-                                                 th:attr="src=@{books.bookspath}"
-                                                 srcset="https://pic1.zhimg.com/50/v2-c320ae214fe6dbfc975fcec3e5ba5e12_qhd.webp 2x"
-                                                 alt="男人真相"></div>
+                                                 th:src="${books.bookspath}"></div>
                                     </div>
-                                    <div class="BookItem-title">男人真相</div>
-                                    <div class="BookItem-authors">薛好大</div>
+                                    <div class="BookItem-title" th:text="${books.bname}"></div>
+                                    <div class="BookItem-authors" th:text="${books.author}"></div>
                                     <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
                                             class="Yuan-symbol" th:text="${books.oldprice}"></span></span>
                                     </div>
                                 </a>
                             </li>
-                            <li class="BookItem">
-                                <a href="https://www.zhihu.com/pub/book/119575034">
-                                    <div class="BookCoverWrapper BookItem-cover">
-                                        <div class="ImageWrapper">
-                                            <div class="sizeHolder" style="padding-top:133.33333333333331%"></div>
-                                            <img class="Image"
-                                                 src="css/book/v2-ccf53622cfa1c0e889e050e31ed960ae_200x0.webp"
-                                                 srcset="https://pic1.zhimg.com/50/v2-ccf53622cfa1c0e889e050e31ed960ae_qhd.webp 2x"
-                                                 alt="从你的全世界路过"></div>
-                                    </div>
-                                    <div class="BookItem-title">从你的全世界路过</div>
-                                    <div class="BookItem-authors">张嘉佳</div>
-                                    <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                            class="Yuan-symbol">¥</span>17.99</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="BookItem">
-                                <a href="https://www.zhihu.com/pub/book/119575184">
-                                    <div class="BookCoverWrapper BookItem-cover">
-                                        <div class="ImageWrapper">
-                                            <div class="sizeHolder" style="padding-top:133.33333333333331%"></div>
-                                            <img class="Image"
-                                                 src="css/book/v2-eced8614a4309d93853ceffd1c40fff1_200x0.webp"
-                                                 srcset="https://pic1.zhimg.com/50/v2-eced8614a4309d93853ceffd1c40fff1_qhd.webp 2x"
-                                                 alt="世界在变软"></div>
-                                    </div>
-                                    <div class="BookItem-title">世界在变软</div>
-                                    <div class="BookItem-authors">水木然</div>
-                                    <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                            class="Yuan-symbol">¥</span>43.20</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="BookItem">
-                                <a href="https://www.zhihu.com/pub/book/119574158">
-                                    <div class="BookCoverWrapper BookItem-cover">
-                                        <div class="ImageWrapper">
-                                            <div class="sizeHolder" style="padding-top:133.33333333333331%"></div>
-                                            <img class="Image"
-                                                 src="css/book/v2-04d6d2103e01b3bfb67f5067eb6c38ca_200x0.webp"
-                                                 srcset="https://pic1.zhimg.com/50/v2-04d6d2103e01b3bfb67f5067eb6c38ca_qhd.webp 2x"
-                                                 alt="南渡北归. 北归—增订本"></div>
-                                    </div>
-                                    <div class="BookItem-title">南渡北归. 北归—增订本</div>
-                                    <div class="BookItem-authors">岳南</div>
-                                    <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                            class="Yuan-symbol">¥</span>22.99</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="BookItem">
-                                <a href="https://www.zhihu.com/pub/book/119575022">
-                                    <div class="BookCoverWrapper BookItem-cover">
-                                        <div class="ImageWrapper">
-                                            <div class="sizeHolder" style="padding-top:133.33333333333331%"></div>
-                                            <img class="Image"
-                                                 src="css/book/v2-75f28194d7041408da69e75710adabd5_200x0.webp"
-                                                 srcset="https://pic1.zhimg.com/50/v2-75f28194d7041408da69e75710adabd5_qhd.webp 2x"
-                                                 alt="初次爱你，请多关照"></div>
-                                        <span class="CornerText">SALE</span></div>
-                                    <div class="BookItem-title">初次爱你，请多关照</div>
-                                    <div class="BookItem-authors">咪蒙</div>
-                                    <div class="BookItem-promotion"><span class="Yuan BookItem-value"><span
-                                            class="Yuan-symbol">¥</span>17.99</span><span
-                                            class="Yuan BookItem-price"><span class="Yuan-symbol">¥</span>8.99</span>
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                     </div>
+                    <!--
+
+                    头部
+
+                    -->
                     <div class="Card" style="overflow:visible">
                         <div id="secondary" class="PubAnchor"></div>
-                        <div class="PubIndex-CategoriesHeader PubMobileSubHeader" style="top:50px">
+                        <div class="PubIndex-CategoriesHeader PubMobileSubHeader">
                             <ul role="tablist" class="Tabs PubIndex-tabs">
                                 <li role="tab" class="Tabs-item Tabs-item--noMeta">
-                                    <a class="Tabs-link is-active"
-                                       href="https://www.zhihu.com/pub/categories/147">分类</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/pub/features/sale">特价</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/pub/features/free">免费</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/pub/features/top">榜单</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/pub/zhihu">知乎出品</a>
+                                    分类
                                 </li>
                             </ul>
-                            <button type="button" class="Button Pub-NavShelf Button--blue">
-                                <svg width="15" height="14" viewBox="0 0 14 15" xmlns="http://www.w3.org/2000/svg"
-                                     class="Icon">
-                                    <path d="M8.05 3.24V1.086A.574.574 0 0 0 7.49.5H5.81c-.31 0-.56.262-.56.586v10.369c0 .323.25.586.56.586h1.68c.309 0 .56-.263.56-.586V4.678l1.962 6.842c.093.323.409.516.706.431l1.615-.463c.297-.085.463-.417.37-.74l-2.182-7.61c-.092-.323-.409-.516-.706-.431L8.2 3.17a.518.518 0 0 0-.15.07zm-6.44 8.8c-.31 0-.56-.266-.56-.594v-7.54c0-.329.25-.595.56-.595h1.68c.309 0 .56.266.56.594v7.541c0 .328-.251.595-.56.595H1.61zM.7 13.096h12.6a.7.7 0 0 1 .7.7v.005a.7.7 0 0 1-.7.7H.7a.7.7 0 0 1-.7-.7v-.005a.7.7 0 0 1 .7-.7z"
-                                          fill="currentColor"></path>
-                                </svg>
-                                我的书架 <span class="TotalCount">3</span></button>
+                            <a th:href="@{queryBookJia}"><button type="button" class="Button Pub-NavShelf Button--blue">
+                                我的书架 <span class="TotalCount">4</span></button></a>
                         </div>
                         <div class="PubIndex-main">
                             <div class="PubIndex-subTabs">
-                                <a class="is-active" href="https://www.zhihu.com/pub/categories/147">人文社科</a>
-                                <a class="" href="https://www.zhihu.com/pub/categories/254">职场成长</a>
-                                <a class="" href="https://www.zhihu.com/pub/categories/232">生活方式</a>
-                                <div class="Popover">
-                                    <button role="combobox" aria-expanded="false" type="button" id="Popover2-toggle"
-                                            aria-haspopup="true" aria-owns="Popover2-content"
-                                            class="Button Select-button">技能习得<span
-                                            style="display:inline-flex;align-items:center">​<svg
-                                            class="Zi Zi--Select Select-arrow" fill="currentColor" viewBox="0 0 24 24"
-                                            width="24" height="24"><path
-                                            d="M12 16.183l2.716-2.966a.757.757 0 0 1 1.064.001.738.738 0 0 1 0 1.052l-3.247 3.512a.758.758 0 0 1-1.064 0L8.22 14.27a.738.738 0 0 1 0-1.052.758.758 0 0 1 1.063 0L12 16.183zm0-9.365L9.284 9.782a.758.758 0 0 1-1.064 0 .738.738 0 0 1 0-1.052l3.248-3.512a.758.758 0 0 1 1.065 0L15.78 8.73a.738.738 0 0 1 0 1.052.757.757 0 0 1-1.063.001L12 6.818z"
-                                            fill-rule="evenodd"></path></svg></span></button>
-                                </div>
+                                <a href="bQueryBooksAll?btid=1">IT</a>
+                                <a href="bQueryBooksAll?btid=2">名著</a>
+                                <a href="bQueryBooksAll?btid=3">小说</a>
+                                <a href="bQueryBooksAll?btid=4">社交</a>
                             </div>
                             <div class="">
                                 <ul class="BookList BookList--wrap">
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119575174">
+                                    <li class="BookItem" th:each="books,booksStat : ${booksPageInfo2}">
+                                        <a th:href="@{queryBooksById(bid=${books.bid})}">
                                             <div class="BookCoverWrapper BookItem-cover">
                                                 <div class="ImageWrapper">
                                                     <div class="sizeHolder"
                                                          style="padding-top:133.33333333333331%"></div>
                                                     <img class="Image"
-                                                         src="css/book/v2-aea36ab0ea8ecffb5165d9d07c29e25a_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-aea36ab0ea8ecffb5165d9d07c29e25a_qhd.webp 2x"
-                                                         alt="重返魔法世界"></div>
+                                                         th:src="${books.bookspath}"
+                                                         alt=""></div>
                                             </div>
-                                            <div class="BookItem-title">重返魔法世界</div>
-                                            <div class="BookItem-authors">雲绯 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119572600">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder"
-                                                         style="padding-top:133.33333333333331%"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-011aac469a7e9c5192465da29fcf9196_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-011aac469a7e9c5192465da29fcf9196_qhd.webp 2x"
-                                                         alt="江湖再见，再见江湖"></div>
-                                            </div>
-                                            <div class="BookItem-title">江湖再见，再见江湖</div>
-                                            <div class="BookItem-authors">马家辉 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119567975">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder"
-                                                         style="padding-top:133.33333333333331%"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-e21391a305f83d40591eb216e7843f9a_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-e21391a305f83d40591eb216e7843f9a_qhd.webp 2x"
-                                                         alt="鲁迅：「这句话不是我说的」"></div>
-                                            </div>
-                                            <div class="BookItem-title">鲁迅：「这句话不是我说的」</div>
-                                            <div class="BookItem-authors">张佳玮 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119567790">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder"
-                                                         style="padding-top:133.33333333333331%"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-c3aea54100755fbe85a5a798a64ee9fc_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-c3aea54100755fbe85a5a798a64ee9fc_qhd.webp 2x"
-                                                         alt="真是搞不懂地球了"></div>
-                                            </div>
-                                            <div class="BookItem-title">真是搞不懂地球了</div>
-                                            <div class="BookItem-authors">河森堡 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119569540">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder"
-                                                         style="padding-top:133.33333333333331%"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-36d5984b0d35f27130c8f4acd025aa16_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-36d5984b0d35f27130c8f4acd025aa16_qhd.webp 2x"
-                                                         alt="我去过那儿，因为这本书"></div>
-                                            </div>
-                                            <div class="BookItem-title">我去过那儿，因为这本书</div>
-                                            <div class="BookItem-authors">李淼 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119571234">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-b3d0d8b554da49bb15f1cf02faaacf40_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-b3d0d8b554da49bb15f1cf02faaacf40_qhd.webp 2x"
-                                                         alt="别动本宝宝的玩具！"></div>
-                                            </div>
-                                            <div class="BookItem-title">别动本宝宝的玩具！</div>
-                                            <div class="BookItem-authors">叶佳桐 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119566158">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-52fbd10a70ac4c7576145fb9a9d2e688_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-52fbd10a70ac4c7576145fb9a9d2e688_qhd.webp 2x"
-                                                         alt="迷人的反派"></div>
-                                            </div>
-                                            <div class="BookItem-title">迷人的反派</div>
-                                            <div class="BookItem-authors">RED韵 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119566024">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-1218da46a588701495f63490db2274b1_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-1218da46a588701495f63490db2274b1_qhd.webp 2x"
-                                                         alt="没想到你是这样的童话"></div>
-                                            </div>
-                                            <div class="BookItem-title">没想到你是这样的童话</div>
-                                            <div class="BookItem-authors">孔阳君 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119560601">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-911cbb9354eff6a43c06faf21c1b5fd9_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-911cbb9354eff6a43c06faf21c1b5fd9_qhd.webp 2x"
-                                                         alt="人间情爱（2017 知乎日报故事精选）"></div>
-                                            </div>
-                                            <div class="BookItem-title">人间情爱（2017 知乎日报故事精选）</div>
-                                            <div class="BookItem-authors">真实故事计划 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119568529">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-df7b53e988264fbd48deaeb98444db59_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-df7b53e988264fbd48deaeb98444db59_qhd.webp 2x"
-                                                         alt="请回答，2008"></div>
-                                            </div>
-                                            <div class="BookItem-title">请回答，2008</div>
-                                            <div class="BookItem-authors">每日人物 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119569292">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-a13534c3bf5d42043ab313f264a8859f_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-a13534c3bf5d42043ab313f264a8859f_qhd.webp 2x"
-                                                         alt="自学日语：从五十音到 N2"></div>
-                                            </div>
-                                            <div class="BookItem-title">自学日语：从五十音到 N2</div>
-                                            <div class="BookItem-authors">小岩井</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>4.99</span>
+                                            <div class="BookItem-title" th:text="${books.bname}"></div>
+                                            <div class="BookItem-authors" th:text="${books.author}"></div>
+                                            <div class="BookItem-promotion"><span class="BookItem-price"
+                                                                                  th:text="${books.oldprice}"> </span>
                                             </div>
                                         </a>
                                     </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119554120">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-2d7d82ea52747d98d2011d4de4b1a20c_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-2d7d82ea52747d98d2011d4de4b1a20c_qhd.webp 2x"
-                                                         alt="刑事辩护指导书"></div>
-                                            </div>
-                                            <div class="BookItem-title">刑事辩护指导书</div>
-                                            <div class="BookItem-authors">已弃号勿念</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>9.99</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119557727">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-c6813f485334a3d09cb136e1e60d81f3_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-c6813f485334a3d09cb136e1e60d81f3_qhd.webp 2x"
-                                                         alt="中国哲学简史"></div>
-                                            </div>
-                                            <div class="BookItem-title">中国哲学简史</div>
-                                            <div class="BookItem-authors">冯友兰</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>22.99</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119567378">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-fa0df2b482a86e68535f044ce17d9c60_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-fa0df2b482a86e68535f044ce17d9c60_qhd.webp 2x"
-                                                         alt="知乎观影团 | 姜文和他的电影"></div>
-                                            </div>
-                                            <div class="BookItem-title">知乎观影团 | 姜文和他的电影</div>
-                                            <div class="BookItem-authors">谭卓 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119560566">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-8e45db00e0d0c7709e5784b109776e8b_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-8e45db00e0d0c7709e5784b109776e8b_qhd.webp 2x"
-                                                         alt="2017：知乎日报年度精选"></div>
-                                            </div>
-                                            <div class="BookItem-title">2017：知乎日报年度精选</div>
-                                            <div class="BookItem-authors">PingWest品玩 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119567698">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-389a4a476a7974fdb0677f7dc158407d_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-389a4a476a7974fdb0677f7dc158407d_qhd.webp 2x"
-                                                         alt="读书会特刊 | 谁还没有本奇怪的书呢"></div>
-                                            </div>
-                                            <div class="BookItem-title">读书会特刊 | 谁还没有本奇怪的书呢</div>
-                                            <div class="BookItem-authors">陈语岚 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119555052">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-fb48655c9c2f9340a301cd3e3afd015f_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-fb48655c9c2f9340a301cd3e3afd015f_qhd.webp 2x"
-                                                         alt="真实的虚构：《权力的游戏》中的现实故事"></div>
-                                            </div>
-                                            <div class="BookItem-title">真实的虚构：《权力的游戏》中的现实故事</div>
-                                            <div class="BookItem-authors">赵云志</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>4.99</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/19552101">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/c0295ae7b42a2396a81f7f18cfc788e5_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/c0295ae7b42a2396a81f7f18cfc788e5_qhd.webp 2x"
-                                                         alt="日本有意思"></div>
-                                            </div>
-                                            <div class="BookItem-title">日本有意思</div>
-                                            <div class="BookItem-authors">Nina Rong 等</div>
-                                            <div class="BookItem-promotion"><span class="BookItem-price">免费</span></div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119566427">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-d0b21a1fb7713b32f4fbe96ea64c4674_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-d0b21a1fb7713b32f4fbe96ea64c4674_qhd.webp 2x"
-                                                         alt="租个好房子：租房青年生存指南"></div>
-                                            </div>
-                                            <div class="BookItem-title">租个好房子：租房青年生存指南</div>
-                                            <div class="BookItem-authors">羊迪 等</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>6.99</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="BookItem">
-                                        <a href="https://www.zhihu.com/pub/book/119572573">
-                                            <div class="BookCoverWrapper BookItem-cover">
-                                                <div class="ImageWrapper">
-                                                    <div class="sizeHolder" style="padding-top: 133.333%;"></div>
-                                                    <img class="Image"
-                                                         src="css/book/v2-3afff0a3bb585aed2ddf0605d1a4506c_200x0.webp"
-                                                         srcset="https://pic1.zhimg.com/50/v2-3afff0a3bb585aed2ddf0605d1a4506c_qhd.webp 2x"
-                                                         alt="乌合之众"></div>
-                                            </div>
-                                            <div class="BookItem-title">乌合之众</div>
-                                            <div class="BookItem-authors">居斯塔夫·勒庞</div>
-                                            <div class="BookItem-promotion"><span class="Yuan BookItem-price"><span
-                                                    class="Yuan-symbol">¥</span>7.99</span>
-                                            </div>
-                                        </a>
-                                    </li>
+
                                     <li class="BookItem"></li>
                                     <li class="BookItem"></li>
                                     <li class="BookItem"></li>
@@ -590,9 +188,6 @@
                                 <div></div>
                             </div>
                         </div>
-                        <p class="PubIndex-helpLinkWrapper">
-                            <a href="https://www.zhihu.com/publications/help" target="_blank">需要帮助？查看电子书常见问题</a>
-                        </p>
                     </div>
                 </div>
             </div>
