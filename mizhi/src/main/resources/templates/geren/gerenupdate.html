@@ -97,8 +97,14 @@
         </script>
         <form class="Field xingbieForm"><h3 class="Field-label">性别</h3>
             <div class="Field-content">
-                <div><span class="Field-text xingbietext" th:if="${session.user.getGender()} eq '0'">女</span><span
-                        class="Field-text xingbietext" th:if="${session.user.getGender()} eq '1'">男</span>
+                <div>
+                    <span class="xingbietext Field-text">
+                         <span th:if="${session.user.getGender()} eq '0'">女</span><span
+                            th:if="${session.user.getGender()} eq '1'">男</span>
+                    <span
+                            th:if="${session.user.getGender()} eq null">未知</span>
+                    </span>
+
                     <span class="xingbie" hidden><input type="radio" name="gender" value="1"/>男 <input type="radio"
                                                                                                        name="gender"
                                                                                                        value="0"/>女</span>
@@ -114,6 +120,52 @@
                     </button>
                     <input type="submit" style="display: none;"
                            class="Button ModifyButton Field-modify Button--link xingbiesub">
+                </div>
+            </div>
+        </form>
+
+        <script>
+            $(function () {
+                $(".shengribut").click(function () {
+                    $(".shengribut").hide();
+                    $(".shengrisub").show();
+                    $(".shengritext").hide();
+                    $(".shengrihide").show();
+                });
+                $(".shengriForm").submit(function () {
+                    var birthday = $("input[name='birthday']").val();
+                    $.post("updateUserController", {"asdasd": birthday}, function (returnData) {
+                        $(".shengribut").show();
+                        $(".shengrisub").hide();
+                        $(".shengritext").show();
+                        $(".shengritext").text(birthday);
+                        $(".shengrihide").hide();
+                        parent.$(".shengriL").text(birthday);
+                    }, "json");
+                    return false;
+                });
+            })
+        </script>
+        <form class="Field shengriForm"><h3 class="Field-label">生日</h3>
+            <div class="Field-content">
+                <div>
+                    <span class="shengritext Field-text">
+                        <span class="Field-text" th:if="${session.user.getBirthday()} eq null">未知</span>    <span
+                            class="Field-text" th:text="${#dates.format(session.user.getBirthday(), 'yyyy-MM-dd')}"></span>
+                    </span>
+                    <span class="shengrihide" hidden> <input type="date" name="birthday"/> </span>
+                    <button type="button" class="Button ModifyButton Field-modify Button--link shengribut">
+                        <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" width="12" height="16" x
+                             aria-hidden="true" style="height: 16px; width: 12px;"><title></title>
+                            <g>
+                                <path d="M.423 10.32L0 12l1.667-.474 1.55-.44-2.4-2.33-.394 1.564zM10.153.233c-.327-.318-.85-.31-1.17.018l-.793.817 2.49 2.414.792-.814c.318-.328.312-.852-.017-1.17l-1.3-1.263zM3.84 10.536L1.35 8.122l6.265-6.46 2.49 2.414-6.265 6.46z"
+                                      fill-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                        修改
+                    </button>
+                    <input type="submit" style="display: none;"
+                           class="Button ModifyButton Field-modify Button--link shengrisub">
                 </div>
             </div>
         </form>
@@ -141,7 +193,6 @@
                     $(".gerenbut").hide();
                     $(".gerensub").show();
                     var gerentxt = $(".gerentext").hide().text();
-                    $("input[name='geren']").val(gerentxt);
                     $(".geren").show();
                 });
                 $(".gerenForm").submit(function () {
@@ -164,9 +215,11 @@
         <form class="Field gerenForm"><h3 class="Field-label">个人简介</h3>
             <div class="Field-content">
                 <div class="DescriptionField-content">
-                    <span class="gerentext" th:text="${session.user.getIntroduce()}">asdfsadfa</span><span class="geren"
-                                                                                                           hidden><input
-                        type="text" name="geren"/></span>
+                   <span class="gerentext">
+                        <span class="Field-text" th:text="${session.user.getIntroduce()}"></span>
+                       <span class="Field-text" th:if="${session.user.getIntroduce()} eq null">暂无个人简介</span>
+                   </span>
+                    <span class="geren" hidden><input type="text" value="" name="geren"/></span>
                     <button type="button" class="Button ModifyButton Button--link gerenbut">
                         <svg viewBox="0 0 12 12" class="Icon ModifyButton-icon Icon--modify" width="12" height="16"
                              aria-hidden="true" style="height: 16px; width: 12px;"><title></title>

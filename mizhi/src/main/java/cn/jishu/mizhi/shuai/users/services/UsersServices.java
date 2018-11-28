@@ -13,7 +13,7 @@ public interface UsersServices {
     Integer userAdd(Users user);
 
     Users queryPhoneYN(String phone);
-
+    Users queryByBieRenId(Integer userid);
     Integer updatePassword(Users user);
 
     Users phoneLogin(String phone);

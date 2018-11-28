@@ -15,4 +15,6 @@ public interface UsersDao {
     Integer updateBj(Users users);
     Integer updateTouxiang(Users users);
     Integer updateUser(Users user);
+
+    Users queryByBieRenId(Integer userid);
 }

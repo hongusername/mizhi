@@ -49,6 +49,13 @@
         <if test="introduce!=null and introduce!=''">
             introduce=#{introduce}
         </if>
+        <if test="birthday!=null">
+            birthday=#{birthday}
+        </if>
         where userid=#{userid}
     </update>
+    
+    <select id="queryByBieRenId" resultType="cn.jishu.mizhi.entity.Users">
+        select * from tbuser where userid=#{userid}
+    </select>
 </mapper>

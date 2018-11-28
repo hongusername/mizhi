@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class UsersController {
@@ -84,11 +87,19 @@ public class UsersController {
 
     @RequestMapping("updateUserController")
     @ResponseBody
-    public boolean update(Users user, HttpSession session) {
+    public boolean update(Users user, HttpSession session, String asdasd) {
+        if (asdasd != null && asdasd != "") {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                user.setBirthday(sdf.parse(asdasd));
+            } catch (ParseException e) {
+                System.out.print("日期格式出错");
+            }
+        }
         Users users = (Users) session.getAttribute("user");
         user.setUserid(users.getUserid());
         Integer u = services.updateUser(user);
-        session.setAttribute("user",services.phoneLogin(users.getPhone()));
+        session.setAttribute("user", services.phoneLogin(users.getPhone()));
         return (u > 0);
     }
 }

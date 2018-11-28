@@ -36,6 +36,11 @@ public class UsersServicesImpl implements UsersServices {
     }
 
     @Override
+    public Users queryByBieRenId(Integer userid) {
+        return dao.queryByBieRenId(userid);
+    }
+
+    @Override
     public Integer updatePassword(Users user) {
         return dao.updatePassword(user);
     }

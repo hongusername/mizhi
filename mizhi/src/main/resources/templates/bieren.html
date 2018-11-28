@@ -8,16 +8,9 @@
     <link href="css/mizhimain.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="/layer/layer.js"></script>
-    <script>
-        $(function () {
-            $("title").text("个人信息");
-        })
-        function nihao() {
-            location.href="bierenController";
-        }
-    </script>
+
 </head>
-<body class="Entry-body" >
+<body class="Entry-body">
 <div id="root">
     <div data-zop-usertoken="{&quot;urlToken&quot;:&quot;mou-sheng-zhe-18&quot;}">
         <div class="LoadingBar"></div>
@@ -211,7 +204,8 @@
                                               action="updateTouxiang"
                                               method="post">
                                             <input
-                                                    type="file" name="file" accept="image/jpeg,image/jpg,image/png" class="UploadPicture-input updateTouxiang">
+                                                    type="file" name="file" accept="image/jpeg,image/jpg,image/png"
+                                                    class="UploadPicture-input updateTouxiang">
                                             <input type="submit" hidden>
                                         </form>
                                         <div class="Mask UserAvatarEditor-mask touxiangwenzi" hidden="hidden">
