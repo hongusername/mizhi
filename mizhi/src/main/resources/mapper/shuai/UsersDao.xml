@@ -2,20 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.jishu.mizhi.shuai.users.dao.UsersDao">
     <select id="usersLogin" resultType="cn.jishu.mizhi.entity.Users" parameterType="cn.jishu.mizhi.entity.Users">
-        select * from users <where>
-        <if test="phone!=null and phone!=''">
-            phone=#{phone}
-        </if>
-        <if test="email!=null and email!=''">
-            email=#{email}
-        </if>
-    </where>
+        select * from users
+        <where>
+            <if test="phone!=null and phone!=''">
+                phone=#{phone}
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email}
+            </if>
+        </where>
         and password=#{password}
     </select>
     <select id="queryAll" resultType="cn.jishu.mizhi.entity.Users">
         select * from users
     </select>
     <insert id="userAdd" parameterType="cn.jishu.mizhi.entity.Users">
-        INSERT INTO users (phone,PASSWORD) VALUE (#{phone},#{password})
+        INSERT INTO users (phone,password,nickname) VALUE (#{phone},#{password},#{nickname})
     </insert>
+    <select id="queryPhoneYN" resultType="cn.jishu.mizhi.entity.Users" parameterType="String">
+        select * from users where phone = #{phone}
+    </select>
+    <update id="updatePassword" parameterType="cn.jishu.mizhi.entity.Users">
+        update users set password=#{password} where phone=#{phone}
+    </update>
+    <select id="phoneLogin" resultType="cn.jishu.mizhi.entity.Users" parameterType="String">
+        select * from users where phone=#{phone}
+    </select>
+    <update id="updateBj" parameterType="cn.jishu.mizhi.entity.Users">
+        update users set
+            homepageimg=#{homepageimg}
+        where userid=#{userid};
+    </update>
+    <update id="updateTouxiang" parameterType="cn.jishu.mizhi.entity.Users">
+         update users set
+            headimg=#{headimg}
+             where userid=#{userid};
+    </update>
+    <update id="updateUser" parameterType="cn.jishu.mizhi.entity.Users">
+        update users set
+        <if test="nickname!=null and nickname!=''">
+            nickname=#{nickname}
+        </if>
+        <if test="gender!=null and gender!=''">
+            gender=#{gender}
+        </if>
+        <if test="introduce!=null and introduce!=''">
+            introduce=#{introduce}
+        </if>
+        where userid=#{userid}
+    </update>
 </mapper>

@@ -10,6 +10,8 @@ import java.util.List;
 
 @Service
 public class UsersServicesImpl implements UsersServices {
+
+
     @Resource
     private UsersDao dao;
 
@@ -26,5 +28,35 @@ public class UsersServicesImpl implements UsersServices {
     @Override
     public Integer userAdd(Users user) {
         return dao.userAdd(user);
+    }
+
+    @Override
+    public Users queryPhoneYN(String phone) {
+        return dao.queryPhoneYN(phone);
+    }
+
+    @Override
+    public Integer updatePassword(Users user) {
+        return dao.updatePassword(user);
+    }
+
+    @Override
+    public Users phoneLogin(String phone) {
+        return dao.phoneLogin(phone);
+    }
+
+    @Override
+    public Integer updateBj(Users users) {
+        return dao.updateBj(users);
+    }
+
+    @Override
+    public Integer updateTouxiang(Users users) {
+        return dao.updateTouxiang(users);
+    }
+
+    @Override
+    public Integer updateUser(Users user) {
+        return dao.updateUser(user);
     }
 }
