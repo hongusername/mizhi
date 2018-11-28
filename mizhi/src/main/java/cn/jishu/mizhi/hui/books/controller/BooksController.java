@@ -1,16 +1,15 @@
 package cn.jishu.mizhi.hui.books.controller;
 
-import cn.jishu.mizhi.entity.Books;
-import cn.jishu.mizhi.entity.Booktype;
-import cn.jishu.mizhi.entity.Orderform;
-import cn.jishu.mizhi.entity.Users;
+import cn.jishu.mizhi.entity.*;
 import cn.jishu.mizhi.hui.books.service.BooksService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -23,6 +22,7 @@ public class BooksController {
      *
      * @param model
      * @return
+     *
      */
     @RequestMapping("bQueryBooksAll")
     public String queryBooksAll(Model model, Integer btid) {
@@ -66,15 +66,18 @@ public class BooksController {
      * @return
      */
     @RequestMapping("queryBookJia")
-    public String myJia() {
+    public String myJia(Model model,HttpSession session) {
+        Users u= (Users) session.getAttribute("user");
+        List<Books> listbooks=this.service.queryJiaAll(u.getUserid());
+        model.addAttribute("jia",listbooks);
         return "mybook";
     }
 
-    /**
+   /* *//**
      * 支付完成后执行的操作
      *
      * @return
-     */
+     *//*
     @RequestMapping("payIndex")
     public String payIndex(HttpSession session) {
         Integer bid = (Integer) session.getAttribute("bid");
@@ -85,6 +88,6 @@ public class BooksController {
         u.setUserid(userid);
         Orderform o = new Orderform(null, u, b, null, null, "1", this.service.queryBooksById(2002).getNewprice());
         this.service.addOrders(o);
-        return "redirect:/bQueryBooksAll";
-    }
+        return "redirect:/queryBooksById?bit=bid";
+    }*/
 }

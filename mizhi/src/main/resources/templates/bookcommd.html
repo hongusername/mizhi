@@ -33,7 +33,7 @@
             $("#du").text("开始阅读");
         }
         $("form").submit(function () {
-            var user = [[${user}]];
+            var user = [[${session.user}]];
             if (user == null) {
                 alert("请您先进行登陆！");
                 return false;

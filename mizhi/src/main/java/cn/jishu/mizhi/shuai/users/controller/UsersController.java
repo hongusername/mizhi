@@ -80,10 +80,7 @@ public class UsersController {
         return false;
     }
 
-    @RequestMapping("redirect")
-    public String redirect() {
-        return "geren.html";
-    }
+
 
     @RequestMapping("updateUserController")
     @ResponseBody

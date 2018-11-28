@@ -23,4 +23,10 @@ public class TzController {
         return "bieren.html";
     }
 
+
+
+    @RequestMapping("redirect")
+    public String redirect() {
+        return "redirect:/bQueryBooksAll";
+    }
 }

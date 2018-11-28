@@ -14,7 +14,18 @@
     <link rel="shortcut icon" type="image/x-icon" href="https://static.zhihu.com/static/favicon.ico">
     <link rel="stylesheet" href="css/mizhimain.css"/>
 </head>
-
+<script src="jquery/jquery-3.3.1.min.js"></script>
+<script th:inline="javascript">
+    $(function () {
+        $("#jia").click(function () {
+            var u=[[${session.user}]];
+            if(u==null){
+                alert("您还未登陆！");
+                return false;
+            }
+        })
+    })
+</script>
 <body class="">
 <div id="root">
 
@@ -150,8 +161,8 @@
                                     分类
                                 </li>
                             </ul>
-                            <a th:href="@{queryBookJia}"><button type="button" class="Button Pub-NavShelf Button--blue">
-                                我的书架 <span class="TotalCount">4</span></button></a>
+                            <a id="jia" th:href="@{queryBookJia}"><button type="button" class="Button Pub-NavShelf Button--blue">
+                                我的书架 <span class="TotalCount"></span></button></a>
                         </div>
                         <div class="PubIndex-main">
                             <div class="PubIndex-subTabs">
