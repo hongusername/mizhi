@@ -653,14 +653,15 @@
 										<td th:text="${#dates.format(user.getRegtime(),'yyyy-MM-dd')}">2件</td>
 										<td th:text="${user.getLevel()}">A+B+C<145cm</td>
 										<td class="hidden-480">
-												<span class="label label-sm label-warning" th:text="${user.getUstatus()}">5千克</span>
+												<span class="label label-sm label-inverse arrowed-in"  th:if="${user.getUstatus()} eq '0'==true">账号冻结</span>
+												<span class="label label-sm label-warning"  th:if="${user.getUstatus()} eq '1'==true">账号正常</span>
 										</td>
 										<td>
 											<div class="hidden-sm hidden-xs btn-group">
-												<button type="button" class="btn btn-xs btn-success" title="" href="#modal-table1" data-toggle="modal" id="chakan" >
+												<button type="button" class="btn btn-xs btn-success chakan" title="" href="#modal-table1" data-toggle="modal"  >
 													<i class="ace-icon fa fa-search-plus bigger-120"></i>
 												</button>
-												<button class="btn btn-xs btn-info" href="#modal-table2" data-toggle="modal">
+												<button class="btn btn-xs btn-info xiugai" href="#modal-table2" data-toggle="modal" id="xiugai">
 													<i class="ace-icon fa fa-pencil bigger-120"></i>
 												</button>
 											</div>
@@ -674,18 +675,47 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 	$(function(){
-		$("#chakan").click(function(){
-		    alert(1324);
+	    var msg='[[${msg}]]';
+	    if (msg.length!=0){
+	        alert(msg);
+		}
+		$(".chakan").click(function(){
 		    var id=$(this).parent().parent().prev().prev().prev().prev().prev().text();
-		    alert(id+"qewr");
+		    alert("查看用的id"+id)
 		    $.post("queryByUserId",{"id":id},function(returnDate){
-
-		        alert(returnDate)
 		        var html="<td>"+returnDate[0].userid+"</td><td>"+returnDate[0].nickname+"</td><td>"+returnDate[0].phone+"</td><td>"+returnDate[0].email+"</td><td>"+returnDate[0].gender+"</td><td>"+returnDate[1]+"</td>" +
 					"<td>"+returnDate[0].introduce+"</td>"
                 $("#pingjie").html(html);
 			})
 		})
+
+		$(".xiugai").click(function(){
+            var userid=$(this).parent().parent().prev().prev().prev().prev().prev().text();
+			$("#updateid").val(userid);
+		    alert(userid);
+		    $.post("updateUserStatus",{"id":userid},function(returnDate){
+		        if(returnDate!=null){
+		            $("#userid").html(returnDate.userid);
+		            $("#usernickname").html(returnDate.nickname);
+		            if(returnDate.ustatus==1){
+		                alert(returnDate.ustatus)
+		                $("#userstatus1").attr("selected",true)
+					}else {
+		                alert(returnDate.ustatus)
+                        $("#userstatus0").attr("selected",true)
+					}
+				}else{
+		            alert("用户信息获取异常！");
+				}
+			})
+
+		})
+        $("#submit").click(function(){
+            alert("触发点击事件");
+			alert($("#updateid").val())
+            $("#formUpdate").submit();
+        })
+
 	})
 </script>
 
@@ -735,7 +765,7 @@
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal-dialog -->
 					</div><!-- PAGE CONTENT ENDS -->
-					<!-- 弹出层修改 -->
+<!-- 弹出层修改 -->
 					<div id="modal-table2" class="modal fade" tabindex="-1">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -749,6 +779,7 @@
 								</div>
 
 								<div class="modal-body no-padding">
+									<form method="get" action="udpatestatus" id="formUpdate">
 									<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
 										<thead>
 											<tr>
@@ -759,23 +790,21 @@
 												</th>
 											</tr>
 										</thead>
-
 										<tbody>
-
-
-											<td></td>
-											<td></td>
+											<td  th:name="id" id="userid">用户id</td>
+											<td id="usernickname" th:name="nickname">昵称</td>
+											<input type="hidden" name="id" id="updateid">
 											<td>
-												<select>
-													<option>账号活跃</option>
-													<option>账号冻结</option>
+												<select id="userstatus" th:name="status">
+													<option id="userstatus1" th:value="1">账号活跃</option>
+													<option id="userstatus0" th:value="0">账号冻结</option>
 												</select>
 											</td>
-
-
 											<!-- 写行 -->
 										</tbody>
+
 									</table>
+									</form>
 								</div>
 
 								<div class="modal-footer no-margin-top">
@@ -783,7 +812,7 @@
 										<i class="ace-icon fa fa-times"></i>
 										关闭
 									</button>
-									<button class="btn btn-white btn-info btn-bold">
+									<button id="submit" class="btn btn-white btn-info btn-bold">
 										<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
 										保存
 									</button>

@@ -617,18 +617,21 @@
 				<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 				<script>
                     $(function(){
-                        $("#chakan").click(function(){
-                            alert(1324);
-                            var id=$(this).parent().parent().prev().prev().prev().prev().text();
-                            alert(id+"qewr");
+                        var mqg='[[${mqs}]]';
+						if(mqg.length!=0){
+                            alert(mqg);
+						}
+
+                        $(".chakan").click(function(){
+                            var id=$(this).parent().parent().prev().prev().prev().prev().prev().text();
+                            alert(id);
                             $.post("queryQuestionType",{"id":id},function(returnDate){
                                 alert(returnDate)
                                 var html="";
 								for (var i=0;i<returnDate.length;i++){
 								    for (var j=0;j<returnDate[i].questionstypes.length;j++){
-                                        html+="<td>"+returnDate[i].questionstypes[j].qtname+"</td>"
+                                        html+="<td class='label label-sm label-warning'>"+returnDate[i].questionstypes[j].qtname+"</td>"
 									}
-
 								}
                                 $("#pingjie").html(html);
                             })
@@ -672,16 +675,18 @@
 																		<td th:text="${quest.getUsers().getUserid()}"></td>
 																		<td th:text="${quest.getQcontent()}" class="hidden-480">2件</td>
 																		<td th:text="${quest.getClickcount()}">A+B+C<145cm</td>
-																		<td class="hidden-480" th:text="${quest.getQuestionstatus()}">
-																			<span class="label label-sm label-warning">封闭</span>
+																		<td class="hidden-480" >
+																			<!--<span class="label label-sm label-warning">封闭</span>-->
+																			<span class="label label-sm label-inverse arrowed-in"  th:if="${quest.getQuestionstatus()} eq '0'==true">话题删除</span>
+																			<span class="label label-sm label-warning"  th:if="${quest.getQuestionstatus()} eq '1'==true">话题正常</span>
 																		</td>
 																		<td>
 																			<div class="hidden-sm hidden-xs btn-group">
-																				&nbsp;<a href="#modal-table2" data-toggle="modal" id="chakan">查看类型</a>
+																				&nbsp;<a href="#modal-table2" data-toggle="modal" class="chakan">查看类型</a>
 
 
 																				<button class="btn btn-xs btn-danger" >
-																					<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																					<a th:href="@{updateQstatus(id=${quest.getQid()},qstatus=${quest.getQuestionstatus()})}"><i class="ace-icon fa fa-trash-o bigger-120 shanchu"></i></a>
 																				</button>
 																			</div>
 																		</td>
@@ -699,17 +704,18 @@
 																		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 																			<span class="white">&times;</span>
 																		</button>
-																		标题
+																		话题类型
 																	</div>
 																</div>
 
 																<div class="modal-body no-padding">
 																	<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-																		<thead>
+																		<!--<thead>
+																		<th colspan=""></th>
 																			话题类型
-																		</thead>
+																		</thead>-->
 
-																		<tbody id="pingjie">
+																		<tbody id="pingjie" style="border: 1px">
 
 																		<!-- 写行 -->
 																		</tbody>
@@ -721,10 +727,10 @@
 																		<i class="ace-icon fa fa-times"></i>
 																		关闭
 																	</button>
-																	<button class="btn btn-white btn-info btn-bold">
+																	<!--<button class="btn btn-white btn-info btn-bold">
 																		<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
 																		保存
-																	</button>
+																	</button>-->
 																	<!-- <ul class="pagination pull-right no-margin">
                                                                         <li class="prev disabled">
                                                                             <a href="#">

@@ -7,7 +7,9 @@ import cn.jishu.mizhi.kai.manager.server.ManagerService;
 import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;
@@ -42,7 +44,9 @@ public class ManagerController {
 
     @RequestMapping("UserTable")
     public String userTable(Map map){
+      /* , @RequestParam(value = "msg",defaultValue = "0")String msg*/
        map.put("userAll",managerService.queryAllUser());
+       /*map.put("msg",msg);*/
        return "017/profile";
     }
 
@@ -77,6 +81,56 @@ public class ManagerController {
        return member;
     }
 
+
+    //修改用户状态
+    @RequestMapping("updateUserStatus")
+    @ResponseBody
+    public Users updateUserStatic(Integer id){
+       Users users=managerService.qeuryUsersById(id);
+      return users;
+    }
+
+    @RequestMapping("udpatestatus")
+    public String updateStatus(Integer id, String status, RedirectAttributes redirectAttributes){
+       Users users=new Users();
+       users.setUserid(id);
+       users.setUstatus(status);
+       if(id!=null&&status!=null&&users!=null){
+           managerService.updateUserStatus(users);
+           redirectAttributes.addFlashAttribute("msg","修改成功!");
+           System.out.println(managerService.updateUserStatus(users));
+           return "redirect:/UserTable";
+       }else{
+           redirectAttributes.addFlashAttribute("msg","修改失败，请稍后重试！");
+           return "redirect:/UserTable";
+       }
+    }
+
+    @RequestMapping("updateQstatus")
+    public String updateQStatus(Integer id,String qstatus,RedirectAttributes redirectAttributes){
+       Questions questions=new Questions();
+       questions.setQid(id);
+        String id2="1";
+       if(qstatus.equals(id2)){
+           questions.setQuestionstatus("0");
+           System.out.println(qstatus);
+       }else{
+           questions.setQuestionstatus("1");
+           System.out.println(qstatus);
+       }
+       managerService.updateStatus(questions);
+       if(managerService.updateStatus(questions)>0) {
+           redirectAttributes.addFlashAttribute("mqs", "修改话题状态成功！");
+           return "redirect:/qeuryQuestion";
+       }else{
+           redirectAttributes.addFlashAttribute("mqs","修改话题状态失败，请稍后重试！");
+           return "redirect:/qeuryQuestion";
+       }
+    }
+
+
+
+
     @RequestMapping("qeuryQuestion")
     public String queryByAllQuestion(Map map){
        map.put("questionAll",managerService.qeuryAllQuestions());
@@ -95,7 +149,17 @@ public class ManagerController {
        managerService.deleteByQuestionId(id);
         System.out.println(managerService.deleteByQuestionId(id));
        return  "forward:queryAllMamber";
+    }
 
+    @RequestMapping("updateMember")
+    public String updateMember(Member member,RedirectAttributes redirectAttributes){
+       managerService.updateMember(member);
+       if(managerService.updateMember(member)>0){
+           redirectAttributes.addFlashAttribute("mms","修改会员信息成功！");
+       }else{
+           redirectAttributes.addFlashAttribute("mms","修改会员信息失败！");
+       }
+       return "redirect:/queryAllMamber";
     }
 
 }

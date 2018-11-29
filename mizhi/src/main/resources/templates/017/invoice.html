@@ -663,7 +663,7 @@
 																					<div class="hidden-sm hidden-xs btn-group">
 																						
 																						<!--<button class="btn btn-xs btn-info" href="#modal-table3" data-toggle="modal">-->
-																							<a  href="#modal-table3" data-toggle="modal"><i id="xiugai" class="ace-icon fa fa-pencil bigger-120"></i></a>
+																							<a  href="#modal-table3" data-toggle="modal"><i  class="ace-icon fa fa-pencil bigger-120 xiugai"></i></a>
 																						<!--</button>-->
 					<!-- 这里是会员的删除按钮 -->
 																						<!--<button  class="btn btn-xs btn-danger">-->
@@ -683,9 +683,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 	$(function(){
-	    $("#xiugai").click(function(){
+	    var mms='[[${mms}]]';
+	    if(mms.length!=0){
+	        alert(mms);
+		}
+	    $(".xiugai").click(function(){
 	        alert(1223)
-	        var id=$("#xiugai").parent().parent().prev().prev().prev().prev().prev().prev().text();
+	        var id=$(this).parent().parent().parent().prev().prev().prev().prev().prev().prev().text();
 	        alert(id);
 	        $.post("qeuryMemberById",{"id":id},function(returnDate){
 							/*<th>会员编号</th>
@@ -694,11 +698,24 @@
 								<th>赠送积分数</th>
 								<th >单价</th>
 								<th>购物打折度</th>*/
-	            var html="<td><input type='text' value='"+returnDate.mid+"'></td><td><input type='text' value='"+returnDate.mlevel+"'></td>" +
-					"<td><input type='text' value='"+returnDate.downloadcount+"'></td><td><input type='text' value='"+returnDate.scores+"'></td>" +
-					"<td><input type='text' value='"+returnDate.mprice+"'></td><td><input type='text' value='"+returnDate.discount+"'></td>"
+	            var html="<tr><td>会员编号</td><td><input class='mid' name='mid' type='text' value='"+returnDate.mid+"'></td></tr><tr><td>会员等级</td><td><input class='mlevel' name='mlevel' type='text' value='"+returnDate.mlevel+"'></td>" +
+					"</tr><tr><td>可下载资源数</td><td><input class='downloadcount' name='downloadcount' type='text' value='"+returnDate.downloadcount+"'></td></tr><tr><td>赠送积分数</td><td><input class='scores' name='scores' type='text' value='"+returnDate.scores+"'></td>" +
+					"</tr><tr><td>单价</td><td><input class='mprice' name='mprice' type='text' value='"+returnDate.mprice+"'></td></tr><tr><td>购物打折度</td><td><input class='discount' name='discount' type='text' value='"+returnDate.discount+"'></td></tr>"
                 $("#xieru").html(html);
+                var mid=$(".mid").val();
+                var mlevel=$(".mlevel").val();
+                var downloadcount=$(".downloadcount").val();
+                var scores=$(".scores").val();
+                var mprice=$(".mprice").val();
+                var discount=$(".discount").val();
+                $("#submitg").click(function(){
+                   $("#submitform").submit();
+                   alert("提交成功！");
+                })
 			})
+
+
+
 
 		})
 	})
@@ -718,8 +735,9 @@
 																											</div>
 																
 																											<div class="modal-body no-padding">
+																												<form id="submitform" action="updateMember" method="get">
 																												<table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-																													<thead>
+																													<!--<thead>
 																														<tr>
 																															<th>会员编号</th>
 																															<th>会员等级</th>
@@ -728,12 +746,13 @@
 																															<th >单价</th>
 																															<th>购物打折度</th>
 																														</tr>
-																													</thead>
+																													</thead>-->
 																													<tbody id="xieru">
 
 
 																													</tbody>
 																												</table>
+																												</form>
 																											</div>
 																
 																											<div class="modal-footer no-margin-top">
@@ -741,8 +760,8 @@
 																													<i class="ace-icon fa fa-times"></i>
 																													关闭
 																												</button>
-																												<button class="btn btn-white btn-info btn-bold">
-																													<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+																												<button class="btn btn-white btn-info btn-bold " id="submitg">
+																													<i class="ace-icon fa fa-floppy-o bigger-120 blue "></i>
 																													保存
 																												</button>
 																												<!-- <ul class="pagination pull-right no-margin">
