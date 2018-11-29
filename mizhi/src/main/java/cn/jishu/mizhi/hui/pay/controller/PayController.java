@@ -1,5 +1,10 @@
 package cn.jishu.mizhi.hui.pay.controller;
 
+import cn.jishu.mizhi.entity.Bookrack;
+import cn.jishu.mizhi.entity.Books;
+import cn.jishu.mizhi.entity.Orderform;
+import cn.jishu.mizhi.entity.Users;
+import cn.jishu.mizhi.hui.books.service.BooksService;
 import cn.jishu.mizhi.hui.pay.config.AlipayConfig;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
@@ -9,8 +14,10 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -20,8 +27,11 @@ import java.util.Map;
 
 @Controller
 public class PayController {
+    @Resource
+    private BooksService service;
+
     @RequestMapping(value = "pay", produces = "application/json;charset=UTF-8")
-    public String pay(HttpServletResponse response, HttpServletRequest request) {
+    public String pay(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 
@@ -148,7 +158,7 @@ public class PayController {
     }*/
 
     @RequestMapping(value = "returnUrl", produces = "application/json;charset=UTF-8")
-    public String returnUrl(HttpServletRequest request, HttpServletResponse response) {
+    public String returnUrl(HttpServletRequest request, HttpServletResponse response,HttpSession session) {
         PrintWriter out = null;
         try {
             out = response.getWriter();
@@ -207,8 +217,19 @@ public class PayController {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+            Integer bid = (Integer) session.getAttribute("bid");
+            Integer userid = ((Users) session.getAttribute("user")).getUserid();
+            Books b = new Books();
+            b.setBid(bid);
+            Users u = new Users();
+            u.setUserid(userid);
+            Orderform o = new Orderform(null, u, b, null, null, "1", this.service.queryBooksById(2002).getNewprice());
+            this.service.addOrders(o);
+            Bookrack bb=new Bookrack(null,(Users) session.getAttribute("user"),this.service.queryBooksById(bid));
+            this.service.addJia(bb);//添加到书架
+            return "redirect:/queryBookJia";
         } else {
         }
-        return "book";
+        return "redirect:/queryBookJia";
     }
 }

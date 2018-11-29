@@ -16,7 +16,7 @@
         <where>
             b1.btid=b2.btid
             <if test="b!=null">
-                <if test="b.booktype.btid!=null and b.booktype.btid!='' or b.booktype.btid!=0">
+                <if test="b.booktype!=null">
                     and b1.btid=#{b.booktype.btid}
                 </if>
                 <if test="b.author!=null and b.author!=''">

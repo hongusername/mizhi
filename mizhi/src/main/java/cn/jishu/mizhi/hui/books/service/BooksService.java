@@ -18,6 +18,8 @@ public interface BooksService {
      */
     PageInfo<Books> queryBooksAll(Books books, Integer pageNum);
 
+    List<Books> queryBooksAll2(Books books);
+
     /**
      * 增加书
      *

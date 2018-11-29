@@ -9,4 +9,12 @@ public interface UsersDao {
     Users usersLogin(Users users);
     List<Users> queryAll();
     Integer userAdd(Users user);
+    Users queryPhoneYN(String phone);
+    Integer updatePassword(Users user);
+    Users phoneLogin(String phone);
+    Integer updateBj(Users users);
+    Integer updateTouxiang(Users users);
+    Integer updateUser(Users user);
+
+    Users queryByBieRenId(Integer userid);
 }

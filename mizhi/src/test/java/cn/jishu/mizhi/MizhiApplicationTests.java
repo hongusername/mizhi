@@ -33,9 +33,26 @@ public class MizhiApplicationTests {
     private UserCommentsServices userCommentsServices;
     @Resource
     private UsersTalksServices usersTalksServices;
-
+    @Resource
+    private BooksService booksService;
     @Resource
     private ManagerService managerService;
+
+    /**
+     * 查询书
+     */
+    @Test
+    public void queryBook() {
+        Books bb = new Books();
+        // bb.setAuthor("马旭辉");
+        Booktype b2 = new Booktype();
+        b2.setBtid(2);
+        bb.setBooktype(b2);
+        PageInfo<Books> booksPageInfo = this.booksService.queryBooksAll(bb, 1);
+        for (Books b : booksPageInfo.getList()) {
+            System.out.println(b);
+        }
+    }
 
 
     @Test
@@ -77,10 +94,10 @@ public class MizhiApplicationTests {
     }
 
     @Test
-    public void testQueryByUserId(){
+    public void testQueryByUserId() {
         System.out.println(managerService.queyrTypeById(1));
 
-    //根据id查询问题类型
+        //根据id查询问题类型
    /* @Test
     public void testQueryById() {
         System.out.println(managerService.queyrTypeById(1).get(0).getQuestionstypes());
@@ -165,29 +182,12 @@ public class MizhiApplicationTests {
         System.out.println(managerService.updateMember(new Member(6, "sanji", 11, 12, 14, 4)));
     }
 
-    *//*以下是books的测试类*//*
-    @Resource
-    private BooksService booksService;
+    */
 
-    *//**
-     * 查询书
-     *//*
-    @Test
-    public void queryBook() {
-        Books bb = new Books();
-        // bb.setAuthor("马旭辉");
-        Booktype b2 = new Booktype();
-        b2.setBtid(2);
-        bb.setBooktype(b2);
-        PageInfo<Books> booksPageInfo = this.booksService.queryBooksAll(bb, 1);
-        for (Books b : booksPageInfo.getList()) {
-            System.out.println(b);
-        }
-    }
 
-    *//**
-     * 增加书
-     *//*
+        /**
+         * 增加书
+         *//*
     @Test
     public void addBooks() {
         for (int i = 1; i < 1000; i++) {
@@ -199,24 +199,24 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * 根据id查询书
-     *//*
+         * 根据id查询书
+         *//*
     @Test
     public void testQueryBooksById() {
         System.out.println(this.booksService.queryBooksById(1001));
     }
 
     *//**
-     * 根据name查询书
-     *//*
+         * 根据name查询书
+         *//*
     @Test
     public void testQueryBooksByName() {
         System.out.println(this.booksService.queryBooksByName("西游记"));
     }
 
     *//**
-     * 查询当前用户书架的书
-     *//*
+         * 查询当前用户书架的书
+         *//*
     @Test
     public void testQueryJiaAll() {
         List<Books> list = this.booksService.queryJiaAll(1);
@@ -226,8 +226,8 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * 给当前用户书架增加一本书
-     *//*
+         * 给当前用户书架增加一本书
+         *//*
     @Test
     public void testAddJia() {
         Bookrack b = new Bookrack();
@@ -241,16 +241,16 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * 删除当前用户书架的一本书
-     *//*
+         * 删除当前用户书架的一本书
+         *//*
     @Test
     public void testDeleteJia() {
         System.out.println(this.booksService.deleteJia(1, 2003));
     }
 
     *//**
-     * 购买书，增加订单信息
-     *//*
+         * 购买书，增加订单信息
+         *//*
     @Test
     public void testAddOrders() {
         Books b = new Books();
@@ -262,8 +262,8 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * 判断当前用户是否购买了本书
-     *//*
+         * 判断当前用户是否购买了本书
+         *//*
     @Test
     public void testQueryOrderByBooks() {
         if (this.booksService.queryOrderByBooks(1, 20044) != null) {
@@ -274,8 +274,8 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * 查询所有订单信息，组合查询当前用户订单
-     *//*
+         * 查询所有订单信息，组合查询当前用户订单
+         *//*
     @Test
     public void testQueryOrderAllByUserId() {
         List<Orderform> list = this.booksService.queryOrderAllByUserId(1);
@@ -285,19 +285,19 @@ public class MizhiApplicationTests {
     }
 
     *//**
-     * LearnLi
-     * private Integer articleid;//主键
-     * private Users users;//外键 用户编号
-     * private Articletype articletype;//外键 文章类型编号,
-     * private String atitle;//文章标题
-     * private String aimg;//文章图片
-     * private String acontent;//文章内容
-     * private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
-     * private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
-     * private Timestamp articletime;//文章发表时间
-     * private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
-     * private List<Userstalks> userstalksList;
-     *//*
+         * LearnLi
+         * private Integer articleid;//主键
+         * private Users users;//外键 用户编号
+         * private Articletype articletype;//外键 文章类型编号,
+         * private String atitle;//文章标题
+         * private String aimg;//文章图片
+         * private String acontent;//文章内容
+         * private Integer clickcount,agreecount,disagreecount;//浏览量,赞同量,反对量
+         * private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
+         * private Timestamp articletime;//文章发表时间
+         * private Integer rewardscore,rewardcount;//打赏总积分,打赏总次数
+         * private List<Userstalks> userstalksList;
+         *//*
 
     @Resource
     private ArticlesService as;
@@ -355,5 +355,6 @@ public class MizhiApplicationTests {
         }
     }
 
-    */}
+    */
+    }
 }
