@@ -17,12 +17,28 @@ public class BooksController {
     @Resource
     private BooksService service;
 
+    @RequestMapping("kanshu")
+    public String kanshu(Model model, Integer bid, HttpSession session) {
+        Users u = (Users) session.getAttribute("user");
+        Books b = this.service.queryBooksById(bid);
+        if (this.service.queryOrderByBooks(u.getUserid(), b.getBid()) != null) {
+            session.setAttribute("shutext", b.getTryread());
+        } else {
+            int i=400;
+            if (b.getTryread().length()<400){
+                i=b.getTryread().length()/2;
+            }
+            String shutext = b.getTryread().substring(0, i);
+            session.setAttribute("shutext", shutext);
+        }
+        return "dushu";
+    }
+
     /**
      * 展示书籍 分类查找
      *
      * @param model
      * @return
-     *
      */
     @RequestMapping("bQueryBooksAll")
     public String queryBooksAll(Model model, Integer btid) {
@@ -66,14 +82,14 @@ public class BooksController {
      * @return
      */
     @RequestMapping("queryBookJia")
-    public String myJia(Model model,HttpSession session) {
-        Users u= (Users) session.getAttribute("user");
-        List<Books> listbooks=this.service.queryJiaAll(u.getUserid());
-        model.addAttribute("jia",listbooks);
+    public String myJia(Model model, HttpSession session) {
+        Users u = (Users) session.getAttribute("user");
+        List<Books> listbooks = this.service.queryJiaAll(u.getUserid());
+        model.addAttribute("jia", listbooks);
         return "mybook";
     }
 
-   /* *//**
+    /* *//**
      * 支付完成后执行的操作
      *
      * @return
