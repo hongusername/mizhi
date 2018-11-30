@@ -35,8 +35,6 @@ public class TzController {
         model.addAttribute("dongtai", dongtai);
         return "bieren.html";
     }
-
-
     @RequestMapping("redirect")
     public String redirect() {
         return "geren.html";
