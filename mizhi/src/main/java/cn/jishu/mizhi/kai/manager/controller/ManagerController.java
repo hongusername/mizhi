@@ -60,6 +60,10 @@ public class ManagerController {
        /*map.put("msg",msg);*/
        return "017/profile";
     }
+    @RequestMapping("index")
+    public String index(){
+       return "017/index";
+    }
 
     @RequestMapping("queryByUserId")
     @ResponseBody
