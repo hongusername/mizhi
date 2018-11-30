@@ -80,15 +80,15 @@
 			var str=txt.substring(0,400);
 			$("#text").text(str);
 			$("#xia").click(function() {
-				if (parseInt(j) < txt.length) {
-					var t = txt.substring((i + 400), (j + 400));
-					i += 400;
-					j += 400;
-					$("#text").text(t);
-				}else{
-					alert("已经是最后一页啦，别再翻了");
-				}
-			})
+                if (parseInt(j) < txt.length) {
+                    var t = txt.substring((i + 400), (j + 400));
+                    i += 400;
+                    j += 400;
+                    $("#text").text(t);
+                }else{
+                    alert("已经是最后一页啦，别再翻了");
+                }
+            })
 			$("#shang").click(function() {
 				if (parseInt(i) > 0) {
 					var t = txt.substring((i - 400), (j - 400));
