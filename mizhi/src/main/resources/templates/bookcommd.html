@@ -170,7 +170,7 @@
                                                         class="Yuan-symbol"></span></span>
                                                 </div>
                                                 <div class="Pub-BookInfoButtons">
-                                                    <a type="button" id="du" class="Button readFree Button--blue"
+                                                    <a type="button" th:href="@{kanshu(bid=${books.bid})}" id="du" class="Button readFree Button--blue"
                                                        >试读</a>
                                                     <form action="/pay" method="post" target="_parent">
                                                         <input id="WIDout_trade_no" type="hidden"

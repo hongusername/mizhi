@@ -7,6 +7,7 @@ import cn.jishu.mizhi.hong.usercomments.services.UserCommentsServices;
 import cn.jishu.mizhi.hong.userstalks.services.UsersTalksServices;
 import cn.jishu.mizhi.hui.books.service.BooksService;
 import cn.jishu.mizhi.kai.manager.server.ManagerService;
+import cn.jishu.mizhi.kai.manager.server.ManagerUserService;
 import cn.jishu.mizhi.shuo.articles.service.ArticlesService;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
@@ -37,6 +38,8 @@ public class MizhiApplicationTests {
     private BooksService booksService;
     @Resource
     private ManagerService managerService;
+    @Resource
+    private ManagerUserService managerUserService;
 
     /**
      * 查询书
@@ -356,5 +359,19 @@ public class MizhiApplicationTests {
     }
 
     */
+    }
+    @Test
+    public void testQueryAllManagerContext(){
+
+        System.out.println(managerUserService.queryAllManagerUser(1));
+    }
+    @Test
+    public void testQueryByUserName(){
+        System.out.println(managerUserService.mQueryByUserName("管理员"));
+    }
+
+    @Test
+    public void testLoginManagerUser(){
+        System.out.println(managerUserService.mLogin("管理员","123123"));
     }
 }
