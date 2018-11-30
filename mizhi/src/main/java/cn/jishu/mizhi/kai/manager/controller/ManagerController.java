@@ -1,9 +1,13 @@
 package cn.jishu.mizhi.kai.manager.controller;
 
+import cn.jishu.mizhi.entity.ManagerUser;
 import cn.jishu.mizhi.entity.Member;
 import cn.jishu.mizhi.entity.Questions;
 import cn.jishu.mizhi.entity.Users;
 import cn.jishu.mizhi.kai.manager.server.ManagerService;
+import cn.jishu.mizhi.kai.manager.server.ManagerUserService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.catalina.Manager;
 import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +32,8 @@ import java.util.*;
 public class ManagerController {
     @Resource
     private ManagerService managerService;
+    @Resource
+    private ManagerUserService managerUserService;
     /**
      * @Description: 用户方法
      * @Param: []
@@ -37,9 +44,13 @@ public class ManagerController {
    /* List<Users> queryAllUser();
     Users qeuryUsersById(@Param("userId") Integer userid);
     Integer updateUserStatus(@Param("updateUser") Users users);*/
+   @RequestMapping("managerindex")
+   public String shouye(){
+       return "017/index";
+   }
    @RequestMapping("ManagerController")
     public String toDengLu(){
-        return "017/index";
+        return "017/login";
     }
 
     @RequestMapping("UserTable")
@@ -128,9 +139,6 @@ public class ManagerController {
        }
     }
 
-
-
-
     @RequestMapping("qeuryQuestion")
     public String queryByAllQuestion(Map map){
        map.put("questionAll",managerService.qeuryAllQuestions());
@@ -162,4 +170,49 @@ public class ManagerController {
        return "redirect:/queryAllMamber";
     }
 
+    @RequestMapping("ajaxQueryByUsername")
+    @ResponseBody
+    public Boolean ajaxController(String username){
+        ManagerUser managerUser=new ManagerUser();
+        if(username.length()!=0){
+            managerUser=managerUserService.mQueryByUserName(username);
+            if(managerUser!=null && managerUser.getMUserName()!=null){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+
+    }
+
+    @RequestMapping("loginManagerUser")
+    public String loginManagerController(String username, String password, RedirectAttributes redirectAttributes, HttpSession session){
+       ManagerUser managerUser=managerUserService.mLogin(username,password);
+       if(managerUserService.mLogin(username,password)!=null){
+           session.setAttribute("managerUser",managerUser);
+           //redirectAttributes.addFlashAttribute("msg","登录成功！");
+           System.out.println("登陆成功");
+           return "redirect:/managerindex";
+       }else{
+           redirectAttributes.addFlashAttribute("msg","登录失败！请重新登录！");
+           session.removeAttribute("managerUser");
+           System.out.println("登录失败");
+           return "redirect:/ManagerController";
+       }
+    }
+
+    @RequestMapping("queryForContext")
+    public String queryQueryForManagerContext(Map map,HttpSession session,RedirectAttributes redirectAttributes){
+       Integer id=((ManagerUser)session.getAttribute("managerUser")).getMUid();
+       if(id!=null){
+           redirectAttributes.addFlashAttribute("rizhimsg","获取后台管理员信息成功！");
+           map.put("rizhi",managerUserService.queryAllManagerUser(id));
+           return "017/timeline";
+       }else{
+           redirectAttributes.addFlashAttribute("rizhimsg","获取后台管理员信息失败！请重新登录！");
+           return "redirect:/ManagerController";
+       }
+    }
 }

@@ -56,6 +56,6 @@
     </update>
     
     <select id="queryByBieRenId" resultType="cn.jishu.mizhi.entity.Users">
-        select * from tbuser where userid=#{userid}
+        select * from users where userid=#{userid}
     </select>
 </mapper>
