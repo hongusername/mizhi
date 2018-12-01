@@ -223,7 +223,7 @@ public class PayController {
             b.setBid(bid);
             Users u = new Users();
             u.setUserid(userid);
-            Orderform o = new Orderform(null, u, b, null, null, "1", this.service.queryBooksById(2002).getNewprice());
+            Orderform o = new Orderform(null, u, b, null, null, "1", this.service.queryBooksById(bid).getNewprice());
             this.service.addOrders(o);
             Bookrack bb=new Bookrack(null,(Users) session.getAttribute("user"),this.service.queryBooksById(bid));
             this.service.addJia(bb);//添加到书架

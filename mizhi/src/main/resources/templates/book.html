@@ -24,11 +24,35 @@
                 return false;
             }
         })
+        $("#guan").click(function () {
+            $("#guanggao").hide();
+        })
+
+        setTimeout(function () {
+            $("#guanggao").show();
+        },12000);
     })
 </script>
+<style>
+    #guanggao{
+        position: fixed;
+        margin-top: 16%;
+        margin-left: 35%;
+        z-index: 10;
+        display: none;
+    }
+    #guan{
+        position: absolute;
+        margin-left: 0%;
+        margin-top: 0%;
+    }
+</style>
 <body class="">
 <div id="root">
-
+    <div id="guanggao">
+        <button id="guan">X 关闭广告</button>
+        <a href="http://www.accp168.com/"><img src="/books/广告1.jpg"></a>
+    </div>
     <div data-zop-usertoken="{&quot;urlToken&quot;:&quot;hua-du-niao&quot;}" data-reactroot="">
         <div class="LoadingBar">
 
