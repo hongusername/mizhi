@@ -11,12 +11,4 @@ public interface UsersServices {
     List<Users> queryAll();
 
     Integer userAdd(Users user);
-
-    Users queryPhoneYN(String phone);
-    Users queryByBieRenId(Integer userid);
-    Integer updatePassword(Users user);
-
-    Users phoneLogin(String phone);
-
-    Integer updateBj(Users users); Integer updateTouxiang(Users users);Integer updateUser(Users user);
 }

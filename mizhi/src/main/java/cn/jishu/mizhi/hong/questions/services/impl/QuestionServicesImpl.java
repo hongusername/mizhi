@@ -31,8 +31,13 @@ public class QuestionServicesImpl implements QuestionsServices {
     }
 
     @Override
-    public List<Questions> queryQuestionsByUsersids(List<Integer> userids, Integer jiange) {
-        return questionsMapper.queryQuestionsByUsersids(userids,jiange);
+    public List<Questions> queryQuestionsByUsersids(List<Integer> userids ) {
+        return questionsMapper.queryQuestionsByUsersids(userids);
+    }
+
+    @Override
+    public Integer updateQuestionClickCount(Integer qid) {
+        return questionsMapper.updateQuestionClickCount(qid);
     }
 
 

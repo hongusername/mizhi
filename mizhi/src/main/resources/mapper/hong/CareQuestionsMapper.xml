@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jishu.mizhi.hong.carequestions.dao.CareQuestionsMapper">
+
+    <select id="detailCarequestions" resultType="cn.jishu.mizhi.entity.Carequestions">
+    select * from carequestions where userid  =#{userid} and qid = #{qid}
+    </select>
+
+    <insert id="addQuestion">
+  insert  into carequestions values(null,#{userid},#{qid})
+    </insert>
+
+    <delete id="deleteQuestion">
+      delete from carequestions where userid = #{userid} and qid = #{qid}
+    </delete>
+
+    <select id="queryUsersByCares" resultType="cn.jishu.mizhi.entity.Users">
+        select  userid from carequestions where qid = #{qid}
+    </select>
+</mapper>

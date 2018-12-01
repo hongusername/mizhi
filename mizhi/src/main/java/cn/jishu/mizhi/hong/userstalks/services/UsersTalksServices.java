@@ -8,6 +8,6 @@ import java.util.List;
 public interface UsersTalksServices {
 
     //查询关注模块中的用户动态列表
-    List<Userstalks> queryUserTalksByuserids( List<Integer> userids, int jiange);
+    List<Userstalks> queryUserTalksByuserids( List<Integer> userids );
 
 }

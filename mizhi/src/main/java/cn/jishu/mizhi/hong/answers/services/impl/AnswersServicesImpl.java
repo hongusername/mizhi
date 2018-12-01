@@ -25,7 +25,7 @@ public class AnswersServicesImpl implements AnswersServices {
     }
 
     @Override
-    public List<Questions> queryAnswersByUsersids(List<Integer> userids, Integer jiange) {
-        return answersMapper.queryAnswersByUsersids(userids,jiange);
+    public List<Answers> queryAnswersByUsersids(List<Integer> userids) {
+        return answersMapper.queryAnswersByUsersids(userids);
     }
 }
