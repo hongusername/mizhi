@@ -219,4 +219,45 @@ public class ManagerController {
            return "redirect:/ManagerController";
        }
     }
+
+    //随机数方法
+    public Integer random(){
+        int num = (int) (Math.random() * 5 + 1);
+       return num;
+    }
+
+    @RequestMapping("rzController")
+    public void rZBySession(HttpSession session,Map map){
+       Integer sessionId=((ManagerUser)session.getAttribute("managerUser")).getMUid();
+       //获取日期list
+       List<cn.jishu.mizhi.entity.ManagerController> managerControllerList=managerUserService.mCdate(sessionId);
+       map.put("rzTimeList",managerControllerList);
+       //声明接收日期的对象，里面有list属性
+       //cn.jishu.mizhi.entity.ManagerController managerController=new cn.jishu.mizhi.entity.ManagerController();
+        //循环调用一下随机数，然后进入到list中去，页面随机赋予样式
+        List<Integer> numList=new ArrayList<>();
+        // 循环日期list
+       for(int i=0;i<managerControllerList.size();i++){
+           //获取循环的日期第i个
+           numList.add(i,random());
+           Date date=managerControllerList.get(i).getMCtime();
+           SimpleDateFormat format=new SimpleDateFormat();
+           //转换
+           String date1=format.format(date);
+           //将转换的日期set进含有list类里面
+          // managerController.setManagerControllerList(managerUserService.mContext(date1));
+           managerControllerList.get(i).setManagerControllerList(managerUserService.mContext(date1));
+       }
+
+       map.put("rzContextList",managerControllerList);
+    }
+
+    //跳转日志页面
+    @RequestMapping("riziHtml")
+    public String tiaoRi(){
+       return "017/timeline";
+    }
+
+
+
 }
