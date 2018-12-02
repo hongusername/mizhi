@@ -11,6 +11,6 @@ public class Cares {//关注用户表
     private Integer careid;//主键
     private Users careuser;
     private Users becareuser;
-
+    private Integer becardid;
 
 }

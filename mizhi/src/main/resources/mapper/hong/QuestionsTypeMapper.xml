@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jishu.mizhi.hong.questionstype.dao.QuestionsTypeMapper">
+    <select id="queryTypeByQid" resultType="cn.jishu.mizhi.entity.Questionstype">
+        SELECT * FROM questionstype WHERE qtid IN(  SELECT qc.qtid FROM questions AS q,questionstype AS qt,questionscontext AS qc WHERE qt.qtid = qc.qtid AND q.qid = qc.qid AND qc.qid = #{qid})
+    </select>
+    
+    <select id="queryAllQuestionsType" resultType="cn.jishu.mizhi.entity.Questionstype">
+        select * from questionstype
+    </select>
+
+    <select id="isChooseQuestionsType" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM userquestiontypes WHERE userid = #{userid}
+    </select>
+
+    <insert id="addUsersQuestionsTytpe">
+        INSERT INTO userquestiontypes VALUES(NULL,#{userid},#{qtid})
+    </insert>
+</mapper>

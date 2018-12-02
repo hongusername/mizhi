@@ -11,182 +11,28 @@
     <link href="css/mizhimain.css" rel="stylesheet">
     <link href="layui/css/layui.css" rel="stylesheet">
 
+
 </head>
 
-<body class="Entry-body">
+<body class="Entry-body" >
 <div id="root">
+
+
+
+
+
     <div th:replace="/top.html"></div>
     <div data-zop-usertoken="{&quot;urlToken&quot;:&quot;hua-du-niao&quot;}">
         <div class="LoadingBar"></div>
         <div>
-
         </div>
         <main role="main" class="App-main">
             <div class="Topstory">
                 <div class="Topstory-container">
-                    <div class="Topstory-mainColumn">
-                        <div class="Card Topstory-noMarginCard Topstory-tabCard">
-                            <ul role="tablist" class="Tabs">
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Topstory-recommend">
-                                    <a class="Tabs-link is-active" href="https://www.zhihu.com/">推荐</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Topstory-follow">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/follow">关注</a>
-                                </li>
-                                <li role="tab" class="Tabs-item Tabs-item--noMeta" aria-controls="Topstory-hot">
-                                    <a class="Tabs-link" href="https://www.zhihu.com/hot">热榜</a>
-                                </li>
-                            </ul>
-                            <div>
-                                <div>
-                                    <div class="Sticky" style=""></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="TopstoryContent" class="Topstory-content">
-                            <div class="Topstory-recommend">
-                                <div class="">
-                                    <!--<div class="Card TopstoryItem TopstoryItem-isRecommend">
-                                        <div class="Feed" data-za-detail-view-path-module="FeedItem" data-za-detail-view-path-index="0" data-za-extra-module="{&quot;card&quot;:{&quot;card_type&quot;:&quot;Feed&quot;,&quot;feed_id&quot;:&quot;0_1542179065.21&quot;,&quot;has_image&quot;:false,&quot;has_video&quot;:false,&quot;content&quot;:{&quot;type&quot;:&quot;Answer&quot;,&quot;token&quot;:&quot;517776987&quot;}},&quot;attached_info_bytes&quot;:&quot;CoEBCNXt4efuw+LmTxAEGgkxMjQyMTE3ODgg0KvE3gUo4wcwpQJAAEoMCgNUQkwSATAYACAAUh50YWdfYmFzZWRfbG9uZ190ZXJtX2FkZF9hbnN3ZXJaCDE2ODc0NDE2cgk1MTc3NzY5ODd4EYoBCDYxNjI0NzU0qgEJcmVjb21tZW5k&quot;}">
-                                            <div class="ContentItem AnswerItem" data-zop="{&quot;authorName&quot;:&quot;Delive Lee&quot;,&quot;itemId&quot;:517776987,&quot;title&quot;:&quot;正在工作的程序员，生活状态什么样？&quot;,&quot;type&quot;:&quot;answer&quot;}" name="517776987" itemprop="answer" itemtype="http://schema.org/Answer" itemscope="" data-za-detail-view-path-module="AnswerItem" data-za-extra-module="{&quot;card&quot;:{&quot;has_image&quot;:false,&quot;has_video&quot;:false,&quot;content&quot;:{&quot;type&quot;:&quot;Answer&quot;,&quot;token&quot;:&quot;517776987&quot;,&quot;upvote_num&quot;:995,&quot;comment_num&quot;:293,&quot;publish_timestamp&quot;:null,&quot;parent_token&quot;:&quot;61624754&quot;,&quot;author_member_hash_id&quot;:&quot;c6f5687fe4632bd70570d9e3d3cbe7ce&quot;}}}">
-                                                <h2 class="ContentItem-title"><div itemprop="zhihu:question" itemtype="http://schema.org/Question" itemscope=""><meta itemprop="url" content="https://www.zhihu.com/question/61624754"><meta itemprop="name" content="正在工作的程序员，生活状态什么样？"><a target="_blank" data-za-detail-view-element_name="Title" data-za-detail-view-id="2812" href="https://www.zhihu.com/question/61624754/answer/517776987">正在工作的程序员，生活状态什么样？</a></div></h2>
-                                                <div class="ContentItem-meta"></div>
-                                                <meta itemprop="image" content="https://pic4.zhimg.com/50/v2-4a4b953cd7e7d93915365874c9e8f99d_200x112.jpg">
-                                                <meta itemprop="upvoteCount" content="995">
-                                                <meta itemprop="url" content="https://www.zhihu.com/question/61624754/answer/517776987">
-                                                <meta itemprop="dateCreated" content="2018-10-25T01:01:04.000Z">
-                                                <meta itemprop="dateModified" content="2018-10-30T04:19:53.000Z">
-                                                <meta itemprop="commentCount" content="293">
-                                                <div class="RichContent is-collapsed">
-                                                    <div class="RichContent-cover">
-                                                        <div class="RichContent-cover-inner"><img src="./Home_files/v2-4a4b953cd7e7d93915365874c9e8f99d_400x224.jpg" alt="cover"></div>
-                                                    </div>
-                                                    <div class="RichContent-inner"><span class="RichText ztext CopyrightRichText-richText" itemprop="text">Delive Lee： 工作日的一天 早5点钟起床， 上厕所洗澡。 5点半开始做早饭，吃完自己的，给老婆把早饭摆好烧好水，抽根烟穿衣服准备出门。 6点10分左右出门，6点半左右到公司附近停车场。 6点45到公司…</span><button type="button" class="Button ContentItem-more Button&#45;&#45;plain">阅读全文<span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;ArrowDown ContentItem-arrowIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z" fill-rule="evenodd"></path></svg></span></button></div>
-                                                    <div class="ContentItem-actions"><span><button aria-label="赞同" type="button" class="Button VoteButton VoteButton&#45;&#45;up"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;TriangleUp VoteButton-TriangleUp" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z" fill-rule="evenodd"></path></svg></span>赞同 995</button><button aria-label="反对" type="button" class="Button VoteButton VoteButton&#45;&#45;down"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span></button></span><button type="button" class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;Comment Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z" fill-rule="evenodd"></path></svg></span>293 条评论</button>
-                                                        <div class="Popover ShareMenu ContentItem-action">
-                                                            <div class="" id="Popover3-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover3-content"><button type="button" class="Button Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;Share Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z" fill-rule="evenodd"></path></svg></span>分享</button></div>
-                                                        </div><button type="button" class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;Star Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path></svg></span>收藏</button><button type="button" class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;Heart Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z" fill-rule="evenodd"></path></svg></span>感谢</button>
-                                                        <div class="Popover ContentItem-action"><button aria-label="更多" type="button" id="Popover4-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover4-content" class="Button OptionsButton Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;iconOnly"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi&#45;&#45;Dots Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path></svg></span></button></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
-<div id="questionlistdiv">
-                                    <div class="Card TopstoryItem TopstoryItem-isRecommend"
-                                         th:each="question : ${qpage.list}">
-                                        <div class="Feed">
-                                            <div class="ContentItem AnswerItem">
-                                                <h2 class="ContentItem-title">
-                                                    <div>
-                                                        <meta itemprop="url">
-                                                        <meta itemprop="name"  content="[[${question.qttitle}]]">
-                                                        <a target="_blank"  data-za-detail-view-element_name="Title"
-                                                           data-za-detail-view-id="2812" th:href="@{/detailQuestionPage(qid=${question.qid})}">[[${question.qttitle}]]</a>
-                                                    </div>
-                                                </h2>
-                                                <div class="RichContent is-collapsed">
-                                                    <!--图片!!!-->
-                                                    <!--<div class="RichContent-cover">
-                                                        <div class="RichContent-cover-inner"><img src="./Home_files/v2-4a4b953cd7e7d93915365874c9e8f99d_400x224.jpg" alt="cover"></div>
-                                                    </div>-->
-                                                    <div class="RichContent-inner"><span
-                                                            class="RichText ztext CopyrightRichText-richText"
-                                                            itemprop="text">最佳回答： <span th:utext="${question.answersList.get(0).awcontent}"></span>…</span>
-                                                        <button type="button"
-                                                                class="Button ContentItem-more Button&#45;&#45;plain">
-                                                            阅读全文<span
-                                                                style="display: inline-flex; align-items: center;">​<svg
-                                                                class="Zi Zi&#45;&#45;ArrowDown ContentItem-arrowIcon"
-                                                                fill="currentColor" viewBox="0 0 24 24" width="24"
-                                                                height="24"><path
-                                                                d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z"
-                                                                fill-rule="evenodd"></path></svg></span> </button>
-                                                    </div>
 
-                                                    <div class="ContentItem-actions"><span><button aria-label="赞同"
-                                                                                                   type="button"
-                                                                                                   class="Button VoteButton VoteButton&#45;&#45;up"><span
-                                                            style="display: inline-flex; align-items: center;">​<svg
-                                                            class="Zi Zi&#45;&#45;TriangleUp VoteButton-TriangleUp"
-                                                            fill="currentColor" viewBox="0 0 24 24" width="10"
-                                                            height="10"><path
-                                                            d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z"
-                                                            fill-rule="evenodd"></path></svg></span>赞同 <span th:if="${question.answersList.get(0).agreecount !=0}">[[${question.answersList.get(0).agreecount}]]</span></button><button
-                                                            aria-label="反对" type="button"
-                                                            class="Button VoteButton VoteButton&#45;&#45;down"><span
-                                                            style="display: inline-flex; align-items: center;">​<svg
-                                                            class="Zi Zi&#45;&#45;TriangleDown" fill="currentColor"
-                                                            viewBox="0 0 24 24" width="10" height="10"><path
-                                                            d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z"
-                                                            fill-rule="evenodd"></path></svg></span>反对   <span th:if="${question.answersList.get(0).ducagreecount !=0}">[[${question.answersList.get(0).ducagreecount}]]</span></button></span>
-                                                        <button type="button"
-                                                                class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel">
-                                                            <span style="display: inline-flex; align-items: center;"><svg
-                                                                    class="Zi Zi&#45;&#45;Comment Button-zi"
-                                                                    fill="currentColor" viewBox="0 0 24 24"
-                                                                    width="1.2em" height="1.2em"><path
-                                                                    d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z"
-                                                                    fill-rule="evenodd"></path></svg></span>[[${question.answersList.get(0).usercommentsPageInfo.total}]] 条评论
-                                                        </button>
-                                                        <div class="Popover ShareMenu ContentItem-action">
-                                                            <div class="" id="Popover3-toggle" aria-haspopup="true"
-                                                                 aria-expanded="false" aria-owns="Popover3-content">
-                                                                <button type="button"
-                                                                        class="Button Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel">
-                                                                    <span style="display: inline-flex; align-items: center;">​<svg
-                                                                            class="Zi Zi&#45;&#45;Share Button-zi"
-                                                                            fill="currentColor" viewBox="0 0 24 24"
-                                                                            width="1.2em" height="1.2em"><path
-                                                                            d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
-                                                                            fill-rule="evenodd"></path></svg></span>分享
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <button type="button"
-                                                                class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel">
-                                                            <span style="display: inline-flex; align-items: center;">​<svg
-                                                                    class="Zi Zi&#45;&#45;Star Button-zi"
-                                                                    fill="currentColor" viewBox="0 0 24 24"
-                                                                    width="1.2em" height="1.2em"><path
-                                                                    d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"
-                                                                    fill-rule="evenodd"></path></svg></span>收藏
-                                                        </button>
-                                                        <button type="button"
-                                                                class="Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel">
-                                                            <span style="display: inline-flex; align-items: center;">​<svg
-                                                                    class="Zi Zi&#45;&#45;Heart Button-zi"
-                                                                    fill="currentColor" viewBox="0 0 24 24"
-                                                                    width="1.2em" height="1.2em"><path
-                                                                    d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z"
-                                                                    fill-rule="evenodd"></path></svg></span>感谢
-                                                        </button>
-                                                        <div class="Popover ContentItem-action">
-                                                            <button aria-label="更多" type="button" id="Popover4-toggle"
-                                                                    aria-haspopup="true" aria-expanded="false"
-                                                                    aria-owns="Popover4-content"
-                                                                    class="Button OptionsButton Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;iconOnly">
-                                                                <span style="display: inline-flex; align-items: center;">​<svg
-                                                                        class="Zi Zi&#45;&#45;Dots Button-zi"
-                                                                        fill="currentColor" viewBox="0 0 24 24"
-                                                                        width="1.2em" height="1.2em"><path
-                                                                        d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-                                                                        fill-rule="evenodd"></path></svg></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-</div>
-                                <div id ="pagebutton" align="center"></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div th:replace="right.html"></div>
+                        <!--标记-->
+                        <iframe th:src="toRecommendListController" frameborder="0" id ="iframe" scrolling="no" width="710px" height="100%"></iframe>
+                    <div  th:replace="right.html"></div>
                 </div>
             </div>
         </main>
@@ -227,41 +73,48 @@
             //alert($(window).scrollTop());
             if ($(window).scrollTop() >250) {
 
-                $("#topbutton").css("display","block");
+                $("#topbutton").show(500);
             }else{
-                $("#topbutton").css("display","none");
+                $("#topbutton").hide(300);
             }
         });
+        
+        $("#caresbutton").click(function () {
+            $("#iframe").attr("src","toCaresListController");
+        });
+        $("#tuijianbutton").click(function () {
+            $("#iframe").attr("src","toRecommendListController");
+        });
+
+
+        /*$("#morequestionbutton").click(function () {
+            var pageNum = parseInt($("#hiddenpage").val())+1;
+            $.post("ajaxQuestionList",{pageNum:pageNum},function(result){
+                var html ="";
+                $("#hiddenpage").val(result.pageNum);
+                if(result.list.length>0){
+                    var qlist = result.list;
+                    for (var i = 0;i<qlist.length;i++){
+                        html+="<div class='Card TopstoryItem TopstoryItem-isRecommend' ><div class='Feed'><div class='ContentItem AnswerItem'><h2 class='ContentItem-title'><div><meta itemprop='url'><meta itemprop='name'  content='"+qlist[i].qtitle+"'><a target='_blank'  data-za-detail-view-element_name='Title'data-za-detail-view-id='2812' href = '/detailQuestionPage?qid="+qlist[i].qid+"'>"+qlist[i].qttitle+"</a></div> </h2> <div class='RichContent is-collapsed'><div class='RichContent-inner'><spanclass='RichText ztext CopyrightRichText-richText'itemprop='text'>最佳回答： <span>"+qlist[i].answersList[0].awcontent+"</span>…</span><button type='button'class='Button ContentItem-more Button&#45;&#45;plain'>阅读全文<span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;ArrowDown ContentItem-arrowIcon'fill='currentColor' viewBox='0 0 24 24' width='24'height='24'><path d='M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z'fill-rule='evenodd'></path></svg></span> </button> </div><div class='ContentItem-actions'><span><button aria-label='赞同'type='button' class='Button VoteButton VoteButton&#45;&#45;up'><span style='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;TriangleUp VoteButton-TriangleUp'fill='currentColor' viewBox='0 0 24 24' width='10'height='10'><path d='M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z'fill-rule='evenodd'></path></svg></span>赞同  "+qlist[i].answersList[0].agreecount+"</button><button aria-label='反对' type='button'class='Button VoteButton VoteButton&#45;&#45;down'><span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;TriangleDown' fill='currentColor'viewBox='0 0 24 24' width='10' height='10'><path d='M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z'fill-rule='evenodd'></path></svg></span>反对   "+qlist[i].answersList[0].ducagreecount+"</button></span> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'><svg class='Zi Zi&#45;&#45;Comment Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z'fill-rule='evenodd'></path></svg></span> "+qlist[i].answersList[0].usercommentsPageInfo.total+"条评论 </button> <div class='Popover ShareMenu ContentItem-action'> <div class='' id='Popover3-toggle' aria-haspopup='true'aria-expanded='false' aria-owns='Popover3-content'> <button type='button'class='Button Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;Share Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z'fill-rule='evenodd'></path></svg></span>分享 </button> </div> </div> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;Star Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z'fill-rule='evenodd'></path></svg></span>收藏 </button> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;Heart Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z'fill-rule='evenodd'></path></svg></span>感谢 </button> <div class='Popover ContentItem-action'> <button aria-label='更多' type='button' id='Popover4-toggle'aria-haspopup='true' aria-expanded='false'aria-owns='Popover4-content'class='Button OptionsButton Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;iconOnly'> <span style='display: inline-flex; align-items: center;'>​<svg class='Zi Zi&#45;&#45;Dots Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z'fill-rule='evenodd'></path></svg></span> </button> </div> </div> </div> </div> </div> </div>";
+                    }
+
+                }
+                if(html==""){
+                    layui.use('layer', function(){
+                        var layer = layui.layer;
+                        layer.msg('到底儿了。。',{offset:'100px',time:1500});
+                    });
+                }else{
+                    $("#questionlistdiv").append(html);
+                }
+
+            },"json");
+        });*/
     });
 
 </script>
 
-<script>
-        layui.use('laypage',function () {
-            var laypage = layui.laypage;
-            laypage.render({
-                elem: 'pagebutton' //注意，这里的 test1 是 ID，不用加 # 号
-                ,count: [[${qpage.total}]] //数据总数，从服务端得到
-                ,limit: 6
-                ,jump:function (obj,first) {
-                    if(!first){
-                        var pageNum = obj.curr;
-                     $.post("ajaxQuestionList",{pageNum:pageNum},function(result){
-                         var html ="";
-                        if(result.list.length>0){
-                             var qlist = result.list;
-                             for (var i = 0;i<qlist.length;i++){
-                               html+="<div class='Card TopstoryItem TopstoryItem-isRecommend' ><div class='Feed'><div class='ContentItem AnswerItem'><h2 class='ContentItem-title'><div><meta itemprop='url'><meta itemprop='name'  content='"+qlist[i].qtitle+"'><a target='_blank'  data-za-detail-view-element_name='Title'data-za-detail-view-id='2812' >"+qlist[i].qttitle+"</a></div> </h2> <div class='RichContent is-collapsed'><div class='RichContent-inner'><spanclass='RichText ztext CopyrightRichText-richText'itemprop='text'>最佳回答： <span>"+qlist[i].answersList[0].awcontent+"</span>…</span><button type='button'class='Button ContentItem-more Button&#45;&#45;plain'>阅读全文<spanstyle='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;ArrowDown ContentItem-arrowIcon'fill='currentColor' viewBox='0 0 24 24' width='24'height='24'><path d='M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z'fill-rule='evenodd'></path></svg></span> </button> </div><div class='ContentItem-actions'><span><button aria-label='赞同'type='button' class='Button VoteButton VoteButton&#45;&#45;up'><spanstyle='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;TriangleUp VoteButton-TriangleUp'fill='currentColor' viewBox='0 0 24 24' width='10'height='10'><path d='M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z'fill-rule='evenodd'></path></svg></span>赞同  "+qlist[i].answersList[0].agreecount+"</button><buttonaria-label='反对' type='button'class='Button VoteButton VoteButton&#45;&#45;down'><spanstyle='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;TriangleDown' fill='currentColor'viewBox='0 0 24 24' width='10' height='10'><path d='M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z'fill-rule='evenodd'></path></svg></span>反对   "+qlist[i].answersList[0].ducagreecount+"</button></span> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'><svgclass='Zi Zi&#45;&#45;Comment Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z'fill-rule='evenodd'></path></svg></span> "+qlist[i].answersList[0].usercommentsPageInfo.total+"条评论 </button> <div class='Popover ShareMenu ContentItem-action'> <div class='' id='Popover3-toggle' aria-haspopup='true'aria-expanded='false' aria-owns='Popover3-content'> <button type='button'class='Button Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;Share Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z'fill-rule='evenodd'></path></svg></span>分享 </button> </div> </div> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;Star Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z'fill-rule='evenodd'></path></svg></span>收藏 </button> <button type='button'class='Button ContentItem-action Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;withLabel'> <span style='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;Heart Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z'fill-rule='evenodd'></path></svg></span>感谢 </button> <div class='Popover ContentItem-action'> <button aria-label='更多' type='button' id='Popover4-toggle'aria-haspopup='true' aria-expanded='false'aria-owns='Popover4-content'class='Button OptionsButton Button&#45;&#45;plain Button&#45;&#45;withIcon Button&#45;&#45;iconOnly'> <span style='display: inline-flex; align-items: center;'>​<svgclass='Zi Zi&#45;&#45;Dots Button-zi'fill='currentColor' viewBox='0 0 24 24'width='1.2em' height='1.2em'><path d='M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z'fill-rule='evenodd'></path></svg></span> </button> </div> </div> </div> </div> </div> </div>";
-                          // html +="<div>"+qlist[i].qtitle+"</div>";
-                             }
-                             $("#questionlistdiv").html(html);
-                         }
-                     },"json");
-                    }
-                }
-            });
-        })
-</script>
+
 
 <div>
     <div >想来觅知工作？请发送邮件到 jobs@mizhi.com</div>

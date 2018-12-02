@@ -19,7 +19,7 @@ public class Questions {//话题表
     private String questionstatus;//话题状态
     private Users users;//用户编号,
     private List<Questionscontext> questionscontextList;
-    private List<Questionstype> questionstypes;
     private List<Answers> answersList;
     private Timestamp qtime;
+    private Integer biaoshi;
 }

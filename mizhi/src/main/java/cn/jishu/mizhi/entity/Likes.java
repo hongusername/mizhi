@@ -13,5 +13,6 @@ public class Likes {//收藏表
     private Integer lid;//收藏编号
     private Users users;//用户编号
     private String lname;//收藏名称
+    private String descriptions;//收藏夹描述
     private List<Likecontexts> likecontextsList;
 }

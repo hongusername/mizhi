@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="queryUserTalksByuserids" resultMap="userstalksmap">
-       SELECT  *  FROM userstalks AS ut,users AS u WHERE ut.userid = u.userid AND ut.talktime > DATE_ADD(NOW(),INTERVAL #{jiange} DAY) AND ut.userid IN
+       SELECT  *  FROM userstalks AS ut,users AS u WHERE ut.userid = u.userid  AND ut.userid IN
         <foreach collection="userids" open="(" close=")" separator="," item="userids">
             #{userids}
     </foreach>

@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserCommentsServices {
 
     //查询特定回答下所有的评论信息
-    PageInfo<Usercomments> queryCommentsByFkid(Integer pageNum,Integer fkid, String tctype);
+    PageInfo<Usercomments> queryCommentsByFkid(Integer pageNum, Integer fkid, String tctype);
 }
