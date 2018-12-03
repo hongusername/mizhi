@@ -31,14 +31,24 @@ public class QuestionServicesImpl implements QuestionsServices {
     }
 
     @Override
-    public List<Questions> queryQuestionsByUsersids(List<Integer> userids ) {
-        System.out.println("userids:"+userids);
+    public List<Questions> queryQuestionsByUsersids(List<Integer> userids) {
+        System.out.println("userids:" + userids);
         return questionsMapper.queryQuestionsByUsersids(userids);
     }
 
     @Override
     public Integer updateQuestionClickCount(Integer qid) {
         return questionsMapper.updateQuestionClickCount(qid);
+    }
+
+    @Override
+    public Integer createQuestions(Questions questions) {
+        return questionsMapper.createQuestions(questions);
+    }
+
+    @Override
+    public Integer addQuestionsTypeForQuestion(Integer qid, Integer qtid) {
+        return questionsMapper.addQuestionsTypeForQuestion(qid, qtid);
     }
 
 

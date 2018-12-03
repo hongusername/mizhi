@@ -19,4 +19,7 @@
     <select id="queryUsersByCares" resultType="cn.jishu.mizhi.entity.Users">
         select  userid from carequestions where qid = #{qid}
     </select>
+
+
+
 </mapper>

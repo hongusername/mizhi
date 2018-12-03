@@ -38,7 +38,7 @@ SELECT * FROM questions AS q,users AS u WHERE u.userid = q.userid AND q.qid = #{
         SELECT * FROM questions AS q,users AS u WHERE u.userid = q.userid
         <if test="userids !=null">AND q.userid IN
             <foreach collection="userids" item="userids" index="index"
-                               open="(" close=")" separator=",">
+                     open="(" close=")" separator=",">
                 #{userids}
             </foreach>
         </if>
@@ -49,5 +49,15 @@ SELECT * FROM questions AS q,users AS u WHERE u.userid = q.userid AND q.qid = #{
     <update id="updateQuestionClickCount">
         UPDATE questions SET clickcount = clickcount+1 WHERE qid = #{qid}
     </update>
+
+
+
+    <insert id="addQuestionsTypeForQuestion">
+        insert into questionscontext values(null,#{qid},#{qtid})
+    </insert>
+
+    <insert id="createQuestions"  useGeneratedKeys="true" keyProperty="qid">
+ insert  into questions values(null,#{users.userid},#{qcontent},0,1,#{qttitle},now(),3)
+</insert>
 
 </mapper>

@@ -14,8 +14,11 @@ public interface QuestionsMapper {
     List<Questions> queryQuestionsByUsersids(@Param("userids")List<Integer> userids);
     //更新话题被浏览数
     Integer updateQuestionClickCount(Integer qid);
+    //添加一个话题
+    Integer createQuestions(Questions questions);
 
-
+    //为某个话题增加标签
+    Integer addQuestionsTypeForQuestion(@Param("qid")Integer qid,@Param("qtid")Integer qtid);
 
 
 }

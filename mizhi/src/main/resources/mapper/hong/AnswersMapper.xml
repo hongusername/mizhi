@@ -25,10 +25,6 @@
 
 
 
-
-
-
-
     <select id="queryAnswersByQid" resultMap="answermap">
        SELECT * FROM answers AS a,users AS u WHERE u.userid = a.userid and a.qid = #{qid} order by agreecount desc
     </select>

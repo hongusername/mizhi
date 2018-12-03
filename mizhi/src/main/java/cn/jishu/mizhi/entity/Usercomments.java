@@ -1,5 +1,6 @@
 package cn.jishu.mizhi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class Usercomments {//用户评论表
     private Integer parentid;//父评论id
     private String content;//评论内容
     private Integer agreecount,disagreecount;//同意量,反对量
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp tctime;//评论时间
     private String commentstatus;//评论状态
 
