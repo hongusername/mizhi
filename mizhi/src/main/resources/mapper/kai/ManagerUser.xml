@@ -27,7 +27,7 @@
 
 
     <select id="mCdate" resultType="cn.jishu.mizhi.entity.ManagerController">
-        SELECT managercontroller.`mCtime` FROM managercontroller , manageruser WHERE managercontroller.mmid=manageruser.mUid AND manageruser.`mUid`=#{sessionId}
+        SELECT managercontroller.`mCtime` FROM managercontroller , manageruser WHERE managercontroller.mmid=manageruser.mUid AND manageruser.`mUid`=1 GROUP BY managercontroller.`mCtime` ORDER BY  managercontroller.`mCtime` DESC
     </select>
 
     <select id="mContext" resultType="cn.jishu.mizhi.entity.ManagerController">
