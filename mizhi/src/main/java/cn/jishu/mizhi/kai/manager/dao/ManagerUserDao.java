@@ -24,6 +24,8 @@ public interface ManagerUserDao {
     List<ManagerController> mCdate(@Param("sessionId") Integer sessionId);
     //根据sessionid查出来的事件去进行查询日志
     List<ManagerController> mContext(@Param("rzTime")String rzTime);
+    //根据情况进行插入日志信息
+    Integer insertContext(@Param("rzContext")ManagerController managerController);
 
 
 }

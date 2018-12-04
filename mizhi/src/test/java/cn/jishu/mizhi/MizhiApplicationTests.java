@@ -416,4 +416,14 @@ public class MizhiApplicationTests {
         }
         System.out.println(numList);
     }
+    @Test
+    public void testInsertContext(){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        String date="2018-11-22";
+        try {
+            System.out.println( managerUserService.insertContext(new ManagerController(null,1,1,format.parse(date),"没有操作",null)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 }
