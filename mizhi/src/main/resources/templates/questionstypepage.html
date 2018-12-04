@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--图标地址-->
+    <link rel="shortcut icon" type="image/x-icon" href="static/image/icon/favicon.ico">
+    <link href="css/mizhimain.css" rel="stylesheet">
+    <link href="layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+<div class="TopstoryGuide">
+    <div class="TopstoryWrap">
+        <div class="TopstoryTopics fadeInUp">
+            <div class="TopstoryGuide-header">
+                <h2 class="TopstoryGuide-title">你想为你的话题贴上什么标签？</h2>
+                <p class="TopstoryGuide-subtitle">贴上对应的标签更容易获得答案哦!</p>
+            </div>
+            <div class="TopstoryGuide-container">
+                <div th:each = "qtid : ${qtidsitem}">
+                    <input type="hidden" name="hiddenqtid" th:value="${qtid}">
+                </div>
+                <ul class="TopstoryTopics-list">
+                    <li qtid=""  class="TopstoryTopics-item questiontypebutton"
+                        style="width: 80px;height:60px;margin-left: 30px;margin-bottom: -200px;"
+                        th:each="questiontype : ${questionstypeList}" th:qtname = "${questiontype.qtname}">
+                        <div style="width: 80px;height:60px;position: relative;background: rgba(0,132,255,0.8);margin-bottom: -200px;" class="TopstoryTopics-itemWrap">
+                            <div align="center" style="color: #00FFFF;padding-top: 40px;"><span class ="neispan" th:qtid="${questiontype.qtid}"
+                                    style="vertical-align: center;text-align: center;font-size: 10px;float: left;margin-left: 5px;">[[${questiontype.qtname}]]</span>
+                            </div>
+                            <span class="TopstoryTopics-selectItem" style = "width: 15px;height: 15px;"><svg viewBox="0 0 12 9" class="Icon Icon--check"
+                                                                         width="14" height="16" aria-hidden="true"
+                                                                         style="height: 16px; width: 14px;"><title></title><g><path
+                                    d="10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z"></path></g></svg></span><span
+                                class="TopstoryTopics-itemMask"></span></div>
+                    </li>
+
+
+                </ul>
+            </div>
+            <p class="TopstoryTopics-hint">可以通过搜索和「话题广场」找到更多你想要的话题</p>
+        </div>
+        <div class="TopstoryGuide-onStage">
+            <button type="button" class="Button Button--primary Button--blue" id = "toHomebutton">选择</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+   $(function () {
+       $(".questiontypebutton").each(function () {
+            var self = $(this);
+           var qtid1 = $(this).children().children().children(".neispan").attr("qtid");
+           $("[name=hiddenqtid]").each(function () {
+               var qtid2 = $(this).val();
+            if(qtid1 ==qtid2){
+                self.css("display","none");
+            }
+           });
+       });
+       
+       $(".questiontypebutton").click(function () {
+               var qtid1 = $(this).children().children().children(".neispan").attr("qtid");
+               var qtid2 = $(this).attr("qtid");
+               if(qtid2==""){
+                   $(this).children(".TopstoryTopics-itemWrap").children(".TopstoryTopics-selectItem").children("svg").children("g").children("path").attr("d","M10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z");
+                   $(this).attr("qtid",qtid1);
+               }else{
+                   $(this).children(".TopstoryTopics-itemWrap").children(".TopstoryTopics-selectItem").children("svg").children("g").children("path").attr("d","10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z");
+                   $(this).attr("qtid","");
+               }
+           }
+
+       );
+       var count = 0;
+       $("#toHomebutton").click(function () {
+           var arr = new Array();
+          $(".questiontypebutton").each(function () {
+              var qtid =  $(this).attr("qtid");
+              arr.push(qtid);
+              if(qtid!=""){
+                  var qtname = $(this).attr("qtname");
+                $(".ptiditemdiv",parent.document).append("<div class ='qtiddiv' qtid='"+qtid+"' style='color: #00b3ee;margin-right:5px;background: rgb(229,242,255);padding-left: 10px;padding-right: 10px;height: 30px;text-align:center;display: inline-block;line-height: 30px;border-radius: 20px;'><span class='ptnamespan'>"+qtname+"</span> <span class='closespan'>×</span></div>");
+
+            }
+          });
+        if(arr.length==0){
+            layui.use('layer',function () {
+                var layer = layui.layer;
+                layer.msg("最少选择一样 😊");
+            });
+        }else{
+            $(".ptiditemdiv .qtiddiv",parent.document).each(function () {
+                count++;
+            });
+            if(count>4){
+                layui.use('layer',function () {
+                    var layer = layui.layer;
+                    layer.msg("不能再贴了!!");
+                    return;
+                });
+            }else{
+                $(".msgspan",parent.document).html("("+count+"/4)");
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index); //再执行关闭
+            }
+
+
+        }
+       });
+   });
+</script>
+</body>
+</html>

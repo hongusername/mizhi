@@ -16,10 +16,15 @@ public class UserCommentsServicesImpl implements UserCommentsServices {
     private UsersCommentsMapper usersCommentsMapper;
 
     @Override
-    public PageInfo<Usercomments> queryCommentsByFkid(Integer pageNum, Integer fkid, String tctype) {
-        PageHelper.startPage(pageNum, 6);
-        List<Usercomments> list = usersCommentsMapper.queryCommentsByFkid(fkid, tctype);
+    public PageInfo<Usercomments> queryCommentsByFkid(Integer pageNum, Integer pageSize, Integer fkid, String tctype, Integer parentid) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Usercomments> list = usersCommentsMapper.queryCommentsByFkid(fkid, tctype, parentid);
         PageInfo<Usercomments> page = new PageInfo<>(list);
         return page;
+    }
+
+    @Override
+    public Usercomments detailUserCommentByTcid(int tcid) {
+        return usersCommentsMapper.detailUserCommentByTcid(tcid);
     }
 }

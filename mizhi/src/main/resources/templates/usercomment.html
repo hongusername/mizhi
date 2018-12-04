@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--图标地址-->
+<link rel="shortcut icon" type="image/x-icon" href="static/image/icon/favicon.ico">
+<link href="css/mizhimain.css" rel="stylesheet">
+<link href="layui/css/layui.css" rel="stylesheet">
+<body>
+
+
+    <div class="commenttciddiv" style="background: white;margin-bottom: 20px;margin-top: 10px;">
+        <div class="CommentItemV2" >
+            <div>
+                <div class="CommentItemV2-meta"><span
+                        class="UserLink CommentItemV2-avatar"><div
+                        class="Popover"><div id="Popover106-toggle"
+                                             aria-haspopup="true"
+                                             aria-expanded="false"
+                                             aria-owns="Popover106-content"><a
+                        class="UserLink-link"
+                        data-za-detail-view-element_name="User"
+                        target="_blank"
+                        href=""><img
+                        class="Avatar UserLink-avatar" width="24"
+                        height="24"
+                        th:src="${usercomments.users.headimg}"
+                        srcset="https://pic4.zhimg.com/v2-2ca5e9da0a43ece52bdafdb848098b94_xs.jpg 2x"
+                        th:alt="${usercomments.users.headimg}"></a></div></div></span><span
+                        class="UserLink"><a class="UserLink-link"
+                                            data-za-detail-view-element_name="User"
+                                            target="_blank"
+                                            href="https://www.zhihu.com/people/qing-nian-bu-wen-yi-10">[[${usercomments.users.nickname}]]</a></span><span
+                        class="CommentItemV2-time">[[${#dates.format(usercomments.tctime,'yyyy-MM-dd hh:mm:ss')}]]</span>
+                </div>
+                <div class="CommentItemV2-metaSibling">
+                    <div class="CommentRichText">
+                        <div class="RichText ztext">[[${usercomments.content}]]</div>
+                    </div>
+                    <div class="CommentItemV2-footer">
+                        <button type="button"
+                                class="Button CommentItemV2-likeBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Like"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z"
+                                                                                        fill-rule="evenodd"></path></svg></span>[[${usercomments.agreecount}]]
+                        </button>
+                        <button type="button"
+                                class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Reply"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z"
+                                                                                        fill-rule="evenodd"></path></svg></span>回复
+                        </button>
+                        <button type="button"
+                                class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Like"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="transform: rotate(180deg); margin-right: 5px;"><path
+                                                                                        d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z"
+                                                                                        fill-rule="evenodd"></path></svg></span>踩
+                        </button>
+                        <button type="button"
+                                class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Report"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z"
+                                                                                        fill-rule="evenodd"></path></svg></span>举报
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class = "commentitemdiv" style="background: white;" th:if="${usercommentsPageInfo.list.size()!=0}">
+            <div class="CommentMoreReplyButton">
+                <button type="button" class="Button Button--plain" style="font-size: 17px;float: left;margin-bottom: 5px;margin-left: -70px;">
+                    [[${usercommentsPageInfo.total}]]条回复
+                </button>
+            </div>
+            <hr>
+            <ul class="NestComment" id ="commentitem">
+                <li class="NestComment--rootComment" th:each = "usercomment,sta: ${usercommentsPageInfo.list}">
+            <div class="CommentItemV2" >
+                <div>
+                    <div class="CommentItemV2-meta"><span
+                            class="UserLink CommentItemV2-avatar"><div
+                            class="Popover"><div id="Popover106-toggle"
+                                                 aria-haspopup="true"
+                                                 aria-expanded="false"
+                                                 aria-owns="Popover106-content"><a
+                            class="UserLink-link"
+                            data-za-detail-view-element_name="User"
+                            target="_blank"
+                            href="https://www.zhihu.com/people/qing-nian-bu-wen-yi-10"><span style="color: #00bcd4">[[${sta.index+1}]]楼</span>   <img
+                            class="Avatar UserLink-avatar" width="24"
+                            height="24"
+                            th:src="${usercomment.users.headimg}"
+                            th:alt="${usercomment.users.headimg}"></a></div></div></span><span
+                            class="UserLink"><a class="UserLink-link"
+                                                data-za-detail-view-element_name="User"
+                                                target="_blank"
+                                                href="">[[${usercomment.users.nickname}]]</a> <span style = "color: #00b3ee">回复</span> [[${usercomments.users.nickname}]]</span><span
+                            class="CommentItemV2-time">[[${#dates.format(usercomment.tctime,'yyyy-MM-dd hh:mm:ss')}]]</span>
+                    </div>
+                    <div class="CommentItemV2-metaSibling">
+                        <div class="CommentRichText">
+                            <div class="RichText ztext">[[${usercomment.content}]]</div>
+                        </div>
+                        <div class="CommentItemV2-footer">
+                            <button type="button"
+                                    class="Button CommentItemV2-likeBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Like"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z"
+                                                                                        fill-rule="evenodd"></path></svg></span>[[${usercomment.agreecount}]]
+                            </button>
+                            <button type="button"
+                                    class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Reply"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z"
+                                                                                        fill-rule="evenodd"></path></svg></span>回复
+                            </button>
+                            <button type="button"
+                                    class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Like"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="transform: rotate(180deg); margin-right: 5px;"><path
+                                                                                        d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z"
+                                                                                        fill-rule="evenodd"></path></svg></span>踩
+                            </button>
+                            <button type="button"
+                                    class="Button CommentItemV2-hoverBtn Button--plain">
+                                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                                        class="Zi Zi--Report"
+                                                                                        fill="currentColor"
+                                                                                        viewBox="0 0 24 24" width="16"
+                                                                                        height="16"
+                                                                                        style="margin-right: 5px;"><path
+                                                                                        d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z"
+                                                                                        fill-rule="evenodd"></path></svg></span>举报
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </li>
+                    </ul>
+            <input type="hidden" id="fkid" th:value="${fkid}">
+            <input type="hidden" id="parentid" th:value="${parentid}">
+
+        <div align="center" id = "pagehelperdiv" style="position: absolute;left: 200px;bottom: 10px;"></div>
+        </div>
+
+    <div align="center" style="margin-top: 100px;" th:if="${usercommentsPageInfo.list.size()==0}"><span style="color: #4e5257;font-size: 18px;font-family: 'Bookshelf Symbol 7'">此评论暂且没有回复</span></div>
+    <script src="webjars/jquery/3.2.1/dist/jquery.js"></script>
+    <script src="layui/layui.js"></script>
+    <script>
+
+       layui.use('laypage',function () {
+           var laypage = layui.laypage;
+           laypage.render({
+               elem: 'pagehelperdiv' //注意，这里的 test1 是 ID，不用加 # 号
+               ,limit:3
+               ,count: [[${usercommentsPageInfo.total}]] //数据总数，从服务端得到
+               ,jump:function (obj,first) {
+
+                   if(!first){
+                       var pageNum = obj.curr;
+                       var fkid = $("#fkid").val();
+                       var parentid = $("#parentid").val();
+                       var nickname ='[[${usercomments.users.nickname}]]';
+            $.post("ajaxPageCommentsController",{"fkid":fkid,"parentid":parentid,"pageNum":pageNum},function (result) {
+               var html ="";
+               if(result.list.length>0){
+                   var pagenumber = result.pageNum;
+                   var pagesize=  result.pageSize;
+                   for(var i = 0;i<result.list.length;i++){
+                       var count =(parseInt(pagenumber-1)*pagesize)+parseInt(i)+parseInt(1);
+                       html += "<li class=\"NestComment--rootComment\" >\n" +
+                           "            <div class=\"CommentItemV2\" >\n" +
+                           "                <div>\n" +
+                           "                    <div class=\"CommentItemV2-meta\"><span\n" +
+                           "                            class=\"UserLink CommentItemV2-avatar\"><div\n" +
+                           "                            class=\"Popover\"><div id=\"Popover106-toggle\"\n" +
+                           "                                                 aria-haspopup=\"true\"\n" +
+                           "                                                 aria-expanded=\"false\"\n" +
+                           "                                                 aria-owns=\"Popover106-content\"><a\n" +
+                           "                            class=\"UserLink-link\"\n" +
+                           "                            data-za-detail-view-element_name=\"User\"\n" +
+                           "                            target=\"_blank\"\n" +
+                           "                            href=\"https://www.zhihu.com/people/qing-nian-bu-wen-yi-10\"><span style=\"color: #00bcd4\">"+count+"楼</span>   <img\n" +
+                           "                            class=\"Avatar UserLink-avatar\" src = "+result.list[i].users.headimg+" width=\"24\"\n" +
+                           "                            height=\"24\"\n" +
+                           "                            ></a></div></div></span><span\n" +
+                           "                            class=\"UserLink\"><a class=\"UserLink-link\"\n" +
+                           "                                                data-za-detail-view-element_name=\"User\"\n" +
+                           "                                                target=\"_blank\"\n" +
+                           "                                                href=\"\">"+result.list[i].users.nickname+"</a> <span style = \"color: #00b3ee\">回复</span> "+nickname+"</span><span\n" +
+                           "                            class=\"CommentItemV2-time\">"+result.list[i].tctime+"</span>\n" +
+                           "                    </div>\n" +
+                           "                    <div class=\"CommentItemV2-metaSibling\">\n" +
+                           "                        <div class=\"CommentRichText\">\n" +
+                           "                            <div class=\"RichText ztext\">"+result.list[i].content+"</div>\n" +
+                           "                        </div>\n" +
+                           "                        <div class=\"CommentItemV2-footer\">\n" +
+                           "                            <button type=\"button\"\n" +
+                           "                                    class=\"Button CommentItemV2-likeBtn Button--plain\">\n" +
+                           "                                                                                <span style=\"display: inline-flex; align-items: center;\">​<svg\n" +
+                           "                                                                                        class=\"Zi Zi--Like\"\n" +
+                           "                                                                                        fill=\"currentColor\"\n" +
+                           "                                                                                        viewBox=\"0 0 24 24\" width=\"16\"\n" +
+                           "                                                                                        height=\"16\"\n" +
+                           "                                                                                        style=\"margin-right: 5px;\"><path\n" +
+                           "                                                                                        d=\"M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z\"\n" +
+                           "                                                                                        fill-rule=\"evenodd\"></path></svg></span>"+result.list[i].agreecount+"\n" +
+                           "                            </button>\n" +
+                           "                            <button type=\"button\"\n" +
+                           "                                    class=\"Button CommentItemV2-hoverBtn Button--plain\">\n" +
+                           "                                                                                <span style=\"display: inline-flex; align-items: center;\">​<svg\n" +
+                           "                                                                                        class=\"Zi Zi--Reply\"\n" +
+                           "                                                                                        fill=\"currentColor\"\n" +
+                           "                                                                                        viewBox=\"0 0 24 24\" width=\"16\"\n" +
+                           "                                                                                        height=\"16\"\n" +
+                           "                                                                                        style=\"margin-right: 5px;\"><path\n" +
+                           "                                                                                        d=\"M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z\"\n" +
+                           "                                                                                        fill-rule=\"evenodd\"></path></svg></span>回复\n" +
+                           "                            </button>\n" +
+                           "                            <button type=\"button\"\n" +
+                           "                                    class=\"Button CommentItemV2-hoverBtn Button--plain\">\n" +
+                           "                                                                                <span style=\"display: inline-flex; align-items: center;\">​<svg\n" +
+                           "                                                                                        class=\"Zi Zi--Like\"\n" +
+                           "                                                                                        fill=\"currentColor\"\n" +
+                           "                                                                                        viewBox=\"0 0 24 24\" width=\"16\"\n" +
+                           "                                                                                        height=\"16\"\n" +
+                           "                                                                                        style=\"transform: rotate(180deg); margin-right: 5px;\"><path\n" +
+                           "                                                                                        d=\"M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z\"\n" +
+                           "                                                                                        fill-rule=\"evenodd\"></path></svg></span>踩\n" +
+                           "                            </button>\n" +
+                           "                            <button type=\"button\"\n" +
+                           "                                    class=\"Button CommentItemV2-hoverBtn Button--plain\">\n" +
+                           "                                                                                <span style=\"display: inline-flex; align-items: center;\">​<svg\n" +
+                           "                                                                                        class=\"Zi Zi--Report\"\n" +
+                           "                                                                                        fill=\"currentColor\"\n" +
+                           "                                                                                        viewBox=\"0 0 24 24\" width=\"16\"\n" +
+                           "                                                                                        height=\"16\"\n" +
+                           "                                                                                        style=\"margin-right: 5px;\"><path\n" +
+                           "                                                                                        d=\"M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z\"\n" +
+                           "                                                                                        fill-rule=\"evenodd\"></path></svg></span>举报\n" +
+                           "                            </button>\n" +
+                           "                        </div>\n" +
+                           "                    </div>\n" +
+                           "                </div>\n" +
+                           "            </div>\n" +
+                           "\n" +
+                           "                </li>";
+                   }
+                  $("#commentitem").html(html);
+               }
+            },"json");
+                   }
+               }
+           });
+       });
+
+    </script>
+</body>
+</html>

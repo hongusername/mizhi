@@ -23,4 +23,15 @@
     <select id="mQueryByUserName" resultType="cn.jishu.mizhi.entity.ManagerUser">
         select * from managerUser where mUserName=#{username}
     </select>
+
+
+
+    <select id="mCdate" resultType="cn.jishu.mizhi.entity.ManagerController">
+        SELECT managercontroller.`mCtime` FROM managercontroller , manageruser WHERE managercontroller.mmid=manageruser.mUid AND manageruser.`mUid`=1 GROUP BY managercontroller.`mCtime` ORDER BY  managercontroller.`mCtime` DESC
+    </select>
+
+    <select id="mContext" resultType="cn.jishu.mizhi.entity.ManagerController">
+        SELECT * FROM managercontroller WHERE mCtime=#{rzTime}
+    </select>
+
 </mapper>

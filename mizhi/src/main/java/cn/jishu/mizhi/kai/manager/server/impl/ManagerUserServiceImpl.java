@@ -1,5 +1,6 @@
 package cn.jishu.mizhi.kai.manager.server.impl;
 
+import cn.jishu.mizhi.entity.ManagerController;
 import cn.jishu.mizhi.entity.ManagerUser;
 import cn.jishu.mizhi.kai.manager.dao.ManagerDao;
 import cn.jishu.mizhi.kai.manager.dao.ManagerUserDao;
@@ -8,6 +9,7 @@ import cn.jishu.mizhi.kai.manager.server.ManagerUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,5 +35,15 @@ public class ManagerUserServiceImpl implements ManagerUserService{
     @Override
     public ManagerUser mQueryByUserName(String username) {
         return managerUserDao.mQueryByUserName(username);
+    }
+
+    @Override
+    public List<ManagerController> mCdate(Integer sessionId) {
+        return managerUserDao.mCdate(sessionId);
+    }
+
+    @Override
+    public List<ManagerController> mContext(String rzTime) {
+        return managerUserDao.mContext(rzTime);
     }
 }

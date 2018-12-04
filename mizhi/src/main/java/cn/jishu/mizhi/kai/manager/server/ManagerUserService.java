@@ -1,8 +1,10 @@
 package cn.jishu.mizhi.kai.manager.server;
 
+import cn.jishu.mizhi.entity.ManagerController;
 import cn.jishu.mizhi.entity.ManagerUser;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,4 +20,8 @@ public interface ManagerUserService {
     ManagerUser mLogin(String username,String password);
     //查询用户信息是否注册过
     ManagerUser mQueryByUserName(@Param("username")String username);
+    //根据后台管理员的id查询对应日期
+    List<ManagerController> mCdate(Integer sessionId);
+    //根据sessionid查出来的事件去进行查询日志
+    List<ManagerController> mContext(@Param("rzTime")String rzTime);
 }

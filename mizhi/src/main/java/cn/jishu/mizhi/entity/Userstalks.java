@@ -1,5 +1,6 @@
 package cn.jishu.mizhi.entity;
 
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,7 @@ public class Userstalks {//用户动态表
     private Timestamp talktime;//发布动态时间
     private List<Usercomments> usercommentsList;
     private String utstatus;//用户状态
+    private Integer biaoshi;
+    private PageInfo<Usercomments> usercommentsPageInfo;
 
 }

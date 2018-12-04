@@ -2,6 +2,7 @@ package cn.jishu.mizhi;
 
 import cn.jishu.mizhi.entity.*;
 import cn.jishu.mizhi.hong.answers.services.AnswersServices;
+import cn.jishu.mizhi.hong.cares.services.CaresServices;
 import cn.jishu.mizhi.hong.questions.services.QuestionsServices;
 import cn.jishu.mizhi.hong.usercomments.services.UserCommentsServices;
 import cn.jishu.mizhi.hong.userstalks.services.UsersTalksServices;
@@ -373,5 +374,46 @@ public class MizhiApplicationTests {
     @Test
     public void testLoginManagerUser(){
         System.out.println(managerUserService.mLogin("管理员","123123"));
+    }
+
+
+    @Test
+    public void testQueryBySession(){
+        System.out.println(managerUserService.mCdate(1));
+    }
+    @Test
+    public void testQueryByTime() throws ParseException {
+        String date="2018-11-13";
+        System.out.println(managerUserService.mContext(date));
+    }
+    public Integer random(){
+        int num = (int) (Math.random() * 5 + 1);
+        return num;
+    }
+    @Test
+    public void testBySessionId(){
+        List<Integer> numList=new ArrayList<>();
+        /*List<cn.jishu.mizhi.entity.ManagerController> managerControllerList=managerUserService.mCdate(1);
+        //System.out.println("五个日期出来了"+managerControllerList);
+        //System.out.println(managerUserService.mContext("2018-11-13"));
+
+        for(int i=0;i<managerControllerList.size();i++){
+
+            Date date=managerControllerList.get(i).getMCtime();
+            SimpleDateFormat format=new SimpleDateFormat();
+            String date1=format.format(date);
+            //System.out.println(""五个日期+date1);
+            managerControllerList.get(i).setManagerControllerList(managerUserService.mContext(date1));
+            //System.out.println(managerControllerList.size());
+           // System.out.println("一个时间"+managerControllerList.get(i).getManagerControllerList());
+
+        }
+        System.out.println(numList);
+        System.out.println(managerControllerList.get(0).getManagerControllerList());*/
+        for(int g=0;g<5;g++){
+
+            numList.add(g,random());
+        }
+        System.out.println(numList);
     }
 }

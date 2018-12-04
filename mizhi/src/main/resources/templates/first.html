@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--图标地址-->
+    <link rel="shortcut icon" type="image/x-icon" href="static/image/icon/favicon.ico">
+    <link href="css/mizhimain.css" rel="stylesheet">
+    <link href="layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+<div class="TopstoryGuide">
+    <div class="TopstoryWrap">
+        <div class="TopstoryTopics fadeInUp">
+            <div class="TopstoryGuide-header">
+                <h2 class="TopstoryGuide-title">你想关注哪些话题？</h2>
+                <p class="TopstoryGuide-subtitle">我们将根据你关注的话题定制首页推荐内容</p>
+            </div>
+            <div class="TopstoryGuide-container">
+                <ul class="TopstoryTopics-list">
+                    <li qtid="" class="TopstoryTopics-item questiontypebutton"
+                        style="width: 150px;height:100px;margin-left: 30px;"
+                        th:each="questiontype : ${questionstypeList}">
+                        <div style="width: 150px;height:100px;position: relative;" class="TopstoryTopics-itemWrap">
+                            <div align="center" style="color: #00b3ee;padding-top: 40px;"><span class ="neispan" th:qtid="${questiontype.qtid}"
+                                    style="vertical-align: center;text-align: center;">[[${questiontype.qtname}]]</span>
+                            </div>
+                            <span class="TopstoryTopics-selectItem"><svg viewBox="0 0 12 9" class="Icon Icon--check"
+                                                                         width="14" height="16" aria-hidden="true"
+                                                                         style="height: 16px; width: 14px;"><title></title><g><path
+                                    d="10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z"></path></g></svg></span><span
+                                class="TopstoryTopics-itemMask"></span></div>
+                    </li>
+
+
+                </ul>
+            </div>
+            <p class="TopstoryTopics-hint">可以通过搜索和「话题广场」找到更多你想要的话题</p>
+        </div>
+        <div class="TopstoryGuide-onStage">
+            <button type="button" class="Button Button--primary Button--blue" id = "toHomebutton">进入觅知</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="layui/layui.js"></script>
+<script>
+   $(function () {
+       $(".questiontypebutton").click(function () {
+               var qtid1 = $(this).children().children().children(".neispan").attr("qtid");
+               var qtid2 = $(this).attr("qtid");
+               if(qtid2==""){
+                   $(this).children(".TopstoryTopics-itemWrap").children(".TopstoryTopics-selectItem").children("svg").children("g").children("path").attr("d","M10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z");
+                   $(this).attr("qtid",qtid1);
+               }else{
+                   $(this).children(".TopstoryTopics-itemWrap").children(".TopstoryTopics-selectItem").children("svg").children("g").children("path").attr("d","10.896 1.802L4.5 8.182c-.198.197-.467.293-.746.293h-.002c-.28 0-.55-.097-.747-.296L.307 5.472c-.41-.413-.41-1.077.004-1.488.414-.41 1.082-.407 1.494.006l1.952 1.966L9.403.31c.412-.413 1.08-.413 1.492 0 .413.41.413 1.08 0 1.492z");
+                   $(this).attr("qtid","");
+               }
+           }
+
+       );
+       $("#toHomebutton").click(function () {
+           var arr = new Array();
+          $(".questiontypebutton").each(function () {
+              var qtid =  $(this).attr("qtid");
+            if(qtid!=""){
+                arr.push(qtid);
+            }
+          });
+        if(arr.length==0){
+            layui.use('layer',function () {
+                var layer = layui.layer;
+                layer.msg("最少选择一样 😊");
+            });
+        }else{
+            location.href = "addUsersQuestionsTypeController?qids="+arr;
+        }
+       });
+   });
+</script>
+</body>
+</html>

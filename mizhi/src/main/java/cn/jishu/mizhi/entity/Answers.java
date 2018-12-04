@@ -22,4 +22,5 @@ public class Answers {//话题回答表
     private String isuse;//是否被采用 0没有 1采用
     private List<Usercomments> usercommentsList;
     private PageInfo<Usercomments> usercommentsPageInfo;
+    private Integer biaoshi;
 }
