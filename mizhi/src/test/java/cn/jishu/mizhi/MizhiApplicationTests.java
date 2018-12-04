@@ -42,7 +42,7 @@ public class MizhiApplicationTests {
     private ManagerUserService managerUserService;
 
     /**
-     * 查询书
+     *
      */
     @Test
     public void queryBook() {
