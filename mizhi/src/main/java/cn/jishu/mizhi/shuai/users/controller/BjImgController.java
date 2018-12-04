@@ -20,7 +20,7 @@ public class BjImgController {
     @Resource
     private UsersServices services;
 
-    @RequestMapping("bjimgController")
+    @RequestMapping("backgroundImage")
     public String imgFile(@RequestParam(value = "file", required = false) MultipartFile file,
                           HttpServletRequest request, HttpSession session) {
         // ****************
@@ -54,11 +54,12 @@ public class BjImgController {
         user.setHomepageimg(urlName);
         services.updateBj(user);
         session.setAttribute("user", user);
-        return "geren.html";
+        return "redirect:geren";
     }
-    @RequestMapping("updateTouxiang")
+
+    @RequestMapping("updateHeadPortrait")
     public String updateTouxiang(@RequestParam(value = "file", required = false) MultipartFile file,
-                          HttpServletRequest request, HttpSession session) {
+                                 HttpServletRequest request, HttpSession session) {
         // ****************
         String path = request.getSession().getServletContext().getRealPath("/image/touXiang");
         System.out.println(path);
@@ -90,6 +91,6 @@ public class BjImgController {
         user.setHeadimg(urlName);
         services.updateTouxiang(user);
         session.setAttribute("user", user);
-        return "geren.html";
+        return "redirect:geren";
     }
 }

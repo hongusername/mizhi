@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jishu.mizhi.shuai.cares.dao.CaresDaos">
+    <resultMap id="caMap" type="cn.jishu.mizhi.entity.Cares" autoMapping="true">
+        <id property="careid" column="careid"/>
+        <collection property="careuser" resultMap="userMap"/>
+    </resultMap>
+    <resultMap id="userMap" type="cn.jishu.mizhi.entity.Users" autoMapping="true">
+        <id column="userid" property="userid"/>
+    </resultMap>
+
+    <select id="queryAllGzwdr" resultMap="caMap">
+SELECT * FROM cares c,users u WHERE u.userid=c.userid AND c.becardid=#{userid}
+
+    </select>
+    <select id="queryAllWgzdr" resultMap="caMap">
+         SELECT * FROM cares c,users u WHERE u.userid=c.becardid AND c.userid=#{userid}
+    </select>
+
+    <insert id="guanzhu">
+        insert into cares values(null,#{userid},#{buserid})
+    </insert>
+    <delete id="quxiao">
+        delete from cares where userid=#{userid} and becardid=#{buserid}
+    </delete>
+</mapper>

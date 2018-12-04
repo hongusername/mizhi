@@ -26,7 +26,7 @@
                 <div class="AppHeader-inner"><a aria-label="觅知">
                     <img src="image/login/logo.png" width="" height="52px"/>
                 </a>
-                    <nav role="navigation" class="AppHeader-nav"><a href="/bQueryBooksAll" class="AppHeader-navItem"
+                    <nav role="navigation" class="AppHeader-nav"><a class="AppHeader-navItem"
                                                                     data-za-not-track-link="true">首页</a><a
                             class="AppHeader-navItem" data-za-not-track-link="true">发现</a><a class="AppHeader-navItem"
                                                                                              data-za-not-track-link="true">话题</a>
@@ -159,7 +159,7 @@
                                             });
                                         })
                                     </script>
-                                    <form action="bjimgController" class="bjimgform" enctype="multipart/form-data"
+                                    <form action="backgroundImage" class="bjimgform" enctype="multipart/form-data"
                                           method="post">
                                         <input type="file" name="file" accept="image/jpeg,image/jpg,image/png"
                                                class="UploadPicture-input beijingtupian">
@@ -193,8 +193,8 @@
                                 }, function () {
                                     $(".touxiangwenzi").hide();
                                 });
-                                $(".updateTouxiang").change(function () {
-                                    $(".updateTouxiangForm").submit();
+                                $(".updateHeadPortrait").change(function () {
+                                    $(".updateHeadPortraitForm").submit();
                                 });
                             })
                         </script>
@@ -207,12 +207,12 @@
                                     >
                                     </div>
                                     <label class="UploadPicture-wrapper">
-                                        <form enctype="multipart/form-data" class="updateTouxiangForm"
-                                              action="updateTouxiang"
+                                        <form enctype="multipart/form-data" class="updateHeadPortraitForm"
+                                              action="updateHeadPortrait"
                                               method="post">
                                             <input
                                                     type="file" name="file" accept="image/jpeg,image/jpg,image/png"
-                                                    class="UploadPicture-input updateTouxiang">
+                                                    class="UploadPicture-input updateHeadPortrait">
                                             <input type="submit" hidden>
                                         </form>
                                         <div class="Mask UserAvatarEditor-mask touxiangwenzi" hidden="hidden">
@@ -314,20 +314,21 @@
                     <div class="Profile-mainColumn">
                         <div class="Card ProfileMain" id="ProfileMain">
                             <div class="ProfileMain-header">
-                                <ul role="tablist" class="Tabs ProfileMain-tabs">
-                                    <li role="tab" class="Tabs-item Tabs-item--noMeta"
-                                        aria-controls="Profile-activities"><a class="Tabs-link is-active">动态</a></li>
-                                    <li role="tab" class="Tabs-item" aria-controls="Profile-answers"><a
-                                            class="Tabs-link">回答<span class="Tabs-meta">0</span></a></li>
-                                    <li role="tab" class="Tabs-item" aria-controls="Profile-asks"><a class="Tabs-link">提问<span
-                                            class="Tabs-meta">0</span></a></li>
-                                    <li role="tab" class="Tabs-item" aria-controls="Profile-posts"><a class="Tabs-link">文章<span
-                                            class="Tabs-meta">0</span></a></li>
-                                    <li role="tab" class="Tabs-item" aria-controls="Profile-columns"><a
-                                            class="Tabs-link">专栏<span class="Tabs-meta">0</span></a></li>
-                                    <li role="tab" class="Tabs-item" aria-controls="Profile-pins"><a meta="0"
-                                                                                                     class="Tabs-link">想法<span
-                                            class="Tabs-meta">0</span></a></li>
+                                <ul role="tablist" class="Tabs ProfileMain-tabs tablist">
+                                    <li role="tab" class="Tabs-item dongtaia"
+                                        aria-controls="Profile-activities"><a class="Tabs-link is-active"
+                                                                              href="javascript:void(0);">动态<span
+                                            class="Tabs-meta" th:text="${#lists.size(dongtai)}">0</span></a></li>
+                                    <li role="tab" class="Tabs-item huidaa" aria-controls="Profile-answers"><a
+                                            class="Tabs-link " href="javascript:void(0);">回答<span
+                                            class="Tabs-meta" th:text="${#lists.size(huida)}">0</span></a></li>
+                                    <li role="tab" class="Tabs-item tiwena" aria-controls="Profile-asks"><a
+                                            href="javascript:void(0);" class="Tabs-link ">提问<span
+                                            class="Tabs-meta" th:text="${#lists.size(tiwen)}">0</span></a></li>
+                                    <li role="tab" class="Tabs-item wenzhanga" aria-controls="Profile-posts">
+                                        <a
+                                                class="Tabs-link " href="javascript:void(0);">文章<span
+                                                class="Tabs-meta" th:text="${#lists.size(wenzhang)}">0</span></a></li>
                                     <li role="tab" class="Tabs-item Tabs-item--noMeta">
                                         <div class="Popover Tabs-link">
                                             <button type="button" id="Popover3-toggle" aria-haspopup="true"
@@ -352,44 +353,616 @@
                                     <div class="Sticky" style=""></div>
                                 </div>
                             </div>
-                            <div class="List ProfileActivities" id="Profile-activities" data-zop-feedlistfather="1">
+                            <script>
+                                $(function () {
+                                    $(".tiwena").click(function () {
+                                        $(".tiwen").show();
+                                        $(".dongtai").hide();
+                                        $(".huida").hide();
+                                        $(".wenzhang").hide();
+                                        $(".tablist li a").attr("class", "Tabs-link");
+                                        $(this).children().attr("class", "Tabs-link is-active");
+                                    });
+                                    $(".dongtaia").click(function () {
+                                        $(".dongtai").show();
+                                        $(".tiwen").hide();
+                                        $(".huida").hide();
+                                        $(".wenzhang").hide();
+                                        $(".tablist li a").attr("class", "Tabs-link");
+                                        $(this).children().attr("class", "Tabs-link is-active");
+                                    });
+                                    $(".huidaa").click(function () {
+                                        $(".huida").show();
+                                        $(".dongtai").hide();
+                                        $(".tiwen").hide();
+                                        $(".wenzhang").hide();
+                                        $(".tablist li a").attr("class", "Tabs-link");
+                                        $(this).children().attr("class", "Tabs-link is-active");
+                                    });
+                                    $(".wenzhanga").click(function () {
+                                        $(".wenzhang").show();
+                                        $(".huida").hide();
+                                        $(".dongtai").hide();
+                                        $(".tiwen").hide();
+                                        $(".tablist li a").attr("class", "Tabs-link");
+                                        $(this).children().attr("class", "Tabs-link is-active");
+                                    });
+                                })
+                            </script>
+                            <!-------------->
+                            <div class="List tiwen" id="Profile-asks" hidden>
                                 <div class="List-header">
-                                    <h4 class="List-headerText"><span>我的动态</span></h4>
+                                    <h4 class="List-headerText">
+                                        <div class="SubTabs"><a class="SubTabs-item is-active"
+                                                                href="javascript:void(0);"><span
+                                                th:if="${buser.gender} eq 0">她</span><span th:if="${buser.gender} eq 1">我</span>的提问</a>
+                                        </div>
+                                    </h4>
                                     <div class="List-headerOptions"></div>
                                 </div>
-                                <div class="EmptyState">
+                                <div>
+                                    <list th:each="list:${tiwen}">
+                                        <div class="List-item">
+                                            <div class="ContentItem" data-za-detail-view-path-module="QuestionItem">
+                                                <h2 class="ContentItem-title">
+                                                    <div class="QuestionItem-title"><a href="javascript:void(0);"
+                                                                                       th:text="${list.qttitle}"> </a>
+                                                    </div>
+                                                </h2>
+                                                <div class="ContentItem-status"><span class="ContentItem-statusItem"
+                                                                                      th:text="${list.qtime}">2018-09-30</span><span
+                                                        class="ContentItem-statusItem"><span
+                                                        th:text="${#lists.size(list.answers)}"></span> 个回答</span><span
+                                                        class="ContentItem-statusItem"><span
+                                                        th:text="${#lists.size(list.carequestions)}"></span> 个关注</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </list>
+                                </div>
+                                <span th:if="${#lists.size(tiwen)} eq 0">
+                                    <div class="EmptyState">
                                     <div class="EmptyState-inner">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120"
-                                             viewBox="0 0 150 120"
-                                             class="EmptyState-image">
-                                            <title></title>
-                                            <g>
-                                                <g fill="none" fill-rule="evenodd">
-                                                    <path fill="#EBEEF5" fill-rule="nonzero"
-                                                          d="M94 29v-2.002c0-.55.443-.998 1-.998h1c.553 0 1 .446 1 .998V29h2.002c.55 0 .998.443.998 1v1c0 .553-.446 1-.998 1H97v2.002c0 .55-.443.998-1 .998h-1c-.553 0-1-.446-1-.998V32h-2.002A.997.997 0 0 1 91 31v-1c0-.553.446-1 .998-1H94zm30.613 17.724l-21.82-4.638.207-3.023 22.237 4.727a6.004 6.004 0 0 1 4.62 7.122l-7.9 37.158a6.001 6.001 0 0 1-7.116 4.627l-15.31-3.254.63-2.934 15.31 3.25c1.62.34 3.218-.69 3.56-2.32l7.9-37.16a3.005 3.005 0 0 0-2.31-3.567zM48.596 85.727l.624 2.935-12.717 2.703a6.004 6.004 0 0 1-7.117-4.628L21.488 49.58a6.004 6.004 0 0 1 4.62-7.123L47 38.017l.133 3.038-20.402 4.337a3 3 0 0 0-2.3 3.564l7.9 37.157a3.005 3.005 0 0 0 3.56 2.317l12.71-2.703zM100 82c0 3.314-2.688 6-6.006 6H56.006A6.01 6.01 0 0 1 50 82V34c0-3.314 2.688-6 6.006-6h27.147v3H56.006A3.003 3.003 0 0 0 53 34v48c0 1.65 1.35 3 3.006 3h37.988A3.003 3.003 0 0 0 97 82V42.373h3V82zm-4.5-41C89.7 41 85 36.3 85 30.5S89.7 20 95.5 20 106 24.7 106 30.5 101.3 41 95.5 41zm0-3a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"></path>
-                                                    <path fill="#F7F8FA"
-                                                          d="M47 73.22l-6.484 1.378c-.82.174-1.333.97-1.16 1.78.173.816.97 1.327 1.784 1.154L47 76.287V73.22zm0-8.594l-4.58.974c-.8.17-1.324.968-1.152 1.778a1.494 1.494 0 0 0 1.775 1.156l3.957-.84v-3.068zm0-17.285a6.002 6.002 0 0 0-8 5.66 6.002 6.002 0 0 0 8 5.66V47.34zm56 29.88l6.178 1.318a1.5 1.5 0 1 0 .624-2.934L103 74.148v3.067zm0-8.58l4.275.91c.808.17 1.6-.34 1.775-1.157a1.507 1.507 0 0 0-1.15-1.78l-4.9-1.04v3.067zm0-8.97c.626.22 1.3.34 2 .34 3.314 0 6-2.685 6-6s-2.686-6-6-6c-.7 0-1.374.12-2 .34v11.32zM76 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-8 7.5c0-.828.667-1.5 1.505-1.5h12.99a1.5 1.5 0 1 1 0 3h-12.99A1.5 1.5 0 0 1 68 63.5zm-5 8c0-.828.67-1.5 1.49-1.5h23.02c.822 0 1.49.666 1.49 1.5 0 .828-.67 1.5-1.49 1.5H64.49c-.822 0-1.49-.666-1.49-1.5z"></path>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                        <span>刚来觅知？去<a class="EmptyState-action" target="_blank">关注我感兴趣的话题</a></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120"
+                                         viewBox="0 0 150 120"
+                                         class="EmptyState-image">
+                                    <title></title>
+                                    <g>
+                                    <g fill="none" fill-rule="evenodd">
+                                    <path fill="#EBEEF5" fill-rule="nonzero"
+                                          d="M94 29v-2.002c0-.55.443-.998 1-.998h1c.553 0 1 .446 1 .998V29h2.002c.55 0 .998.443.998 1v1c0 .553-.446 1-.998 1H97v2.002c0 .55-.443.998-1 .998h-1c-.553 0-1-.446-1-.998V32h-2.002A.997.997 0 0 1 91 31v-1c0-.553.446-1 .998-1H94zm30.613 17.724l-21.82-4.638.207-3.023 22.237 4.727a6.004 6.004 0 0 1 4.62 7.122l-7.9 37.158a6.001 6.001 0 0 1-7.116 4.627l-15.31-3.254.63-2.934 15.31 3.25c1.62.34 3.218-.69 3.56-2.32l7.9-37.16a3.005 3.005 0 0 0-2.31-3.567zM48.596 85.727l.624 2.935-12.717 2.703a6.004 6.004 0 0 1-7.117-4.628L21.488 49.58a6.004 6.004 0 0 1 4.62-7.123L47 38.017l.133 3.038-20.402 4.337a3 3 0 0 0-2.3 3.564l7.9 37.157a3.005 3.005 0 0 0 3.56 2.317l12.71-2.703zM100 82c0 3.314-2.688 6-6.006 6H56.006A6.01 6.01 0 0 1 50 82V34c0-3.314 2.688-6 6.006-6h27.147v3H56.006A3.003 3.003 0 0 0 53 34v48c0 1.65 1.35 3 3.006 3h37.988A3.003 3.003 0 0 0 97 82V42.373h3V82zm-4.5-41C89.7 41 85 36.3 85 30.5S89.7 20 95.5 20 106 24.7 106 30.5 101.3 41 95.5 41zm0-3a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"></path>
+                                    <path fill="#F7F8FA"
+                                          d="M47 73.22l-6.484 1.378c-.82.174-1.333.97-1.16 1.78.173.816.97 1.327 1.784 1.154L47 76.287V73.22zm0-8.594l-4.58.974c-.8.17-1.324.968-1.152 1.778a1.494 1.494 0 0 0 1.775 1.156l3.957-.84v-3.068zm0-17.285a6.002 6.002 0 0 0-8 5.66 6.002 6.002 0 0 0 8 5.66V47.34zm56 29.88l6.178 1.318a1.5 1.5 0 1 0 .624-2.934L103 74.148v3.067zm0-8.58l4.275.91c.808.17 1.6-.34 1.775-1.157a1.507 1.507 0 0 0-1.15-1.78l-4.9-1.04v3.067zm0-8.97c.626.22 1.3.34 2 .34 3.314 0 6-2.685 6-6s-2.686-6-6-6c-.7 0-1.374.12-2 .34v11.32zM76 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-8 7.5c0-.828.667-1.5 1.505-1.5h12.99a1.5 1.5 0 1 1 0 3h-12.99A1.5 1.5 0 0 1 68 63.5zm-5 8c0-.828.67-1.5 1.49-1.5h23.02c.822 0 1.49.666 1.49 1.5 0 .828-.67 1.5-1.49 1.5H64.49c-.822 0-1.49-.666-1.49-1.5z"></path>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                    <span>刚来觅知？去<a class="EmptyState-action" target="_blank" href="javascript:void(0);">关注我感兴趣的话题</a></span>
+                                    </div>
+                                    </div>
+                                </span>
+                            </div>
+                            <!-------------->
+                            <div class="List dongtai" id="Profile-posts">
+                                <div class="List-header"><h4 class="List-headerText"><span>我的动态</span></h4>
+                                    <div class="List-headerOptions"></div>
+                                </div>
+                                <div>
+                                    <list th:each="list : ${dongtai}">
+                                        <div class="List-item">
+                                            <div class="ContentItem PinItem" data-za-detail-view-path-module="PinItem">
+                                                <div class="ContentItem-meta">
+                                                    <div>
+                                                        <div class="AuthorInfo PinItem-authorInfo" itemprop="author"
+                                                             itemscope="" itemtype="http://schema.org/Person">
+
+                                                        <span class="UserLink AuthorInfo-avatarWrapper"><div
+                                                                class="Popover"><div id="Popover61-toggle"><a
+                                                                class="UserLink-link"
+                                                                href="javascript:void(0);"><img
+                                                                class="Avatar AuthorInfo-avatar" width="38" height="38"
+                                                                th:src="@{image/touXiang/{bjimg}(bjimg=${buser.getHeadimg()})}"
+                                                                alt="花渡鸟"></a></div></div></span>
+                                                            <div class="AuthorInfo-content">
+                                                                <div class="AuthorInfo-head"><span
+                                                                        class="UserLink AuthorInfo-name"><div
+                                                                        class="Popover"><div id="Popover62-toggle"
+                                                                                             aria-haspopup="true"
+                                                                                             aria-expanded="false"
+                                                                                             aria-owns="Popover62-content"><a
+                                                                        class="UserLink-link"
+                                                                        data-za-detail-view-element_name="User"
+                                                                        target="_blank"
+                                                                        href="javascript:void(0);"
+                                                                        th:text="${buser.nickname}"> </a></div></div></span>
+                                                                </div>
+                                                                <div class="AuthorInfo-detail">
+                                                                    <div class="AuthorInfo-badge">
+                                                                        <div class="RichText ztext AuthorInfo-badgeText"
+                                                                             th:text="${buser.introduce}">
+                                                                            系外行星的研究生
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="RichContent">
+                                                    <div class="RichContent-inner"><span
+                                                            class="RichText ztext CopyrightRichText-richText"
+                                                            itemprop="text" th:text="${list.utcontent}"> </span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="RichText ztext PinItem-remainContentRichText"></div>
+                                                        <div class="ContentItem-time"><a target="_blank"
+                                                                                         href="javascript:void(0);"><span
+                                                                th:text="${list.talktime}">发布于 2018-11-09</span></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ContentItem-actions">
+                                                        <button type="button"
+                                                                class="Button ReactionButton ContentItem-action">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                 height="20"
+                                                                 class="Icon Icon--clap" aria-hidden="true"
+                                                                 style="height: 20px; width: 20px;"><title></title>
+                                                                <g>
+                                                                    <path fill-rule="evenodd"
+                                                                          d="M17.92 6.7c-.04.04-.08.06-.13.05-.1 0-.2-.1-.2-.18l.2-2.9v-.05c0-.08.1-.1.2-.07l2 1.05v.22L17.9 6.7zm2.9-.24l.12 1.47v.04c-.02.1-.1.15-.2.13l-2.17-.4c-.05-.02-.1-.05-.12-.1-.04-.07 0-.18.08-.22l2.04-1.06h.06c.1-.02.17.04.18.14zm-4.4-.02l-1.75-1.78-.03-.06c-.04-.08 0-.18.1-.2l1.54-.62h.05c.1-.02.17.05.18.14l.2 2.4v.12c0 .06-.1.06-.2 0zm1.76 2.28l1.57 4.3c.72 1.97.05 4.2-1.65 5.46l-.26.2c-.97.7-2.1 1.06-3.25 1.06-.4 0-.8-.05-1.1-.12-.6.2-1.1.3-1.7.3-1.1 0-2.3-.37-3.2-1.14L8 18.2c-.5-.4-1.65-1.52-3.52-3.43-.6-.6-.7-1.57-.24-2.3l.14-.17c-.66-.6-.75-1.65-.2-2.36.14-.15.26-.26.4-.35-.16-.6-.06-1.2.3-1.6l.07-.1c.3-.4.7-.6 1.15-.6.34-.1.67.1.96.2l.1-.2.1-.1c.48-.6 1.18-.8 1.83-.6l.1-.1c.7-.8 1.9-.9 2.7-.2l.4.4.1-.2c.2-.3.5-.5.8-.6.4-.2.9-.2 1.4 0 .4.2.7.6.9 1.02l.1.3c.5-.17 1-.14 1.5.1s.8.62 1 1.1zm-1.13 8.86l.25-.2c1.22-.88 1.7-2.5 1.18-3.9l-1.57-4.3c-.1-.32-.4-.5-.8-.37l-.1.1-.1.1c-.3.2-.5.6-.3 1l.3.7c.1.2 0 .5-.2.6-.1.1-.3 0-.4-.1L11 7.5c-.24-.2-.6-.2-.8.04-.2.28-.18.6.03.8l2.74 2.5c.15.16.16.38.03.5s-.35.17-.5 0L9.8 8.9c-.03 0-.04-.02-.05-.04l-.73-.64c-.2-.2-.54-.18-.73.03-.3.3-.2.7 0 .95l3.3 3.1c.1.13.1.35 0 .5-.2.14-.4.15-.5.02l-2.9-2.7c-.2-.2-.5-.2-.7 0-.2.25-.2.6 0 .83l3 2.76c.1.1.1.3 0 .5-.2.1-.4.1-.5 0l-1.9-1.7c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3.1-.2.3-.2.7.03.9 1.9 2 3.1 3.2 3.54 3.5.2.2.56.4 1.04.7 1.44.9 3.27.9 4.66-.1zM5.3 14c1.8 1.85 2.95 2.97 3.4 3.34l.74.6c.6.5 1.33.78 2.06.85l-1-.7c-.5-.4-1.68-1.6-3.68-3.7-.3-.3-.5-.7-.55-1.1l-.44-.3c-.08-.1-.17-.1-.28-.1h-.03c-.1 0-.22 0-.3.1-.2.3-.18.7.07.9zm.16-3.6c-.14.02-.27.1-.36.2-.23.28-.2.67.05.9l1.16 1.04.3-.6c0-.02.1-.04.1-.05-.3-.4-.4-.8-.5-1.2l-.2-.3c-.1-.1-.2-.2-.4-.2zm.72-1.97c-.15 0-.28.08-.38.2-.26.33-.22.75.06 1l.34.32c.07-.2.17-.4.3-.6.02 0 .08-.07.08-.07.08-.1.16-.16.24-.23l-.03-.3-.2-.17c-.2-.1-.3-.15-.5-.15zm7.1-1.03l-.13.16 1.2 1.05c.1-.1.2-.3.35-.4l-.2-.5c-.06-.1-.2-.3-.36-.4-.18-.1-.37-.1-.55 0-.2.1-.3.2-.3.3z"></path>
+                                                                </g>
+                                                            </svg>
+                                                            0
+                                                        </button>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Comment Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z"
+                                                                fill-rule="evenodd"></path></svg></span>添加评论
+                                                        </button>
+                                                        <div class="Popover ShareMenu ContentItem-action">
+                                                            <div class="" id="Popover63-toggle" aria-haspopup="true"
+                                                                 aria-expanded="false" aria-owns="Popover63-content">
+                                                                <button type="button"
+                                                                        class="Button Button--plain Button--withIcon Button--withLabel">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                        class="Zi Zi--Share Button-zi"
+                                                                        fill="currentColor" viewBox="0 0 24 24"
+                                                                        width="1.2em" height="1.2em"><path
+                                                                        d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
+                                                                        fill-rule="evenodd"></path></svg></span>分享
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Star Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"
+                                                                fill-rule="evenodd"></path></svg></span>收藏
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </list>
+                                </div>
+                                <span th:if="${#lists.size(dongtai)} eq 0">
+                                    <div class="EmptyState">
+                                    <div class="EmptyState-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120"
+                                         viewBox="0 0 150 120"
+                                         class="EmptyState-image">
+                                    <title></title>
+                                    <g>
+                                    <g fill="none" fill-rule="evenodd">
+                                    <path fill="#EBEEF5" fill-rule="nonzero"
+                                          d="M94 29v-2.002c0-.55.443-.998 1-.998h1c.553 0 1 .446 1 .998V29h2.002c.55 0 .998.443.998 1v1c0 .553-.446 1-.998 1H97v2.002c0 .55-.443.998-1 .998h-1c-.553 0-1-.446-1-.998V32h-2.002A.997.997 0 0 1 91 31v-1c0-.553.446-1 .998-1H94zm30.613 17.724l-21.82-4.638.207-3.023 22.237 4.727a6.004 6.004 0 0 1 4.62 7.122l-7.9 37.158a6.001 6.001 0 0 1-7.116 4.627l-15.31-3.254.63-2.934 15.31 3.25c1.62.34 3.218-.69 3.56-2.32l7.9-37.16a3.005 3.005 0 0 0-2.31-3.567zM48.596 85.727l.624 2.935-12.717 2.703a6.004 6.004 0 0 1-7.117-4.628L21.488 49.58a6.004 6.004 0 0 1 4.62-7.123L47 38.017l.133 3.038-20.402 4.337a3 3 0 0 0-2.3 3.564l7.9 37.157a3.005 3.005 0 0 0 3.56 2.317l12.71-2.703zM100 82c0 3.314-2.688 6-6.006 6H56.006A6.01 6.01 0 0 1 50 82V34c0-3.314 2.688-6 6.006-6h27.147v3H56.006A3.003 3.003 0 0 0 53 34v48c0 1.65 1.35 3 3.006 3h37.988A3.003 3.003 0 0 0 97 82V42.373h3V82zm-4.5-41C89.7 41 85 36.3 85 30.5S89.7 20 95.5 20 106 24.7 106 30.5 101.3 41 95.5 41zm0-3a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"></path>
+                                    <path fill="#F7F8FA"
+                                          d="M47 73.22l-6.484 1.378c-.82.174-1.333.97-1.16 1.78.173.816.97 1.327 1.784 1.154L47 76.287V73.22zm0-8.594l-4.58.974c-.8.17-1.324.968-1.152 1.778a1.494 1.494 0 0 0 1.775 1.156l3.957-.84v-3.068zm0-17.285a6.002 6.002 0 0 0-8 5.66 6.002 6.002 0 0 0 8 5.66V47.34zm56 29.88l6.178 1.318a1.5 1.5 0 1 0 .624-2.934L103 74.148v3.067zm0-8.58l4.275.91c.808.17 1.6-.34 1.775-1.157a1.507 1.507 0 0 0-1.15-1.78l-4.9-1.04v3.067zm0-8.97c.626.22 1.3.34 2 .34 3.314 0 6-2.685 6-6s-2.686-6-6-6c-.7 0-1.374.12-2 .34v11.32zM76 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-8 7.5c0-.828.667-1.5 1.505-1.5h12.99a1.5 1.5 0 1 1 0 3h-12.99A1.5 1.5 0 0 1 68 63.5zm-5 8c0-.828.67-1.5 1.49-1.5h23.02c.822 0 1.49.666 1.49 1.5 0 .828-.67 1.5-1.49 1.5H64.49c-.822 0-1.49-.666-1.49-1.5z"></path>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                    <span>刚来觅知？去<a class="EmptyState-action" target="_blank" href="javascript:void(0);">关注我感兴趣的话题</a></span>
+                                    </div>
+                                    </div>
+                                </span>
+                            </div>
+                            <!-------------->
+                            <script>
+                                $(function () {
+                                    var yuedu = 1;
+                                    $(".yuedu").click(function () {
+                                        yuedu++;
+                                        if (yuedu % 2 == 0) {
+                                            $(this).prev().show();
+                                            $(this).prev().prev().hide();
+                                            $(this).text("隐藏");
+                                        } else {
+                                            $(this).prev().hide();
+                                            $(this).prev().prev().show();
+                                            $(this).text("阅读全文");
+                                        }
+                                    });
+                                })
+                            </script>
+                            <div class="List huida" id="Profile-answers" hidden data-zop-feedlistfather="1">
+                                <div class="List-header"><h4 class="List-headerText"><span>我的回答</span></h4></div>
+                                <div>
+                                    <list th:each="list:${huida}">
+                                        <div class="List-item">
+                                            <div class="ContentItem AnswerItem">
+                                                <h2 class="ContentItem-title">
+                                                    <div>
+                                                        <meta itemprop="url"
+                                                              content="https://www.zhihu.com/question/296601261">
+                                                        <meta itemprop="name" content="对于伊辛模型， 如何将一维量子系统映射到二维经典系统？">
+                                                        <a href="javascript:void(0);"
+                                                           th:text="${list.questions.qcontent}"></a></div>
+                                                </h2>
+                                                <div class="ContentItem-meta">
+                                                    <div class="AuthorInfo AnswerItem-authorInfo" itemprop="author"
+                                                         itemscope="" itemtype="http://schema.org/Person">
+                                                        <span class="UserLink AuthorInfo-avatarWrapper"><div
+                                                                class="Popover"><div id="Popover6-toggle"
+                                                        ><a
+                                                                class="UserLink-link"
+                                                                data-za-detail-view-element_name="User" target="_blank"
+                                                                href="javascript:void(0);"><img
+                                                                class="Avatar AuthorInfo-avatar" width="38" height="38"
+                                                                th:src="@{image/touXiang/{bjimg}(bjimg=${buser.getHeadimg()})}"
+                                                                alt="paid Pay"></a></div></div></span>
+                                                        <div class="AuthorInfo-content">
+                                                            <div class="AuthorInfo-head"><span
+                                                                    class="UserLink AuthorInfo-name"><div
+                                                                    class="Popover"><div
+                                                                    id="Popover7-toggle" aria-haspopup="true"
+                                                                    aria-expanded="false"
+                                                                    aria-owns="Popover7-content"><a
+                                                                    class="UserLink-link"
+                                                                    data-za-detail-view-element_name="User"
+                                                                    target="_blank"
+                                                                    href="javascript:void(0);"
+                                                                    th:text="${buser.nickname}">paid Pay</a></div></div></span>
+                                                            </div>
+                                                            <div class="AuthorInfo-detail">
+                                                                <div class="AuthorInfo-badge">
+                                                                    <div class="RichText ztext AuthorInfo-badgeText"
+                                                                         th:text="${buser.introduce}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="AnswerItem-extraInfo"><span class="Voters"><button
+                                                            type="button"
+                                                            class="Button Button--plain"><span
+                                                            th:text="${list.agreecount}"></span>人赞同了该回答</button></span>
+                                                    </div>
+                                                </div>
+                                                <meta itemprop="image" content="">
+                                                <meta itemprop="upvoteCount" content="1">
+                                                <meta itemprop="url"
+                                                      content="https://www.zhihu.com/question/296601261/answer/500922247">
+                                                <meta itemprop="dateCreated" content="2018-09-29T16:09:58.000Z">
+                                                <meta itemprop="dateModified" content="2018-09-29T16:09:58.000Z">
+                                                <meta itemprop="commentCount" content="0">
+                                                <div class="RichContent is-collapsed">
+                                                    <div class="RichContent-inner"><span
+                                                            class="RichText ztext CopyrightRichText-richText"
+                                                            itemprop="text"
+                                                            th:text="${#strings.abbreviate(list.awcontent,13)}"> </span>
+
+                                                        <span hidden class="RichText ztext CopyrightRichText-richText"
+                                                              th:text="${list.awcontent}"></span>
+                                                        <button type="button"
+                                                                class="Button ContentItem-more Button--plain yuedu"
+                                                                th:if="${#strings.length(list.awcontent)} >= 10">
+                                                            阅读全文
+                                                        </button>
+                                                    </div>
+                                                    <div class="ContentItem-actions"><span><button aria-label="赞同"
+                                                                                                   type="button"
+                                                                                                   class="Button VoteButton VoteButton--up"><span
+                                                            style="display: inline-flex; align-items: center;">​<svg
+                                                            class="Zi Zi--TriangleUp VoteButton-TriangleUp"
+                                                            fill="currentColor" viewBox="0 0 24 24" width="10"
+                                                            height="10"><path
+                                                            d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z"
+                                                            fill-rule="evenodd"></path></svg></span>赞同 1</button><button
+                                                            aria-label="反对" type="button"
+                                                            class="Button VoteButton VoteButton--down"><span
+                                                            style="display: inline-flex; align-items: center;">​<svg
+                                                            class="Zi Zi--TriangleDown" fill="currentColor"
+                                                            viewBox="0 0 24 24" width="10" height="10"><path
+                                                            d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z"
+                                                            fill-rule="evenodd"></path></svg></span></button></span>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Comment Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z"
+                                                                fill-rule="evenodd"></path></svg></span>添加评论
+                                                        </button>
+                                                        <div class="Popover ShareMenu ContentItem-action">
+                                                            <div class="" id="Popover8-toggle" aria-haspopup="true"
+                                                                 aria-expanded="false" aria-owns="Popover8-content">
+                                                                <button type="button"
+                                                                        class="Button Button--plain Button--withIcon Button--withLabel">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                        class="Zi Zi--Share Button-zi"
+                                                                        fill="currentColor" viewBox="0 0 24 24"
+                                                                        width="1.2em" height="1.2em"><path
+                                                                        d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
+                                                                        fill-rule="evenodd"></path></svg></span>分享
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Star Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"
+                                                                fill-rule="evenodd"></path></svg></span>收藏
+                                                        </button>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Heart Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z"
+                                                                fill-rule="evenodd"></path></svg></span>感谢
+                                                        </button>
+                                                        <div class="Popover ContentItem-action">
+                                                            <button aria-label="更多" type="button" id="Popover9-toggle"
+                                                                    aria-haspopup="true" aria-expanded="false"
+                                                                    aria-owns="Popover9-content"
+                                                                    class="Button OptionsButton Button--plain Button--withIcon Button--iconOnly">
+                                                            <span style="display: inline-flex; align-items: center;">​<svg
+                                                                    class="Zi Zi--Dots Button-zi" fill="currentColor"
+                                                                    viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                    d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+                                                                    fill-rule="evenodd"></path></svg></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </list>
+                                </div>
+                                <span th:if="${#lists.size(huida)} eq 0">
+                                    <div class="EmptyState">
+                                    <div class="EmptyState-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120"
+                                         viewBox="0 0 150 120"
+                                         class="EmptyState-image">
+                                    <title></title>
+                                    <g>
+                                    <g fill="none" fill-rule="evenodd">
+                                    <path fill="#EBEEF5" fill-rule="nonzero"
+                                          d="M94 29v-2.002c0-.55.443-.998 1-.998h1c.553 0 1 .446 1 .998V29h2.002c.55 0 .998.443.998 1v1c0 .553-.446 1-.998 1H97v2.002c0 .55-.443.998-1 .998h-1c-.553 0-1-.446-1-.998V32h-2.002A.997.997 0 0 1 91 31v-1c0-.553.446-1 .998-1H94zm30.613 17.724l-21.82-4.638.207-3.023 22.237 4.727a6.004 6.004 0 0 1 4.62 7.122l-7.9 37.158a6.001 6.001 0 0 1-7.116 4.627l-15.31-3.254.63-2.934 15.31 3.25c1.62.34 3.218-.69 3.56-2.32l7.9-37.16a3.005 3.005 0 0 0-2.31-3.567zM48.596 85.727l.624 2.935-12.717 2.703a6.004 6.004 0 0 1-7.117-4.628L21.488 49.58a6.004 6.004 0 0 1 4.62-7.123L47 38.017l.133 3.038-20.402 4.337a3 3 0 0 0-2.3 3.564l7.9 37.157a3.005 3.005 0 0 0 3.56 2.317l12.71-2.703zM100 82c0 3.314-2.688 6-6.006 6H56.006A6.01 6.01 0 0 1 50 82V34c0-3.314 2.688-6 6.006-6h27.147v3H56.006A3.003 3.003 0 0 0 53 34v48c0 1.65 1.35 3 3.006 3h37.988A3.003 3.003 0 0 0 97 82V42.373h3V82zm-4.5-41C89.7 41 85 36.3 85 30.5S89.7 20 95.5 20 106 24.7 106 30.5 101.3 41 95.5 41zm0-3a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"></path>
+                                    <path fill="#F7F8FA"
+                                          d="M47 73.22l-6.484 1.378c-.82.174-1.333.97-1.16 1.78.173.816.97 1.327 1.784 1.154L47 76.287V73.22zm0-8.594l-4.58.974c-.8.17-1.324.968-1.152 1.778a1.494 1.494 0 0 0 1.775 1.156l3.957-.84v-3.068zm0-17.285a6.002 6.002 0 0 0-8 5.66 6.002 6.002 0 0 0 8 5.66V47.34zm56 29.88l6.178 1.318a1.5 1.5 0 1 0 .624-2.934L103 74.148v3.067zm0-8.58l4.275.91c.808.17 1.6-.34 1.775-1.157a1.507 1.507 0 0 0-1.15-1.78l-4.9-1.04v3.067zm0-8.97c.626.22 1.3.34 2 .34 3.314 0 6-2.685 6-6s-2.686-6-6-6c-.7 0-1.374.12-2 .34v11.32zM76 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-8 7.5c0-.828.667-1.5 1.505-1.5h12.99a1.5 1.5 0 1 1 0 3h-12.99A1.5 1.5 0 0 1 68 63.5zm-5 8c0-.828.67-1.5 1.49-1.5h23.02c.822 0 1.49.666 1.49 1.5 0 .828-.67 1.5-1.49 1.5H64.49c-.822 0-1.49-.666-1.49-1.5z"></path>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                    <span>刚来觅知？去<a class="EmptyState-action" target="_blank" href="javascript:void(0);">关注我感兴趣的话题</a></span>
+                                    </div>
+                                    </div>
+                                </span>
+                            </div>
+                            <!-------------->
+                            <div class="List wenzhang" hidden data-zop-feedlistfather="1">
+                                <div class="List-header"><h4 class="List-headerText"><span>我的文章</span></h4>
+                                    <div class="List-headerOptions">
+                                        <div class="Popover">
+                                            <button role="combobox" aria-expanded="false" type="button"
+                                                    id="Popover55-toggle" aria-haspopup="true"
+                                                    aria-owns="Popover55-content"
+                                                    class="Button Select-button Select-plainButton Button--plain">
+                                                按时间排序<span style="display: inline-flex; align-items: center;">​<svg
+                                                    class="Zi Zi--Select Select-arrow" fill="currentColor"
+                                                    viewBox="0 0 24 24" width="24" height="24"><path
+                                                    d="M12 16.183l2.716-2.966a.757.757 0 0 1 1.064.001.738.738 0 0 1 0 1.052l-3.247 3.512a.758.758 0 0 1-1.064 0L8.22 14.27a.738.738 0 0 1 0-1.052.758.758 0 0 1 1.063 0L12 16.183zm0-9.365L9.284 9.782a.758.758 0 0 1-1.064 0 .738.738 0 0 1 0-1.052l3.248-3.512a.758.758 0 0 1 1.065 0L15.78 8.73a.738.738 0 0 1 0 1.052.757.757 0 0 1-1.063.001L12 6.818z"
+                                                    fill-rule="evenodd"></path></svg></span></button>
+                                        </div>
                                     </div>
                                 </div>
+                                <div>
+                                    <list th:each="list:${wenzhang}">
+                                        <div class="List-item">
+                                            <div class="ContentItem ArticleItem">
+                                                <h2 class="ContentItem-title"><a href="javascript:void(0);"
+                                                                                 th:text="${list.atitle}"></a>
+                                                </h2>
+                                                <div class="ContentItem-meta">
+                                                    <div class="AuthorInfo ArticleItem-authorInfo">
+                                                        <span class="UserLink AuthorInfo-avatarWrapper"><div
+                                                                class="Popover"><div id="Popover56-toggle"
+                                                                                     aria-haspopup="true"
+                                                                                     aria-expanded="false"
+                                                                                     aria-owns="Popover56-content"><a
+                                                                class="UserLink-link"
+                                                                data-za-detail-view-element_name="User" target="_blank"
+                                                                href="javascript:void(0);"><img
+                                                                class="Avatar AuthorInfo-avatar" width="38" height="38"
+                                                                th:src="@{image/touXiang/{bjimg}(bjimg=${buser.getHeadimg()})}"
+                                                                alt="YorN"></a></div></div></span>
+                                                        <div class="AuthorInfo-content">
+                                                            <div class="AuthorInfo-head"><span
+                                                                    class="UserLink AuthorInfo-name"><div
+                                                                    class="Popover"><div><a
+                                                                    class="UserLink-link"
+                                                                    href="javascript:void(0);"
+                                                                    th:text="${buser.nickname}"> </a></div></div>
+                                                            </div>
+                                                            <div class="AuthorInfo-detail">
+                                                                <div class="AuthorInfo-badge">
+                                                                    <div class="AuthorInfo-badgeText"
+                                                                         th:text="${buser.introduce}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ArticleItem-extraInfo"><span class="Voters"><button
+                                                            type="button"
+                                                            class="Button Button--plain"><span
+                                                            th:text="${list.agreecount}"></span> 人赞了该文章</button></span>
+                                                    </div>
+                                                </div>
+                                                <div class="RichContent is-collapsed">
+                                                    <div class="RichContent-inner"><span
+                                                            class="RichText ztext CopyrightRichText-richText"
+                                                            itemprop="articleBody" th:text="${list.acontent}"></span>
+                                                        <button type="button"
+                                                                class="Button ContentItem-more Button--plain">
+                                                            阅读全文<span
+                                                                style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--ArrowDown ContentItem-arrowIcon"
+                                                                fill="currentColor" viewBox="0 0 24 24" width="24"
+                                                                height="24"><path
+                                                                d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                    </div>
+                                                    <div class="ContentItem-actions"><span><button
+                                                            type="button"
+                                                            class="Button VoteButton VoteButton--up"><span
+                                                            style="display: inline-flex; align-items: center;">​<svg
+                                                            class="Zi Zi--TriangleUp VoteButton-TriangleUp"
+                                                            fill="currentColor" viewBox="0 0 24 24" width="10"
+                                                            height="10"><path
+                                                            d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z"
+                                                            fill-rule="evenodd"></path></svg></span>赞同 <span
+                                                            th:text="${list.agreecount}"></span></button><button
+                                                            aria-label="反对" type="button"
+                                                            class="Button VoteButton VoteButton--down"><span
+                                                            style="display: inline-flex; align-items: center;">​<svg
+                                                            class="Zi Zi--TriangleDown" fill="currentColor"
+                                                            viewBox="0 0 24 24" width="10" height="10"><path
+                                                            d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z"
+                                                            fill-rule="evenodd"></path></svg></span></button></span>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Comment Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z"
+                                                                fill-rule="evenodd"></path></svg></span>${} 条评论
+                                                        </button>
+                                                        <div class="Popover ShareMenu ContentItem-action">
+                                                            <div class="" id="Popover64-toggle" aria-haspopup="true"
+                                                                 aria-expanded="false" aria-owns="Popover64-content">
+                                                                <button type="button"
+                                                                        class="Button Button--plain Button--withIcon Button--withLabel">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg
+                                                                        class="Zi Zi--Share Button-zi"
+                                                                        fill="currentColor" viewBox="0 0 24 24"
+                                                                        width="1.2em" height="1.2em"><path
+                                                                        d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
+                                                                        fill-rule="evenodd"></path></svg></span>分享
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg
+                                                                class="Zi Zi--Star Button-zi" fill="currentColor"
+                                                                viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
+                                                                d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"
+                                                                fill-rule="evenodd"></path></svg></span>收藏
+                                                        </button>
+                                                        <button type="button"
+                                                                class="Button ContentItem-action Button--plain">
+                                                            <svg viewBox="0 0 18 20"
+                                                                 class="Icon Icon--report Icon--left"
+                                                                 width="11" height="16" aria-hidden="true"
+                                                                 style="height: 16px; width: 11px;"><title></title>
+                                                                <g>
+                                                                    <path d="M16.947 1.13c-.633.135-3.927.638-5.697.384-3.133-.45-4.776-2.54-9.95-.888C.305 1.04.025 1.664.025 2.646L0 18.807c0 .3.1.54.304.718.195.202.438.304.73.304.275 0 .52-.102.73-.304.202-.18.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V1.964c0-.6-.42-.972-1.053-.835z"></path>
+                                                                </g>
+                                                            </svg>
+                                                            举报
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </list>
+                                </div>
+                                <span th:if="${#lists.size(wenzhang)} eq 0">
+                                    <div class="EmptyState">
+                                    <div class="EmptyState-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="120"
+                                         viewBox="0 0 150 120"
+                                         class="EmptyState-image">
+                                    <title></title>
+                                    <g>
+                                    <g fill="none" fill-rule="evenodd">
+                                    <path fill="#EBEEF5" fill-rule="nonzero"
+                                          d="M94 29v-2.002c0-.55.443-.998 1-.998h1c.553 0 1 .446 1 .998V29h2.002c.55 0 .998.443.998 1v1c0 .553-.446 1-.998 1H97v2.002c0 .55-.443.998-1 .998h-1c-.553 0-1-.446-1-.998V32h-2.002A.997.997 0 0 1 91 31v-1c0-.553.446-1 .998-1H94zm30.613 17.724l-21.82-4.638.207-3.023 22.237 4.727a6.004 6.004 0 0 1 4.62 7.122l-7.9 37.158a6.001 6.001 0 0 1-7.116 4.627l-15.31-3.254.63-2.934 15.31 3.25c1.62.34 3.218-.69 3.56-2.32l7.9-37.16a3.005 3.005 0 0 0-2.31-3.567zM48.596 85.727l.624 2.935-12.717 2.703a6.004 6.004 0 0 1-7.117-4.628L21.488 49.58a6.004 6.004 0 0 1 4.62-7.123L47 38.017l.133 3.038-20.402 4.337a3 3 0 0 0-2.3 3.564l7.9 37.157a3.005 3.005 0 0 0 3.56 2.317l12.71-2.703zM100 82c0 3.314-2.688 6-6.006 6H56.006A6.01 6.01 0 0 1 50 82V34c0-3.314 2.688-6 6.006-6h27.147v3H56.006A3.003 3.003 0 0 0 53 34v48c0 1.65 1.35 3 3.006 3h37.988A3.003 3.003 0 0 0 97 82V42.373h3V82zm-4.5-41C89.7 41 85 36.3 85 30.5S89.7 20 95.5 20 106 24.7 106 30.5 101.3 41 95.5 41zm0-3a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15z"></path>
+                                    <path fill="#F7F8FA"
+                                          d="M47 73.22l-6.484 1.378c-.82.174-1.333.97-1.16 1.78.173.816.97 1.327 1.784 1.154L47 76.287V73.22zm0-8.594l-4.58.974c-.8.17-1.324.968-1.152 1.778a1.494 1.494 0 0 0 1.775 1.156l3.957-.84v-3.068zm0-17.285a6.002 6.002 0 0 0-8 5.66 6.002 6.002 0 0 0 8 5.66V47.34zm56 29.88l6.178 1.318a1.5 1.5 0 1 0 .624-2.934L103 74.148v3.067zm0-8.58l4.275.91c.808.17 1.6-.34 1.775-1.157a1.507 1.507 0 0 0-1.15-1.78l-4.9-1.04v3.067zm0-8.97c.626.22 1.3.34 2 .34 3.314 0 6-2.685 6-6s-2.686-6-6-6c-.7 0-1.374.12-2 .34v11.32zM76 56a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-8 7.5c0-.828.667-1.5 1.505-1.5h12.99a1.5 1.5 0 1 1 0 3h-12.99A1.5 1.5 0 0 1 68 63.5zm-5 8c0-.828.67-1.5 1.49-1.5h23.02c.822 0 1.49.666 1.49 1.5 0 .828-.67 1.5-1.49 1.5H64.49c-.822 0-1.49-.666-1.49-1.5z"></path>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                    <span>刚来觅知？去<a class="EmptyState-action" target="_blank" href="javascript:void(0);">关注我感兴趣的话题</a></span>
+                                    </div>
+                                    </div>
+                                </span>
                             </div>
+                            <!-------------->
+                            <!-------------->
+                            <!-------------->
+                            <!-------------->
                         </div>
                     </div>
+
                     <div class="Profile-sideColumn" data-za-module="RightSideBar">
+                        <script>
+                            $(function () {
+                                $(".gzwdr").click(function () {
+                                    var userid = $(this).attr("id");
+                                    layer.open({
+                                        type: 2,
+                                        title: '关注我的人',
+                                        shadeClose: true,
+                                        shade: 0.8,
+                                        area: ['50%', '55%'],
+                                        content: 'guanzhuwoderen?userid=' + userid
+                                    });
+                                });
+                                $(".wgzdr").click(function () {
+                                    var userid = $(this).attr("id");
+                                    layer.open({
+                                        type: 2,
+                                        title: '我关注的人',
+                                        shadeClose: true,
+                                        shade: 0.8,
+                                        area: ['50%', '55%'],
+                                        content: 'woguanzhuderen?userid=' + userid
+                                    });
+                                });
+                            })
+                        </script>
                         <div class="Card FollowshipCard">
                             <div class="NumberBoard FollowshipCard-counts NumberBoard--divider"><a type="button"
-                                                                                                   class="Button NumberBoard-item Button--plain">
+                                                                                                   th:id="${session.user.userid}"
+                                                                                                   class="Button NumberBoard-item Button--plain wgzdr">
                                 <div class="NumberBoard-itemInner">
                                     <div class="NumberBoard-itemName">关注了</div>
-                                    <strong class="NumberBoard-itemValue" title="0">0</strong>
+                                    <strong class="NumberBoard-itemValue wgz" th:text="${wgzdr}">0</strong>
                                 </div>
-                            </a><a type="button" class="Button NumberBoard-item Button--plain">
+                            </a><a type="button" class="Button NumberBoard-item Button--plain gzwdr"
+                                   th:id="${session.user.userid}">
                                 <div class="NumberBoard-itemInner">
-                                    <div class="NumberBoard-itemName">关注者</div>
-                                    <strong class="NumberBoard-itemValue" title="0">0</strong>
+                                    <div class="NumberBoard-itemName tgz">关注者</div>
+                                    <strong class="NumberBoard-itemValue" th:text="${gzwdr}">0</strong>
                                 </div>
                             </a></div>
                         </div>

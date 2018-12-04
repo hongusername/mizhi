@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh" data-hairline="true" data-theme="light" data-focus-method="keyboard"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/mizhimain.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/layer/layer.js"></script>
+</head>
+<body>
+<list th:each="list:${list}">
+    <div class="List-item">
+        <div class="ContentItem" data-za-detail-view-path-module="UserItem"
+             data-za-extra-module="{&quot;card&quot;:{&quot;content&quot;:{&quot;type&quot;:&quot;User&quot;,&quot;member_hash_id&quot;:&quot;f1887d2c924a22428792c7c22615aefe&quot;,&quot;follower_num&quot;:212305}}}">
+            <div class="ContentItem-main">
+                <div class="ContentItem-image"><span class="UserLink UserItem-avatar"><div class="Popover"><div
+                        id="Popover38-toggle" aria-haspopup="true" aria-expanded="false"
+                        aria-owns="Popover38-content"><a
+                        class="UserLink-link"
+                ><img class="Avatar Avatar--large UserLink-avatar"
+                      width="60" height="60"
+                      th:src="@{image/touXiang/{bjimg}(bjimg=${list.careuser.headimg})}"
+                ></a></div></div></span></div>
+                <div class="ContentItem-head">
+                    <h2 class="ContentItem-title">
+                        <div class="UserItem-title"><span class="UserLink UserItem-name"><div class="Popover"><div
+                                id="Popover39-toggle" aria-haspopup="true" aria-expanded="false"
+                                aria-owns="Popover39-content"><a class="UserLink-link bieren"
+                                                                 href=""
+                                                                 th:userid="${list.careuser.userid}"
+                                                                 th:text="${list.careuser.nickname}"> </a></div></div>
+                        </div>
+                    </h2>
+                    <div class="ContentItem-meta">
+                        <div>
+                            <div th:text="${list.careuser.introduce}"></div>
+                            <div class="ContentItem-status"><span class="ContentItem-statusItem">34 回答</span><span
+                                    class="ContentItem-statusItem">1 文章</span><span class="ContentItem-statusItem">212,305 关注者</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ContentItem-extra nihao" th:id="${list.careuser.userid}">
+                    <span th:each="thislist:${thisGz}" th:if="${thislist.becardid} eq ${list.careuser.userid}">
+                            <button type="button"
+                                    class="Button FollowButton Button--primary Button--grey quxiao">已关注</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</list>
+<script>
+    $(function () {
+        $(".nihao").each(function () {
+            var as = $(this).text().trim();
+            if (as == null || as == '') {
+                $(this).html('<button type="button" class="Button FollowButton Button--primary Button--blue guanzhu"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Plus FollowButton-icon" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M13.491 10.488s-.012-5.387 0-5.998c-.037-1.987-3.035-1.987-2.997 0-.038 1.912 0 5.998 0 5.998H4.499c-1.999.01-1.999 3.009 0 3.009s5.995-.01 5.995-.01v5.999c0 2.019 3.006 2.019 2.997 0-.01-2.019 0-5.998 0-5.998s3.996.009 6.004.009c2.008 0 2.008-3-.01-3.009h-5.994z" fill-rule="evenodd"></path></svg></span>关注他</button>');
+            }
+        });
+        $(".guanzhu").click(function () {
+            var id = $(this).parent().attr("id");
+            $.post("guanzhu", {"id": id}, function (returnData) {
+                if (returnData) {
+                    var text = parent.$(".wgz").text();
+                    text = parseInt(text) + 1;
+                    parent.$(".wgz").text(text);
+                    location.reload();
+                }
+            }, "json");
+        });
+        $(".quxiao").click(function () {
+            var id = $(this).parent().parent().attr("id");
+            $.post("quxiao", {"id": id}, function (returnData) {
+                if (returnData) {
+                    var text = parent.$(".wgz").text();
+                    text = parseInt(text) - 1;
+                    parent.$(".wgz").text(text);
+                    location.reload();
+                }
+            }, "json");
+        });
+        $(".bieren").click(function () {
+            parent.location.href = "bieren?userid=" + $(this).attr("userid");
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.jishu.mizhi.shuai.questions.dao.QuestionsDao">
-    <select id="queruyByUserId" resultType="cn.jishu.mizhi.entity.Questions">
-        select * from questions where userid=#{userid}
+    <resultMap id="quMap" type="cn.jishu.mizhi.entity.Questions" autoMapping="true">
+        <id column="qid" property="qid"/>
+        <collection property="carequestions" resultMap="caMap"></collection>
+        <collection property="answers" resultMap="anMap"></collection>
+    </resultMap>
+    <resultMap id="caMap" type="cn.jishu.mizhi.entity.Carequestions" autoMapping="true">
+        <id property="cqid" column="cqid"/>
+    </resultMap>
+    <resultMap id="anMap" type="cn.jishu.mizhi.entity.Answers" autoMapping="true">
+        <id column="awid" property="awid"/>
+    </resultMap>
+    <select id="queruyByUserId" resultMap="quMap">
+       SELECT * FROM questions q LEFT JOIN carequestions c ON q.qid=c.qid LEFT JOIN answers a ON q.qid=a.qid WHERE q.userid=#{userid}
     </select>
 </mapper>

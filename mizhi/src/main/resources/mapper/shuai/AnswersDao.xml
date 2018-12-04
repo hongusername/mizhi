@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jishu.mizhi.shuai.answers.dao.AnswersDao">
+    <resultMap id="anMap" type="cn.jishu.mizhi.entity.Answers" autoMapping="true">
+        <id column="awid" property="awid"/>
+        <association property="questions" resultMap="quMap"/>
+    </resultMap>
+    <resultMap id="quMap" type="cn.jishu.mizhi.entity.Questions" autoMapping="true">
+        <id property="qid" column="qid"/>
+    </resultMap>
+    <select id="queryByIdAdd" resultMap="anMap">
+        SELECT * FROM answers a,questions q WHERE a.qid=q.qid AND a.userid=#{userid}
+    </select>
+</mapper>
