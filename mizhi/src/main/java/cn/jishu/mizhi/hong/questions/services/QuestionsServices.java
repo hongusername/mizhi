@@ -13,5 +13,15 @@ public interface QuestionsServices {
     Questions detailQuestionsById(Integer qid);
 
     //查询关注模块的关注对象的发布的话题列表信息
-    List<Questions> queryQuestionsByUsersids( List<Integer>userids,Integer jiange);
+    List<Questions> queryQuestionsByUsersids(List<Integer> userids);
+
+
+    //更新话题被浏览数
+    Integer updateQuestionClickCount(Integer qid);
+
+    //添加一个话题
+    Integer createQuestions(Questions questions);
+
+    //为某个话题增加标签
+    Integer addQuestionsTypeForQuestion(@Param("qid")Integer qid,@Param("qtid")Integer qtid);
 }

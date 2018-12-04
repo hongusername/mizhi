@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface AnswersServices {
 
-    PageInfo<Answers> queryAnswersByQid(Integer pageNum,Integer qid);
+    PageInfo<Answers> queryAnswersByQid(Integer pageNum, Integer qid);
 
     //查询关注模块的关注对象的发布的话题列表信息
-    List<Questions> queryAnswersByUsersids(@Param("userids") List<Integer>userids, @Param("jiange") Integer jiange);
+    List<Answers> queryAnswersByUsersids(@Param("userids") List<Integer> userids);
 }

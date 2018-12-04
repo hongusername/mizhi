@@ -14,7 +14,7 @@ public class UsersTalksServicesImpl implements UsersTalksServices {
     private UsersTalksMapper usersTalksMapper;
 
     @Override
-    public List<Userstalks> queryUserTalksByuserids(List<Integer> userids, int jiange) {
-        return usersTalksMapper.queryUserTalksByuserids(userids,jiange);
+    public List<Userstalks> queryUserTalksByuserids(List<Integer> userids ) {
+        return usersTalksMapper.queryUserTalksByuserids(userids);
     }
 }

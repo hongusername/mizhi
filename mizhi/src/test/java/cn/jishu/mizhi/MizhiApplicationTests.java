@@ -2,6 +2,7 @@ package cn.jishu.mizhi;
 
 import cn.jishu.mizhi.entity.*;
 import cn.jishu.mizhi.hong.answers.services.AnswersServices;
+import cn.jishu.mizhi.hong.cares.services.CaresServices;
 import cn.jishu.mizhi.hong.questions.services.QuestionsServices;
 import cn.jishu.mizhi.hong.usercomments.services.UserCommentsServices;
 import cn.jishu.mizhi.hong.userstalks.services.UsersTalksServices;
@@ -374,6 +375,8 @@ public class MizhiApplicationTests {
     public void testLoginManagerUser(){
         System.out.println(managerUserService.mLogin("管理员","123123"));
     }
+
+
     @Test
     public void testQueryBySession(){
         System.out.println(managerUserService.mCdate(1));

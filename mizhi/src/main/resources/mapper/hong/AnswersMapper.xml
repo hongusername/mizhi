@@ -25,17 +25,13 @@
 
 
 
-
-
-
-
     <select id="queryAnswersByQid" resultMap="answermap">
-       SELECT * FROM answers AS a,users AS u WHERE u.userid = a.userid and a.qid = #{qid}
+       SELECT * FROM answers AS a,users AS u WHERE u.userid = a.userid and a.qid = #{qid} order by agreecount desc
     </select>
 
     <select id="queryAnswersByUsersids" resultMap="answermap">
         SELECT * FROM answers AS a,users AS u1,questions AS q WHERE q.qid = a.qid AND u1.userid = a.userid
-         AND a.awtime > DATE_ADD(NOW(),INTERVAL #{jiange} DAY) AND a.userid IN
+          AND a.userid IN
         <foreach collection="userids" open="(" close=")" separator="," item="userids">
             #{userids}
         </foreach>
