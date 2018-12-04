@@ -46,4 +46,9 @@ public class ManagerUserServiceImpl implements ManagerUserService{
     public List<ManagerController> mContext(String rzTime) {
         return managerUserDao.mContext(rzTime);
     }
+
+    @Override
+    public Integer insertContext(ManagerController managerController) {
+        return managerUserDao.insertContext(managerController);
+    }
 }

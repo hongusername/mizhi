@@ -34,4 +34,8 @@
         SELECT * FROM managercontroller WHERE mCtime=#{rzTime}
     </select>
 
+    <insert id="insertContext" parameterType="cn.jishu.mizhi.entity.ManagerController">
+        INSERT INTO managercontroller VALUES(NULL,#{rzContext.mCcontext},#{rzContext.mCtype},NOW(),#{rzContext.mmid})
+    </insert>
+
 </mapper>

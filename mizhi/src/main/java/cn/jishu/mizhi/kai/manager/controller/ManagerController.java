@@ -112,14 +112,21 @@ public class ManagerController {
     }
 
     @RequestMapping("udpatestatus")
-    public String updateStatus(Integer id, String status, RedirectAttributes redirectAttributes){
+    public String updateStatus(Integer id, String status, RedirectAttributes redirectAttributes,HttpSession session){
+        Integer sessionId=((ManagerUser)session.getAttribute("managerUser")).getMUid();
+
        Users users=new Users();
        users.setUserid(id);
        users.setUstatus(status);
        if(id!=null&&status!=null&&users!=null){
            managerService.updateUserStatus(users);
            redirectAttributes.addFlashAttribute("msg","修改成功!");
-           System.out.println(managerService.updateUserStatus(users));
+/*修改用户状态*/
+           cn.jishu.mizhi.entity.ManagerController managerController=new cn.jishu.mizhi.entity.ManagerController();
+           managerController.setMCtype(1);
+           managerController.setMmid(sessionId);
+           managerController.setMCcontext("修改了用户id为"+id+"的信息");
+           managerUserService.insertContext(managerController);
            return "redirect:/UserTable";
        }else{
            redirectAttributes.addFlashAttribute("msg","修改失败，请稍后重试！");
@@ -128,7 +135,8 @@ public class ManagerController {
     }
 
     @RequestMapping("updateQstatus")
-    public String updateQStatus(Integer id,String qstatus,RedirectAttributes redirectAttributes){
+    public String updateQStatus(Integer id,String qstatus,RedirectAttributes redirectAttributes,HttpSession session){
+        Integer sessionId=((ManagerUser)session.getAttribute("managerUser")).getMUid();
        Questions questions=new Questions();
        questions.setQid(id);
         String id2="1";
@@ -142,6 +150,12 @@ public class ManagerController {
        managerService.updateStatus(questions);
        if(managerService.updateStatus(questions)>0) {
            redirectAttributes.addFlashAttribute("mqs", "修改话题状态成功！");
+/*修改话题状态*/
+           cn.jishu.mizhi.entity.ManagerController managerController=new cn.jishu.mizhi.entity.ManagerController();
+           managerController.setMCcontext("修改了话题id="+id+"的状态");
+           managerController.setMCtype(2);
+           managerController.setMmid(sessionId);
+           managerUserService.insertContext(managerController);
            return "redirect:/qeuryQuestion";
        }else{
            redirectAttributes.addFlashAttribute("mqs","修改话题状态失败，请稍后重试！");
@@ -162,18 +176,33 @@ public class ManagerController {
        return "017/invoice";
     }
     @RequestMapping("deleteByMemberById")
-    public String deleteByQuestionId(Integer id){
+    public String deleteByQuestionId(Integer id,HttpSession session){
         System.out.println(id);
        managerService.deleteByQuestionId(id);
+
+/*删除话题*/
+        Integer sessionId=((ManagerUser)session.getAttribute("managerUser")).getMUid();
+        cn.jishu.mizhi.entity.ManagerController managerController=new cn.jishu.mizhi.entity.ManagerController();
+        managerController.setMmid(sessionId);
+        managerController.setMCtype(3);
+        managerController.setMCcontext("删除会员id="+id+"的信息");
+        managerUserService.insertContext(managerController);
         System.out.println(managerService.deleteByQuestionId(id));
        return  "forward:queryAllMamber";
     }
 
     @RequestMapping("updateMember")
-    public String updateMember(Member member,RedirectAttributes redirectAttributes){
+    public String updateMember(Member member,RedirectAttributes redirectAttributes,HttpSession session){
        managerService.updateMember(member);
        if(managerService.updateMember(member)>0){
            redirectAttributes.addFlashAttribute("mms","修改会员信息成功！");
+/*修改会员信息*/
+           Integer sessionId=((ManagerUser)session.getAttribute("managerUser")).getMUid();
+           cn.jishu.mizhi.entity.ManagerController managerController=new cn.jishu.mizhi.entity.ManagerController();
+           managerController.setMCcontext("修改了会员id="+member.getMid()+"的信息");
+           managerController.setMmid(sessionId);
+           managerController.setMCtype(3);
+           managerUserService.insertContext(managerController);
        }else{
            redirectAttributes.addFlashAttribute("mms","修改会员信息失败！");
        }
