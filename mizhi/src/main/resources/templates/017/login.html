@@ -38,7 +38,7 @@
                         var username=$(".username").val();
                         var password=$(".password").val();
                         if(username.length!=0&&password.length!=0){
-                            
+
                             $.post("ajaxQueryByUsername",{"username":username},function(returnDate){
                                 if (returnDate==false){
                                     layer.msg("管理员存在可以登录！");
