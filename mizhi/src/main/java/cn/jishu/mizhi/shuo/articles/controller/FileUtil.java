@@ -1,5 +1,6 @@
 package cn.jishu.mizhi.shuo.articles.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,9 +20,10 @@ import java.util.Map;
  * @Create:2018-11-23 23:53
  */
 
+@Controller
 public class FileUtil {
 
-    @RequestMapping("/uploadArticleImg")
+    @RequestMapping("/uploadArticle")
     @ResponseBody
     public Map<String, Object> uploadArticleImg(
             @RequestParam MultipartFile file,  //这样接收文件
@@ -80,7 +82,7 @@ public class FileUtil {
         }else if (filetype.equals("mp4")){
             path="/video/";
         }else{
-            path="/file/";
+        path="/file/";
         }
         path=request.getSession().getServletContext().getRealPath("temp")+path;
         File file=new File(path);

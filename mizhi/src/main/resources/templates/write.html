@@ -18,15 +18,13 @@
 		<link rel="stylesheet" href="froala/css/themes/gray.min.css" />
 		<link rel="stylesheet" href="css/write.css" />
 		<link rel="stylesheet" href="layui/css/layui.css" />
-		
 
-
-		
 	</head>
-
 	<body>
-		<form class="layui-form">
-		<div class="mroot">
+		<form class="layui-form" id="fmone">
+
+			<input type="hidden" name="userid" th:value="${session.user.userid}"/>
+			<div class="mroot">
 			<div class="mheader">
 				<div class="mlogo">
 					<a href="#"><img src="image/ico/logowebp.webp" width="70px" height="50px" /></a>
@@ -36,19 +34,18 @@
 				<div class="mcontext" >
 					<h3 style="display: block;font-size: medium;font-weight: normal;"><b>写文章</b></h3>
 				</div>
+
+
 				
-				
-				
-				<div class="mcontext" style="margin-left:2%;">
-					<h4 id="" style="color: #c2c2c2;display: block;font-size: medium;font-weight: normal;">
-					正在保存
+				<div class="mcontext" style="margin-left:2%; width: 140px">
+					<h4 id="savetxt" style="color: #c2c2c2;display: block;font-size: medium;font-weight: normal;">
 
 					</h4>
 				</div>
 				
 				<div id="edittime"class="mcontext" >
 				<div style="display: inline-block;">
-				<input type="text" name="atitle" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+				<input type="text" name="atitle" required lay-verify="required" th:value="${art ne null}?${art.atitle}:''" placeholder="请输入标题" autocomplete="off" class="layui-input">
 				</div>
 				<div style="display: inline-block;">
 					<a href="javascript:void(0);" onclick="toeditover()"><i class="layui-icon layui-icon-ok" style="font-size: 25px;"></i></a>
@@ -65,80 +62,142 @@
 					<a href="javascript:void(0);" onclick="toedittime()"><i class="layui-icon layui-icon-edit" style="font-size: 25px;"></i></a>
 				</div>
 				</div>
+
 				
-				
-				<div class="mcontext" style="">
+				<div class="mcontext" style="" onblur="res()">
 					<div class="layui-form-item" >
 							<label class="layui-form-label">请绑定标签</label>
 							<div class="layui-input-block">
-								<select name="interest" lay-filter="aihao" lay-search>
-									<option value="0">写作</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									<option value="1">阅读</option>
-									
+								<select name="articletypeid"  lay-filter="aihao" lay-search>
+									<div th:each="u :${leibie}">
+										<div th:if="${art ne null}?${u.articletypeid eq art.articletype.articletypeid}:false" >
+										<option th:value="${u.articletypeid}"  selected th:text="${u.articletypename}"></option>
+										</div>
+										<div th:if="${art ne null}?${u.articletypeid ne art.articletype.articletypeid}:ture" >
+											<option th:value="${u.articletypeid}"   th:text="${u.articletypename}"></option>
+										</div>
+
+									</div>
 								</select>
 							</div>
 						</div>
 				</div>
 				<div>
+
 					<!--layui-btn layui-btn-radius layui-btn-disabled    禁用-->
 					<!--layui-btn layui-btn-radius layui-btn-primary     可用-->
 					<button class="layui-btn layui-btn-radius layui-btn-primary">发布</button>
 				</div>
 			</div>
 			
-			<div>
-				<div style="margin-left: 20px;margin-right: 20px;">
-					<textarea id="edits"></textarea>
+			<div onkeyup="res()" onkeypress="res()" onkeydown="res()">
+				<div style="margin-left: 20px;margin-right: 20px;" >
+					<textarea id="edits" name="acontent" th:text="${art ne null}?${art.acontent}:''"></textarea>
 				</div>
 			</div>
-		</div>
-		
-						
-					</form>
+
+			</div>
+			<div style="display: none" th:unless="${art} eq null">
+			<input type="hidden" name="articleid" th:value="${art.articleid}" />
+			</div>
+			<input type="hidden" name="anumber" id="anumber">
+			<!--
+            If-then: (if) ? (then)
+            If-then-else: (if) ? (then) : (else)
+            Default: (value) ?: (defaultvalue)
+                                -->
+
+		</form>
 	</body>
+	<script>
+        var nbnb=0;
+	</script>
 	<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 	<script src="froala/js/plugins/emoticons.min.js"></script>
 	<script type="text/javascript" src="froala/js/froala_editor.pkgd.min.js"></script>
 	<script type="text/javascript" src="froala/js/languages/zh_cn.js"></script>
 	<script type="text/javascript" src="layui/layui.js"></script>
+
+
+	<script>
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+	</script>
+	<script>
+        var aas;
+        var html;
+        function res() {
+            document.getElementById('anumber').setAttribute("value",nbnb);
+            clearTimeout(aas);
+            html = "正在保存<i class='layui-icon layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop' style='font-size: 15px;'></i>";
+            $("#savetxt").html(html);
+            aas = setTimeout("saveedit()", 600);
+
+        }
+
+	</script>
+	<script th:inline="javascript">
+		function saveedit(){
+            var param=JSON.stringify($("#fmone").serializeObject());
+
+		    var aid=$("input[name='articleid']").attr("value");
+			if(aid==undefined){
+                $.post("/addArticle",{'param':param},function(returnData,status){
+                    if(status=="success"){
+                        if(returnData[0]=='1'){
+                            html="保存成功";
+                            $("#fmone").append("<input type='hidden' name='articleid' value='"+returnData[1]+"'>");
+                        }else{
+                            html="请检查网络连接";
+                        }
+                        $("#savetxt").html(html);
+                    }
+                },"json");
+			}else{
+                $.post("/updateArticle",{'param':param},function(returnData,status){
+                    if(status=="success"){
+                        if(returnData==1){
+                            html="保存成功";
+                        }else{
+                            html="请检查网络连接";
+                        }
+                        $("#savetxt").html(html);
+                    }
+                },"json");
+			}
+		}
+	</script>
 	<script type="text/javascript">
 		$(function() {
 			$('#edits').froalaEditor({
-				language: 'zh_cn',
-				placeholderText: "请输入标题" //提示字
-					,
-				charCounterMax: 500 //最大字数
-					,
-				imageUploadURL: "uploadImgEditor",
-				enter: $.FroalaEditor.ENTER_BR,
-				theme: 'gray',
-				toolbarButtons: [
-					'bold', 'italic', 'underline', 'paragraphFormat', 'align', 'color', 'emoticons', 'fontSize', 'insertImage', 'insertTable', 'undo', 'redo'
-				]
+                placeholderText: "请输入内容..."//提示字
+                , charCounterMax: 1000//最大字数
+                , imageMaxSize: 1024 * 1024 * 100
+                //,imageMinWidth: 32
+                , imageUploadURL: "/uploadArticle"
+                , fileUploadURL: "/uploadArticle"
+                , videoUploadURL:"/uploadArticle"
+                //,fileMaxSize: 2309285
+                , enter: $.FroalaEditor.ENTER_BR
+                , language: 'zh_cn'
+                , toolbarButtons: [
+                    'bold', 'italic', 'underline', 'paragraphFormat', 'align', 'color', 'fontSize', 'insertImage', 'insertVideo', 'emoticons', 'insertFile', 'insertTable', 'undo', 'redo'
+                ]
 			});
+
 		})
 	</script>
 	<script>
@@ -160,10 +219,25 @@
 		function toeditover(){
 			$("#editover").removeAttr("style");
 			var html=$("[name='atitle']").val();
+			if(html.length>8){
+				html=html.substring(0,7)+"...";
+			}
 			$("#editovertext").text(html);
 			$("#edittime").css("display","none");
+		    res();
 		}
 		
 	</script>
+<script>
+$("#fmone").submit(function(){
+    var kk=$("input[name='atitle']").val();
+    if(kk.length<9){
+    layer.msg("标题必须大于9位!");
+    return false;
+	}
+
+})
+
+</script>
 
 </html>
