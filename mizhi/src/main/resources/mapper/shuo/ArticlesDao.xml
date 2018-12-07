@@ -14,6 +14,7 @@
     <resultMap id="atMap" type="cn.jishu.mizhi.entity.Articletype" autoMapping="true">
         <id column="articletypeid" property="articletypeid"/>
     </resultMap>
+
     <!--
         Integer addarticle(@Param("articles") Articles articles);//增加草稿
         Integer updatearticle(@Param("articles") Articles articles);//ajax修改
@@ -57,16 +58,17 @@
         ,#{articles.articletype.articletypeid}
         ,#{articles.users.userid}
         ,#{articles.atitle}
-        ,#{articles.aimg}
+        ,default
         ,#{articles.acontent}
         ,#{articles.anumber}
-        ,#{articles.clickcount}
-        ,#{articles.agreecount}
-        ,#{articles.disagreecount}
-        ,#{articles.articlestatus}
-        ,#{articles.articletime}
-        ,#{articles.rewardscore}
-        ,#{articles.rewardcount}
+        ,default
+        ,default
+        ,default
+        ,default
+        ,now()
+        ,default
+        ,default
+        ,default
         )
     </insert>
 
@@ -85,11 +87,23 @@
     <update id="updatestatus" parameterType="cn.jishu.mizhi.entity.Articles">
         UPDATE articles
         SET
-        articlestatus=#{articles.articlestatus}
-        ,articletime=#{articles.articletime}
+        articlestatus=2
+        ,articletypeid=#{articles.articletype.articletypeid}
+        ,atitle=#{articles.atitle}
+        ,aimg=#{articles.aimg}
+        ,acontent=#{articles.acontent}
+        ,anumber=#{articles.anumber}
+        ,articletime=now()
         WHERE articleid=#{articles.articleid}
     </update>
 
+    <update id="delarticle" >
+        UPDATE articles
+        SET
+         articlestatus=3
+         where
+         articleid=#{id}
+    </update>
     <select id="queryALlbyuserid" parameterType="cn.jishu.mizhi.entity.Articles" resultMap="aMap">
         SELECT * FROM articles a,users u,articletype art
         <where>
@@ -103,4 +117,19 @@
             </if>
         </where>
     </select>
+    <select id="querymaxid" resultType="Integer">
+      SELECT @@identity
+    </select>
+
+    <select id="queryByarticlesid" resultMap="aMap" >
+     SELECT * FROM articles a,users u,articletype art
+     where
+      a.userid=u.userid
+     AND a.articletypeid=art.articletypeid
+     and a.articleid=#{arid}
+    </select>
+    <select id="queryAll" resultMap="aMap">
+        SELECT * FROM articles a,users u,articletype art  WHERE a.userid=u.userid AND a.articletypeid=art.articletypeid
+    </select>
+
 </mapper>
