@@ -60,6 +60,7 @@
         ,#{articles.atitle}
         ,default
         ,#{articles.acontent}
+        ,#{articles.anavtext}
         ,#{articles.anumber}
         ,default
         ,default
@@ -80,6 +81,7 @@
     ,aimg=#{articles.aimg}
     ,acontent=#{articles.acontent}
     ,anumber=#{articles.anumber}
+    ,anavtext=#{articles.anavtext}
     WHERE articleid=#{articles.articleid}
     </update>
 
@@ -92,6 +94,7 @@
         ,atitle=#{articles.atitle}
         ,aimg=#{articles.aimg}
         ,acontent=#{articles.acontent}
+        ,anavtext=#{articles.anavtext}
         ,anumber=#{articles.anumber}
         ,articletime=now()
         WHERE articleid=#{articles.articleid}
@@ -104,7 +107,7 @@
          where
          articleid=#{id}
     </update>
-    <select id="queryALlbyuserid" parameterType="cn.jishu.mizhi.entity.Articles" resultMap="aMap">
+    <select id="queryAllbyuserid" parameterType="cn.jishu.mizhi.entity.Articles" resultMap="aMap">
         SELECT * FROM articles a,users u,articletype art
         <where>
             a.userid=u.userid

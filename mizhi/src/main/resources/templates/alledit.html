@@ -28,9 +28,9 @@
 	<b>全部草稿</b>
 	<hr class="layui-bg-black">
 	<div th:each="art : ${plist.list}">
-		<b><a href="" th:text="${art.atitle eq ''}?'未名题':${art.atitle}"></a></b>
-		<div th:text="${art.acontent}"></div>
-		<a href="">删除</a><span ></span><a th:href="@{/adetail(id=${art.articleid})}">编辑</a><span >•</span><span th:text="${art.articletime}"></span><span >•</span>共<b th:text="${art.anumber}"></b>字
+		<b><a th:href="@{/adetail(id=${art.articleid})}" th:text="${art.atitle eq ''}?'未名题':${art.atitle}"></a></b>
+		<div th:text="${art.anavtext}"></div>
+		<a th:href="@{/adelarticle(id=${art.articleid})}">删除</a><span >•</span><a th:href="@{/adetail(id=${art.articleid})}">编辑</a><span >•</span>创建于：<span th:text="${#dates.format(art.articletime,'yyyy年MM月dd日 HH时mm分') }"></span><span >•</span>共<b th:text="${art.anumber}"></b>字
 		<hr />
 	</div>
 </div>

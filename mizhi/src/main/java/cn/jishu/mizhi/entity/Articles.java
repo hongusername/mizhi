@@ -19,6 +19,7 @@ public class Articles{//文章表
     private String atitle;//文章标题
     private String aimg;//文章图片
     private String acontent;//文章内容
+    private String anavtext;//导航文本
     private Integer anumber,clickcount,agreecount,disagreecount;//文章字数,浏览量,赞同量,反对量
     private String articlestatus;//文章状态 1.草稿 2.撤销3.发布
     private Timestamp articletime;//文章发表时间
