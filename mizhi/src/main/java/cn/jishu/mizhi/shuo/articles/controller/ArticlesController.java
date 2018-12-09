@@ -69,10 +69,16 @@ public class ArticlesController {
     public del(){
 
     }*/
+    @RequestMapping("/adelarticle")
+    public String del(Integer id){
+        as.delarticle(id);
+        return "redirect:/aqueryall";
+    }
 
     @RequestMapping("/aupdateArticle")
     @ResponseBody
     public Integer ajaxdoUpdate(String param)  throws IOException {
+        System.out.println("修改之后的参数是:"+param);
         Integer row=as.updatearticle(returnparam(param));
         return row;
     }
@@ -95,8 +101,19 @@ public class ArticlesController {
         ObjectMapper om=new ObjectMapper();//创建
         om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false);//声明不寻找全部字段（加不加效果相同）
         a=om.readValue(param, Articles.class);
+        a.setAnavtext(strUpdate(a.getAnavtext()));
         System.out.println("反序列化之后的值是："+a);
         return a;
+    }
+
+    public String strUpdate(String param){
+        if(param.length()>25){
+            param=param.substring(0,25)+"...";
+            System.out.println("我是返回的参数："+param);
+            return param;
+        }else{
+            return param;
+        }
     }
 
     /*public static Object getobjfromjsonarrstr(String json,Class beanclass){

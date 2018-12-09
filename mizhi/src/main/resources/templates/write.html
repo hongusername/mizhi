@@ -72,7 +72,7 @@
 									<div th:each="u :${leibie}">
 										<div th:if="${art ne null}?${u.articletypeid eq art.articletype.articletypeid}:false" >
 										<option th:value="${u.articletypeid}"  selected th:text="${u.articletypename}"></option>
-										</div>
+										</div>l;'
 										<div th:if="${art ne null}?${u.articletypeid ne art.articletype.articletypeid}:ture" >
 											<option th:value="${u.articletypeid}"   th:text="${u.articletypename}"></option>
 										</div>
@@ -92,7 +92,7 @@
 			
 			<div onkeyup="res()" onkeypress="res()" onkeydown="res()">
 				<div style="margin-left: 20px;margin-right: 20px;" >
-					<textarea id="edits" name="acontent" th:text="${art ne null}?${art.acontent}:''"></textarea>
+					<textarea id="edits" name="acontent" th:text="${art ne null}?${art.acontent}:''" ></textarea>
 				</div>
 			</div>
 
@@ -100,19 +100,17 @@
 			<div style="display: none" th:unless="${art} eq null">
 			<input type="hidden" name="articleid" th:value="${art.articleid}" />
 			</div>
-			<input type="hidden" name="anumber" id="anumber">
-			<!--
-            If-then: (if) ? (then)
-            If-then-else: (if) ? (then) : (else)
-            Default: (value) ?: (defaultvalue)
-                                -->
+			<input type="hidden" name="anumber" id="anumber"/>
+			<input type='hidden' name='anavtext' value=''>
+			<div style="display: none" id="temp">
 
+			</div>
 		</form>
 	</body>
+	<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 	<script>
         var nbnb=0;
 	</script>
-	<script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
 	<script src="froala/js/plugins/emoticons.min.js"></script>
 	<script type="text/javascript" src="froala/js/froala_editor.pkgd.min.js"></script>
 	<script type="text/javascript" src="froala/js/languages/zh_cn.js"></script>
@@ -150,12 +148,12 @@
 
 	</script>
 	<script th:inline="javascript">
-		function saveedit(){
+        function saveedit(){
+            $("input[name='anavtext']").val($("#temp").html($("#edits").val()).text());
             var param=JSON.stringify($("#fmone").serializeObject());
-
 		    var aid=$("input[name='articleid']").attr("value");
 			if(aid==undefined){
-                $.post("/addArticle",{'param':param},function(returnData,status){
+                $.post("/aaddArticle",{'param':param},function(returnData,status){
                     if(status=="success"){
                         if(returnData[0]=='1'){
                             html="保存成功";
@@ -167,7 +165,7 @@
                     }
                 },"json");
 			}else{
-                $.post("/updateArticle",{'param':param},function(returnData,status){
+                $.post("/aupdateArticle",{'param':param},function(returnData,status){
                     if(status=="success"){
                         if(returnData==1){
                             html="保存成功";
@@ -178,6 +176,7 @@
                     }
                 },"json");
 			}
+
 		}
 	</script>
 	<script type="text/javascript">

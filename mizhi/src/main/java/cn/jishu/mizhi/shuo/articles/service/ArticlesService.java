@@ -21,7 +21,7 @@ public interface ArticlesService {
     Integer updatearticle(Articles articles);//ajax修改
     Articles queryByarticlesid(Integer arid);//通过id查看
     Integer updatestatus(Articles articles);//发布，删除
-    PageInfo<Articles> queryALlbyuserid(Integer pageNum, Integer pageSize, Articles articles);//查询用户的所有草稿
+    PageInfo<Articles> queryAllbyuserid(Integer pageNum, Integer pageSize, Articles articles);//查询用户的所有草稿
     Integer addfileinfo();//储存用户发布的文件信息
     List<Articletype> queryAllArtitcleType();//读取所有类别
 }

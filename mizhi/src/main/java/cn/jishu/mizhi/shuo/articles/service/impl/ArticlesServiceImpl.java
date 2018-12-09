@@ -74,9 +74,9 @@ public class ArticlesServiceImpl implements ArticlesService {
     }
 
     @Override
-    public PageInfo<Articles> queryALlbyuserid(Integer pageNum, Integer pageSize, Articles articles) {
+    public PageInfo<Articles> queryAllbyuserid(Integer pageNum, Integer pageSize, Articles articles) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Articles> list=ad.queryALlbyuserid(articles);
+        List<Articles> list=ad.queryAllbyuserid(articles);
         PageInfo<Articles> pi=new PageInfo<Articles>(list);
         return pi;
     }
