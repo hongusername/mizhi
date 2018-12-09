@@ -2,14 +2,12 @@ package cn.jishu.mizhi;
 
 import cn.jishu.mizhi.entity.*;
 import cn.jishu.mizhi.hong.answers.services.AnswersServices;
-import cn.jishu.mizhi.hong.cares.services.CaresServices;
 import cn.jishu.mizhi.hong.questions.services.QuestionsServices;
 import cn.jishu.mizhi.hong.usercomments.services.UserCommentsServices;
 import cn.jishu.mizhi.hong.userstalks.services.UsersTalksServices;
 import cn.jishu.mizhi.hui.books.service.BooksService;
 import cn.jishu.mizhi.kai.manager.server.ManagerService;
 import cn.jishu.mizhi.kai.manager.server.ManagerUserService;
-import cn.jishu.mizhi.shuo.articles.service.ArticlesService;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -361,38 +357,43 @@ public class MizhiApplicationTests {
 
     */
     }
+
     @Test
-    public void testQueryAllManagerContext(){
+    public void testQueryAllManagerContext() {
 
         System.out.println(managerUserService.queryAllManagerUser(1));
     }
+
     @Test
-    public void testQueryByUserName(){
+    public void testQueryByUserName() {
         System.out.println(managerUserService.mQueryByUserName("管理员"));
     }
 
     @Test
-    public void testLoginManagerUser(){
-        System.out.println(managerUserService.mLogin("管理员","123123"));
+    public void testLoginManagerUser() {
+        System.out.println(managerUserService.mLogin("管理员", "123123"));
     }
 
 
     @Test
-    public void testQueryBySession(){
+    public void testQueryBySession() {
         System.out.println(managerUserService.mCdate(1));
     }
+
     @Test
     public void testQueryByTime() throws ParseException {
-        String date="2018-11-13";
+        String date = "2018-11-13";
         System.out.println(managerUserService.mContext(date));
     }
-    public Integer random(){
+
+    public Integer random() {
         int num = (int) (Math.random() * 5 + 1);
         return num;
     }
+
     @Test
-    public void testBySessionId(){
-        List<Integer> numList=new ArrayList<>();
+    public void testBySessionId() {
+        List<Integer> numList = new ArrayList<>();
         /*List<cn.jishu.mizhi.entity.ManagerController> managerControllerList=managerUserService.mCdate(1);
         //System.out.println("五个日期出来了"+managerControllerList);
         //System.out.println(managerUserService.mContext("2018-11-13"));
@@ -410,18 +411,19 @@ public class MizhiApplicationTests {
         }
         System.out.println(numList);
         System.out.println(managerControllerList.get(0).getManagerControllerList());*/
-        for(int g=0;g<5;g++){
+        for (int g = 0; g < 5; g++) {
 
-            numList.add(g,random());
+            numList.add(g, random());
         }
         System.out.println(numList);
     }
+
     @Test
-    public void testInsertContext(){
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        String date="2018-11-22";
+    public void testInsertContext() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = "2018-11-22";
         try {
-            System.out.println( managerUserService.insertContext(new ManagerController(null,1,1,format.parse(date),"没有操作",null)));
+            System.out.println(managerUserService.insertContext(new ManagerController(null, 1, 1, format.parse(date), "没有操作", null)));
         } catch (ParseException e) {
             e.printStackTrace();
         }

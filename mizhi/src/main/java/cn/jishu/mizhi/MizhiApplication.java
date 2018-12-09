@@ -31,7 +31,4 @@ public class MizhiApplication {
         pageHelper.setProperties(properties);
         return pageHelper;
     }
-
-
-
 }
