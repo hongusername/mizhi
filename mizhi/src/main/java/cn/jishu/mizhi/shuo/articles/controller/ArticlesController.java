@@ -25,7 +25,9 @@ import java.io.IOException;
 
 @Controller
 public class ArticlesController {
-
+    //时长：3分钟
+    //找一个陌生人，拉住，做3分钟自我介绍。
+    //1.谈话时间3分钟。
 
     @Resource
     private ArticlesService as;
@@ -43,8 +45,12 @@ public class ArticlesController {
     }
 
     @RequestMapping("/adetail")
-    public String queryArt(@RequestParam(defaultValue = "2") Integer id, Model model, HttpSession session){
-        Articles a=as.queryByarticlesid(id);
+    public String queryArt(Integer id, Model model, HttpSession session){
+
+        Articles a=null;
+        if(id!=null&&id!=0){
+            a=as.queryByarticlesid(id);
+        }
         model.addAttribute("leibie",as.queryAllArtitcleType());
         model.addAttribute("art",a);
         Users user=new Users();
